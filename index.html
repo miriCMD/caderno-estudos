@@ -1,0 +1,1404 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1B2550">
+<title>Caderno de Estudos</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📒</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F8FC; --grid:#E4EAF5; --card:#FFFFFF; --ink:#1B2550; --ink2:#525C80; --ink3:#8A92AE;
+  --line:#D8DFEC; --hl:#FFE45C; --hl2:#FFF3A8; --ok:#1F9D6B; --warn:#D9822B; --bad:#C8364A;
+  --h0:#E9EEF7; --h1:#C9D8F5; --h2:#94B2EC; --h3:#5580DA; --h4:#2B4FB0; --h5:#16307A;
+  --shadow:0 1px 0 rgba(27,37,80,.06), 0 6px 18px -10px rgba(27,37,80,.25);
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --f-ui:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-hand:"Caveat", "Comic Sans MS", cursive;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1430; --grid:#161E42; --card:#151D3F; --ink:#E7EBF8; --ink2:#AEB6D6; --ink3:#7580A8;
+    --line:#26305A; --hl:#F5D93A; --hl2:#3D3A1F;
+    --h0:#1A2349; --h1:#23386F; --h2:#2F55A6; --h3:#4679D6; --h4:#79A2F0; --h5:#B9CFFF;
+    --shadow:0 1px 0 rgba(0,0,0,.2), 0 8px 22px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1430; --grid:#161E42; --card:#151D3F; --ink:#E7EBF8; --ink2:#AEB6D6; --ink3:#7580A8;
+  --line:#26305A; --hl:#F5D93A; --hl2:#3D3A1F;
+  --h0:#1A2349; --h1:#23386F; --h2:#2F55A6; --h3:#4679D6; --h4:#79A2F0; --h5:#B9CFFF;
+  --shadow:0 1px 0 rgba(0,0,0,.2), 0 8px 22px -12px rgba(0,0,0,.6);
+}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.5;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:26px 26px; background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--f-ui); line-height:1.15; margin:0 0 .5em; letter-spacing:-.01em}
+h1{font-size:2rem; font-weight:800} h2{font-size:1.45rem; font-weight:800} h3{font-size:1.1rem; font-weight:600}
+p{margin:0 0 .8em}
+button,input,select,textarea{font:inherit; color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--h3); outline-offset:2px; border-radius:6px}
+img{max-width:100%}
+.muted{color:var(--ink2)} .small{font-size:.85rem} .tiny{font-size:.75rem}
+.hide{display:none!important}
+
+/* ---------- Botões e campos ---------- */
+.btn{display:inline-flex; align-items:center; gap:.45em; border:1.5px solid var(--ink); background:var(--card); color:var(--ink);
+  padding:.55em 1em; border-radius:999px; font-family:var(--f-ui); font-weight:600; font-size:.95rem; transition:transform .08s, background .15s}
+.btn:hover{background:var(--hl2)} .btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--ink); color:var(--paper)} .btn.primary:hover{background:var(--h4); border-color:var(--h4)}
+.btn.ghost{border-color:var(--line)} .btn.danger{border-color:var(--bad); color:var(--bad)}
+.btn.sm{padding:.3em .75em; font-size:.85rem}
+.btn[disabled]{opacity:.45; cursor:not-allowed}
+.field{display:flex; flex-direction:column; gap:.3em; margin-bottom:.9em}
+.field label{font-family:var(--f-ui); font-weight:600; font-size:.9rem}
+input[type=text],input[type=password],input[type=number],input[type=date],select,textarea{
+  width:100%; border:1.5px solid var(--line); background:var(--card); border-radius:var(--r-sm); padding:.55em .7em}
+input:focus,select:focus,textarea:focus{border-color:var(--h3); outline:none}
+textarea{min-height:110px; resize:vertical}
+.row{display:flex; gap:.6em; align-items:center; flex-wrap:wrap}
+.spacer{flex:1}
+
+/* ---------- Tela de senha ---------- */
+#lock{min-height:100%; display:grid; place-items:center; padding:24px}
+.lockcard{background:var(--card); border:1.5px solid var(--line); border-radius:24px; padding:34px 30px; width:min(400px,100%); box-shadow:var(--shadow); text-align:center}
+.lockcard .avatar{width:92px; height:92px; margin:0 auto 12px}
+.lockcard .hand{font-family:var(--f-hand); font-size:2.3rem; line-height:1; margin-bottom:.2em}
+.lockcard form{margin-top:18px; text-align:left}
+.err{color:var(--bad); font-size:.9rem; min-height:1.3em}
+
+/* ---------- Avatar ---------- */
+.avatar{border-radius:50%; background:var(--hl); display:grid; place-items:center; overflow:hidden; font-family:var(--f-ui); font-weight:800; color:#1B2550; flex:none; border:2px solid var(--ink)}
+.avatar img{width:100%; height:100%; object-fit:cover}
+
+/* ---------- Layout ---------- */
+#app{display:grid; grid-template-columns:236px 1fr; min-height:100%}
+.side{position:sticky; top:0; height:100vh; height:100dvh; padding:22px 16px; border-right:1.5px solid var(--line); background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(6px); display:flex; flex-direction:column; gap:18px}
+.brand{font-family:var(--f-ui); font-weight:800; font-size:1.15rem; display:flex; align-items:center; gap:.4em; padding:0 6px}
+.me{display:flex; gap:10px; align-items:center; padding:10px; border-radius:var(--r-md); background:var(--card); border:1.5px solid var(--line)}
+.me .avatar{width:42px; height:42px; font-size:1.1rem}
+.me b{font-family:var(--f-ui); display:block; line-height:1.1}
+nav.menu{display:flex; flex-direction:column; gap:2px}
+nav.menu a{display:flex; gap:.6em; align-items:center; text-decoration:none; color:var(--ink2); font-family:var(--f-ui); font-weight:600; padding:.55em .7em; border-radius:10px}
+nav.menu a:hover{color:var(--ink); background:var(--card)}
+nav.menu a.on{color:#1B2550; background:var(--hl)}
+nav.menu .ic{width:1.3em; text-align:center}
+.sync{margin-top:auto; font-size:.78rem; color:var(--ink3); padding:0 6px; display:flex; align-items:center; gap:.4em}
+.sync i{width:8px; height:8px; border-radius:50%; background:var(--ok); display:inline-block}
+.sync.saving i{background:var(--warn)} .sync.error i{background:var(--bad)}
+main{padding:28px clamp(16px,4vw,44px) 90px; max-width:1180px; width:100%}
+.view-head{display:flex; align-items:end; gap:1em; flex-wrap:wrap; margin-bottom:18px}
+.view-head h1{margin:0}
+
+@media (max-width:860px){
+  #app{grid-template-columns:1fr}
+  .side{position:fixed; top:auto; bottom:0; left:0; right:0; height:auto; z-index:40; flex-direction:row; padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px)); border-right:0; border-top:1.5px solid var(--line); gap:0}
+  .brand,.me,.sync{display:none}
+  nav.menu{flex-direction:row; width:100%; justify-content:space-around}
+  nav.menu a{flex-direction:column; gap:0; font-size:.68rem; padding:.35em .2em; text-align:center}
+  nav.menu a .ic{font-size:1.25rem}
+  nav.menu a.on{background:var(--hl2)}
+  main{padding-bottom:110px}
+  h1{font-size:1.6rem}
+}
+
+/* ---------- Cartões ---------- */
+.card{background:var(--card); border:1.5px solid var(--line); border-radius:var(--r-lg); padding:18px 20px; box-shadow:var(--shadow)}
+.card h3{display:flex; align-items:center; gap:.5em}
+.grid{display:grid; gap:16px}
+.g-home{grid-template-columns:1.25fr 1fr}
+.g-2{grid-template-columns:1fr 1fr}
+@media (max-width:980px){.g-home,.g-2{grid-template-columns:1fr}}
+
+/* ---------- Saudação ---------- */
+.hello{display:flex; gap:18px; align-items:center; margin-bottom:22px}
+.hello .avatar{width:74px; height:74px; font-size:1.8rem}
+.hello .hand{font-family:var(--f-hand); font-size:clamp(2.1rem,5vw,3rem); line-height:.95; font-weight:700}
+.hello .phrase{font-family:var(--f-hand); font-size:1.45rem; color:var(--ink2); line-height:1.15; margin-top:4px}
+.countdowns{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px}
+.cd{display:flex; align-items:baseline; gap:.45em; padding:.45em .9em; border-radius:999px; border:1.5px solid var(--line); background:var(--card); font-family:var(--f-ui)}
+.cd b{font-size:1.25rem; font-weight:800}
+.cd.soon{border-color:var(--ink); background:var(--hl2)}
+
+/* ---------- Cronômetro ---------- */
+.timer{position:relative; overflow:hidden}
+.timer .clock{font-family:var(--f-ui); font-weight:800; font-size:clamp(3rem,9vw,4.8rem); letter-spacing:-.02em; line-height:1; margin:.25em 0 .2em; font-variant-numeric:tabular-nums}
+.timer .subjline{display:flex; align-items:center; gap:.5em; font-family:var(--f-ui); font-weight:600}
+.timer .state{font-size:.85rem; color:var(--ink2)}
+.timer.running .clock{color:var(--ink)}
+.timer.paused .clock{color:var(--ink3)}
+.timer .bar{position:absolute; left:0; bottom:0; height:6px; background:var(--subj, var(--h3)); transition:width 1s linear}
+.segmented{display:inline-flex; border:1.5px solid var(--line); border-radius:999px; overflow:hidden}
+.segmented button{border:0; background:transparent; padding:.35em .8em; font-family:var(--f-ui); font-weight:600; font-size:.85rem; color:var(--ink2)}
+.segmented button.on{background:var(--ink); color:var(--paper)}
+.dot{width:.75em; height:.75em; border-radius:50%; display:inline-block; flex:none; background:var(--c,#999)}
+
+/* ---------- Progresso ---------- */
+.prog{height:10px; border-radius:99px; background:var(--h0); overflow:hidden}
+.prog>span{display:block; height:100%; background:var(--c, var(--h3)); border-radius:99px}
+.stat{font-family:var(--f-ui)} .stat b{display:block; font-size:1.7rem; font-weight:800; line-height:1.1}
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px}
+.plan-item{display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center; padding:8px 0; border-bottom:1px dashed var(--line)}
+.plan-item:last-child{border-bottom:0}
+.plan-item .prog{grid-column:2/4; height:7px}
+.plan-item.done .nm{text-decoration:line-through; text-decoration-color:var(--ok); text-decoration-thickness:2px}
+
+/* ---------- Barras da semana ---------- */
+.week{display:grid; grid-template-columns:repeat(7,1fr); gap:8px; align-items:end; height:140px; margin-top:8px}
+.week .col{display:flex; flex-direction:column-reverse; height:100%; border-radius:6px; background:var(--h0); overflow:hidden; cursor:pointer}
+.week .col span{display:block; width:100%}
+.week.lbl{height:auto; align-items:start; text-align:center; font-size:.78rem; color:var(--ink2); margin-top:4px}
+.week.lbl b{display:block; color:var(--ink); font-family:var(--f-ui)}
+
+/* ---------- Heatmap ---------- */
+.heat-wrap{overflow-x:auto; padding-bottom:6px}
+.heat{display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,14px); gap:3px; width:max-content}
+.heat .c{width:14px; height:14px; border-radius:3px; background:var(--h0); cursor:pointer}
+.heat .c.out{visibility:hidden}
+.heat .c.today{outline:2px solid var(--ink); outline-offset:1px}
+.l0{background:var(--h0)!important} .l1{background:var(--h1)!important} .l2{background:var(--h2)!important} .l3{background:var(--h3)!important} .l4{background:var(--h4)!important} .l5{background:var(--h5)!important}
+.months-lbl{display:grid; grid-auto-flow:column; grid-auto-columns:17px; font-size:.72rem; color:var(--ink2); height:16px; width:max-content}
+.heat-row{display:flex; gap:6px}
+.heat-days{display:grid; grid-template-rows:repeat(7,14px); gap:3px; font-size:.68rem; color:var(--ink3); padding-top:16px}
+.legend{display:flex; align-items:center; gap:4px; font-size:.75rem; color:var(--ink2)}
+.legend i{width:13px; height:13px; border-radius:3px; display:inline-block}
+
+/* ---------- Calendário do mês ---------- */
+.mcal{display:grid; grid-template-columns:repeat(7,1fr); gap:6px}
+.mcal .hd{font-family:var(--f-ui); font-weight:600; font-size:.8rem; color:var(--ink2); text-align:center}
+.mcal .day{min-height:78px; border:1.5px solid var(--line); border-radius:10px; padding:6px 7px; background:var(--card); cursor:pointer; display:flex; flex-direction:column; gap:4px; text-align:left}
+.mcal .day:hover{border-color:var(--ink)}
+.mcal .day.empty{visibility:hidden}
+.mcal .day.today{border-color:var(--ink); box-shadow:inset 0 -4px 0 var(--hl)}
+.mcal .day .n{font-family:var(--f-ui); font-weight:600; font-size:.85rem}
+.mcal .day .t{font-family:var(--f-ui); font-weight:800; font-size:.95rem; margin-top:auto}
+.mcal .stack{display:flex; height:7px; border-radius:4px; overflow:hidden; background:var(--h0)}
+@media (max-width:620px){ .mcal .day{min-height:56px; padding:4px} .mcal .day .t{font-size:.72rem} .mcal .day .n{font-size:.75rem} }
+
+.tip{position:fixed; z-index:90; pointer-events:none; background:var(--ink); color:var(--paper); border-radius:10px; padding:8px 11px; font-size:.82rem; min-width:170px; max-width:260px; box-shadow:0 8px 24px -8px rgba(0,0,0,.5)}
+.tip b{font-family:var(--f-ui)}
+.tip .r{display:flex; align-items:center; gap:.45em}
+.tip .r span:last-child{margin-left:auto; font-variant-numeric:tabular-nums}
+
+.hbar{display:grid; grid-template-columns:minmax(110px,190px) 1fr 58px; gap:10px; align-items:center; margin:6px 0; font-size:.9rem}
+.hbar .prog{height:12px}
+.hbar .v{text-align:right; font-family:var(--f-ui); font-weight:600; font-variant-numeric:tabular-nums}
+
+/* ---------- Matérias ---------- */
+.chips{display:flex; gap:6px; flex-wrap:wrap}
+.chip{border:1.5px solid var(--line); border-radius:999px; padding:.25em .75em; background:var(--card); font-family:var(--f-ui); font-weight:600; font-size:.85rem; color:var(--ink2)}
+.chip.on{border-color:var(--ink); color:var(--ink); background:var(--hl2)}
+.tag{display:inline-block; font-family:var(--f-ui); font-size:.68rem; font-weight:600; padding:.05em .5em; border-radius:6px; border:1px solid var(--line); color:var(--ink2); margin-left:4px; white-space:nowrap}
+.tag.d{border-color:#0EA5E9; color:#0B7FB5} .tag.c{border-color:#E4508F; color:#B8306C} .tag.t{border-color:#B45309; color:#9A4A0B}
+:root[data-theme="dark"] .tag.d{color:#6CCBF5} :root[data-theme="dark"] .tag.c{color:#F59BC3} :root[data-theme="dark"] .tag.t{color:#F0B37A}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag.d{color:#6CCBF5} :root:not([data-theme="light"]) .tag.c{color:#F59BC3} :root:not([data-theme="light"]) .tag.t{color:#F0B37A} }
+.subj{border-left:7px solid var(--c); padding:0}
+.subj>summary{list-style:none; cursor:pointer; padding:14px 18px; display:grid; grid-template-columns:1fr auto; gap:6px 14px; align-items:center}
+.subj>summary::-webkit-details-marker{display:none}
+.subj>summary h3{margin:0}
+.subj .meta{font-size:.85rem; color:var(--ink2)}
+.subj .body{padding:0 18px 16px}
+.topic{display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-top:1px dashed var(--line)}
+.topic button.st{width:26px; height:26px; border-radius:7px; border:1.5px solid var(--ink3); background:transparent; flex:none; display:grid; place-items:center; font-size:.85rem; font-weight:700}
+.topic button.st.s1{background:var(--c); border-color:var(--c); color:#fff}
+.topic button.st.s2{background:var(--ink); border-color:var(--ink); color:var(--paper)}
+.topic .tt{flex:1}
+.tipbox{background:var(--hl2); border-radius:10px; padding:10px 12px; font-size:.92rem; margin:6px 0 10px}
+
+/* ---------- Rotina ---------- */
+.rout{display:grid; grid-template-columns:repeat(7,minmax(150px,1fr)); gap:10px; overflow-x:auto; padding-bottom:6px}
+.rday{background:var(--card); border:1.5px solid var(--line); border-radius:var(--r-md); padding:10px; min-width:150px}
+.rday.today{border-color:var(--ink); box-shadow:inset 0 5px 0 var(--hl)}
+.rday h4{font-family:var(--f-ui); margin:0 0 6px; display:flex; justify-content:space-between}
+.blk{display:flex; align-items:center; gap:6px; padding:6px 7px; border-radius:8px; margin-bottom:5px; background:color-mix(in srgb, var(--c) 16%, var(--card)); font-size:.85rem}
+.blk .x{margin-left:auto; border:0; background:transparent; color:var(--ink2); font-size:1rem; line-height:1}
+.blk .m{font-family:var(--f-ui); font-weight:600; white-space:nowrap}
+
+/* ---------- Guia ---------- */
+.tabs{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px}
+table.map{border-collapse:collapse; width:100%; font-size:.92rem}
+table.map th, table.map td{border-bottom:1px solid var(--line); padding:9px 10px; text-align:left; vertical-align:top}
+table.map th{font-family:var(--f-ui); font-weight:600; background:var(--hl2)}
+.tbl-wrap{overflow-x:auto}
+.phase{border-left:4px solid var(--ink); padding-left:16px; margin-bottom:26px}
+.phase.now{border-left-color:var(--hl); }
+.phase h2 small{font-family:var(--f-body); font-weight:400; font-size:.9rem; color:var(--ink2); display:block; margin-top:4px}
+.wk{margin:12px 0; padding:12px 14px}
+.chk{display:flex; gap:10px; align-items:flex-start; padding:5px 0; cursor:pointer}
+.chk input{margin-top:.3em; width:18px; height:18px; accent-color:var(--ink); flex:none}
+.chk.done span{color:var(--ink3); text-decoration:line-through}
+.pill-now{display:inline-block; background:var(--hl); color:#1B2550; font-family:var(--f-ui); font-weight:800; font-size:.75rem; padding:.1em .6em; border-radius:99px; vertical-align:middle; margin-left:.4em}
+.prose{max-width:74ch} .prose li{margin-bottom:.35em}
+
+/* ---------- Modal e toast ---------- */
+.modal-bg{position:fixed; inset:0; background:rgba(14,20,48,.45); z-index:80; display:grid; place-items:center; padding:16px}
+.modal{background:var(--card); border-radius:20px; border:1.5px solid var(--line); width:min(560px,100%); max-height:88vh; overflow:auto; padding:22px; box-shadow:0 20px 50px -20px rgba(0,0,0,.5)}
+.modal .top{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+.modal .top h2{margin:0}
+.modal .close{margin-left:auto; border:0; background:transparent; font-size:1.5rem; line-height:1; color:var(--ink2)}
+.sess{display:flex; gap:10px; align-items:center; padding:8px 0; border-bottom:1px dashed var(--line)}
+.sess:last-child{border-bottom:0}
+#toast{width:max-content; max-width:90vw; text-align:center; position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); background:var(--ink); color:var(--paper); padding:.7em 1.2em; border-radius:999px; font-family:var(--f-ui); font-weight:600; z-index:95; opacity:0; pointer-events:none; transition:opacity .2s}
+#toast.show{opacity:1}
+#toast.act{pointer-events:auto; display:flex; align-items:center; gap:.8em}
+#toast .undo{border:0; background:var(--hl); color:#1B2550; font-family:var(--f-ui); font-weight:800; padding:.3em .8em; border-radius:999px}
+@media (max-width:860px){ #toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))} }
+.photo-edit{display:flex; gap:16px; align-items:center}
+.photo-edit .avatar{width:88px; height:88px; font-size:2rem}
+/* ---------- Botão de tema ---------- */
+.theme-btn{width:42px; height:42px; border-radius:50%; border:1.5px solid var(--line); background:var(--card); color:var(--ink); display:grid; place-items:center; flex:none; position:relative; overflow:hidden; padding:0}
+.theme-btn:hover{border-color:var(--ink)}
+.theme-btn svg{position:absolute; width:22px; height:22px; transition:transform .55s cubic-bezier(.45,1.6,.4,1), opacity .35s}
+.theme-btn .sun{color:#E0A800}
+.theme-btn .moon{color:#AFC3FF; transform:rotate(-120deg) scale(0); opacity:0}
+html[data-eff="dark"] .theme-btn .sun{transform:rotate(120deg) scale(0); opacity:0}
+html[data-eff="dark"] .theme-btn .moon{transform:none; opacity:1}
+.brand .theme-btn{margin-left:auto; width:36px; height:36px}
+.brand .theme-btn svg{width:19px; height:19px}
+#themeFab{position:fixed; top:calc(12px + env(safe-area-inset-top,0px)); right:12px; z-index:45; box-shadow:var(--shadow)}
+body.inapp #themeFab{display:none}
+@media (max-width:860px){ body.inapp #themeFab{display:grid} .view-head,.hello{padding-right:48px} }
+::view-transition-old(root),::view-transition-new(root){animation:none; mix-blend-mode:normal}
+html.theming *, html.theming *::before{transition:background-color .45s, color .45s, border-color .45s!important}
+
+/* ---------- Recorte da foto ---------- */
+.crop-stage{display:grid; place-items:center; margin:4px 0 12px}
+.crop-stage canvas{width:280px; height:280px; max-width:100%; border-radius:16px; touch-action:none; cursor:grab; background:#0E1430}
+.crop-stage canvas:active{cursor:grabbing}
+.zoomrow{display:flex; align-items:center; gap:10px; margin-bottom:14px}
+.zoomrow input{flex:1; accent-color:var(--ink)}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+</style>
+</head>
+<body>
+
+<div id="lock" class="hide">
+  <div class="lockcard">
+    <div id="lockAvatar" class="avatar">📒</div>
+    <div class="hand" id="lockHello">Olá!</div>
+    <p class="muted small" id="lockSub">Digite a senha para abrir seu caderno.</p>
+    <form id="lockForm" autocomplete="on">
+      <input type="text" name="username" autocomplete="username" class="hide" id="lockUser">
+      <div class="field">
+        <label for="lockPwd">Senha</label>
+        <input id="lockPwd" type="password" autocomplete="current-password" required>
+      </div>
+      <div class="err" id="lockErr"></div>
+      <button class="btn primary" style="width:100%; justify-content:center" id="lockBtn">Entrar</button>
+    </form>
+  </div>
+</div>
+
+<div id="app" class="hide">
+  <aside class="side">
+    <div class="brand"><span>📒 Caderno de Estudos</span><button class="theme-btn" data-act="theme" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9z"/></svg></button></div>
+    <div class="me" id="meBox"></div>
+    <nav class="menu" id="menu">
+      <a href="#inicio" data-v="inicio"><span class="ic">⏱</span>Início</a>
+      <a href="#calendario" data-v="calendario"><span class="ic">🗓</span>Calendário</a>
+      <a href="#materias" data-v="materias"><span class="ic">📚</span>Matérias</a>
+      <a href="#rotina" data-v="rotina"><span class="ic">🧭</span>Rotina</a>
+      <a href="#guia" data-v="guia"><span class="ic">🗺</span>Guia</a>
+      <a href="#perfil" data-v="perfil"><span class="ic">🙂</span>Perfil</a>
+    </nav>
+    <div class="sync" id="sync"><i></i><span>Tudo salvo</span></div>
+  </aside>
+  <main id="main"></main>
+</div>
+<button class="theme-btn" id="themeFab" data-act="theme" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9z"/></svg></button>
+<div id="tip" class="tip hide"></div>
+<div id="toast"></div>
+
+<script type="module">
+/* ==========================================================================
+   CONFIGURAÇÃO — cole aqui os dados do seu projeto Firebase (veja o README).
+   A senha NÃO fica neste arquivo: quem confere a senha é o Firebase.
+   ========================================================================== */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDy-IJMYLSsYqFF_y8AbBJ9KBYGq538qbs",
+  authDomain: "caderno-estudos-fa322.firebaseapp.com",
+  projectId: "caderno-estudos-fa322",
+  storageBucket: "caderno-estudos-fa322.firebasestorage.app",
+  messagingSenderId: "334734602042",
+  appId: "1:334734602042:web:a21126ccd2e1092330aa03"
+};
+// E-mail "de fachada" do usuário criado no Firebase > Authentication.
+// Não precisa existir de verdade e ninguém digita: a tela de login pede só a senha.
+const LOGIN_EMAIL = "caderno@meu-estudo.app";
+// Pasta onde os dados ficam no Firestore (não mude depois de começar a usar)
+const DATA_ID = "caderno";
+/* ========================================================================== */
+
+const FB_READY = !!(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.projectId && LOGIN_EMAIL);
+const LS = "caderno_v1_";
+
+/* ---------------- Dados fixos: concursos ---------------- */
+const EXAMS = {
+  d:{key:"dmae", name:"DMAE Uberlândia", role:"Oficial Administrativo", banca:"Fundep"},
+  c:{key:"contagem", name:"Prefeitura de Contagem", role:"Assistente Administrativo", banca:"IBGP"},
+  t:{key:"tjsp", name:"TJSP", role:"Escrevente Técnico Judiciário", banca:"VUNESP"}
+};
+const EX_SHORT = {d:"DMAE", c:"Contagem", t:"TJSP"};
+
+/* ---------------- Dados fixos: matérias e tópicos ----------------
+   ex: d = DMAE, c = Contagem, t = TJSP                              */
+const S = (id,name,color,ex,topics,tip)=>({id,name,color,ex,topics,tip});
+const DEFAULT_SUBJECTS = [
+  S("port","Língua Portuguesa","#E0A800","dct",[
+    ["Interpretação de textos: informações literais, inferências e ponto de vista do autor","dct"],
+    ["Tipos e gêneros textuais","dc"],
+    ["Coesão e coerência; relações entre ideias","dct"],
+    ["Significação: sinônimos, antônimos, polissemia, sentido próprio e figurado","dct"],
+    ["Figuras de linguagem e de sintaxe","c"],
+    ["Fonologia, ortografia e acentuação (Novo Acordo)","dc"],
+    ["Formação de palavras","dc"],
+    ["Classes de palavras e seu emprego","dct"],
+    ["Verbos: tempos, modos, vozes e correlação","dc"],
+    ["Sintaxe: frase, oração, período e termos da oração","dc"],
+    ["Período composto: coordenação e subordinação","dc"],
+    ["Pontuação","dct"],
+    ["Concordância verbal e nominal","dct"],
+    ["Regência verbal e nominal","dct"],
+    ["Crase","dct"],
+    ["Colocação pronominal","dct"],
+    ["Variação linguística","dc"]
+  ],"É a matéria que aparece nos três concursos e desempata no TJSP. Estude um tópico de gramática por sessão e feche sempre com 10–15 questões da banca do próximo concurso. Interpretação se treina todo dia: um texto curto + questões."),
+  S("mat","Matemática básica","#FF7B39","dct",[
+    ["Conjuntos numéricos e operações (frações, decimais, potências, raízes)","dct"],
+    ["MMC e MDC","ct"],
+    ["Razão e proporção; grandezas direta e inversamente proporcionais","dct"],
+    ["Regra de três simples e composta","dct"],
+    ["Porcentagem","dct"],
+    ["Juros simples","dct"],
+    ["Juros compostos","d"],
+    ["Equações do 1º e 2º grau","dct"],
+    ["Sistemas de equações do 1º grau","dct"],
+    ["Média aritmética simples e ponderada","dct"],
+    ["Grandezas e medidas (sistema métrico, tempo, capacidade, massa)","ct"],
+    ["Leitura de gráficos e tabelas","dct"],
+    ["Geometria: perímetro, área, volume e Pitágoras","dt"],
+    ["Resolução de situações-problema","dct"]
+  ],"Base de tudo em exatas. Se você está enferrujado(a), comece por frações, porcentagem e regra de três: caem em qualquer banca e ajudam em juros e no raciocínio lógico."),
+  S("matav","Matemática do ensino médio","#D6453D","d",[
+    ["Funções afim e quadrática (raízes, vértice, sinal, inequações)","d"],
+    ["Função exponencial e logaritmos","d"],
+    ["Trigonometria (triângulo retângulo, ciclo, leis dos senos e cossenos)","d"],
+    ["Progressões: PA e PG","d"],
+    ["Matrizes, determinantes (Sarrus) e sistemas lineares","d"],
+    ["Geometria analítica: ponto, reta e circunferência","d"],
+    ["Estatística: moda, mediana, variância e desvio padrão","d"],
+    ["Intervalos reais e números irracionais","d"]
+  ],"Conteúdo enorme para poucas questões (Matemática + RL somam 10 no DMAE). Para iniciante: PA/PG e estatística primeiro. Trigonometria, logaritmo e matrizes só se sobrar tempo — não compensa travar aqui."),
+  S("rl","Raciocínio Lógico","#8E5CF7","dct",[
+    ["Proposições simples e compostas; conectivos","dct"],
+    ["Tabelas-verdade","ct"],
+    ["Negação de proposições","ct"],
+    ["Equivalências e implicações lógicas","ct"],
+    ["Quantificadores (todo, algum, nenhum)","c"],
+    ["Argumentação: premissas, conclusão e validade","dct"],
+    ["Diagramas lógicos e operações com conjuntos","dct"],
+    ["Sequências de números, letras, palavras e figuras","dct"],
+    ["Associação lógica (problemas com tabelas)","dct"],
+    ["Verdades e mentiras","dc"],
+    ["Análise combinatória: PFC, arranjo, permutação e combinação","dc"],
+    ["Probabilidade","dc"],
+    ["Casa dos pombos; orientação espacial e temporal","d"]
+  ],"RL se aprende fazendo: leia a teoria rápido e vá para questões resolvidas. Monte tabelas e desenhe diagramas no papel sempre."),
+  S("info","Informática","#12B5A5","ct",[
+    ["Windows 10/11: pastas, arquivos, atalhos e Explorador","ct"],
+    ["Área de transferência e atalhos de teclado","ct"],
+    ["Word: formatação, tabelas, quebras, cabeçalho, índices","ct"],
+    ["Excel: células, fórmulas, funções, gráficos, classificação","ct"],
+    ["PowerPoint e apresentações","c"],
+    ["Microsoft 365: Teams, OneDrive, SharePoint, OneNote","ct"],
+    ["Google Workspace (Docs, Planilhas, Drive)","c"],
+    ["Internet: navegadores, URL, busca e e-mail","ct"],
+    ["Hardware, software e periféricos","c"],
+    ["Redes: internet, intranet, protocolos e nuvem","c"],
+    ["Segurança: malware, golpes, antivírus, firewall e senhas","c"],
+    ["Backup e recuperação de dados","c"],
+    ["Inteligência artificial: conceitos e uso responsável","c"]
+  ],"Não cai no DMAE, vale só 5 pontos em Contagem (5 questões, peso 1), mas são 9 questões no TJSP. Em Contagem estude o essencial; aprofunde de verdade na fase do TJSP. Pratique no computador enquanto estuda."),
+  S("adm","Noções de Administração","#3B82F6","dc",[
+    ["Conceitos, princípios e funções (planejar, organizar, dirigir, controlar)","dc"],
+    ["Teorias da Administração (clássica, burocrática, relações humanas, comportamental)","d"],
+    ["Estrutura organizacional e departamentalização","dc"],
+    ["Gestão de pessoas e recursos humanos","d"],
+    ["Rotinas de departamento pessoal","d"],
+    ["Relacionamento interpessoal, ética, motivação, liderança e conflitos","dc"],
+    ["Atendimento ao público: qualidade, acessibilidade, prioritário","dc"],
+    ["Almoxarifado: recebimento, armazenagem, estoques e inventário","dc"],
+    ["Compras: pesquisa, cotação e gestão de compras","d"],
+    ["Finanças: juros, capitalização, descontos, empréstimos","d"],
+    ["Noções de contabilidade: princípios, escrituração, demonstrativos","d"],
+    ["Orçamento: tradicional x programa; empenho e liquidação","d"],
+    ["Rotinas administrativas: planejamento, formulários, manuais","c"]
+  ],"No DMAE os Específicos valem 2 pontos por questão (20 dos 50 pontos). É a matéria de maior retorno até novembro — e quase tudo reaproveita em Contagem."),
+  S("arq","Arquivologia e Redação Oficial","#22A06B","dc",[
+    ["Conceitos de arquivo, documento e protocolo","dc"],
+    ["Ciclo de vida: arquivos corrente, intermediário e permanente","dc"],
+    ["Classificação, métodos de arquivamento e tramitação","dc"],
+    ["Conservação, destinação e documentos digitais","dc"],
+    ["Manual de Redação da Presidência: clareza, concisão, formalidade","dc"],
+    ["Pronomes de tratamento e padrão ofício","dc"],
+    ["Tipos de documentos: ofício, ata, requerimento, certidão, portaria, relatório","dc"],
+    ["Técnica legislativa: redação de leis e decretos","d"]
+  ],"Matéria curta e muito cobrada em cargos administrativos. O Manual de Redação da Presidência é gratuito no site do Planalto: leia os capítulos de princípios, pronomes e padrão ofício."),
+  S("admpub","Adm. Pública, Licitações e Transparência","#5B6CFF","dct",[
+    ["Princípios da Administração (CF, art. 37 — LIMPE)","dct"],
+    ["Servidores públicos na CF (arts. 37 a 41)","dct"],
+    ["Organização administrativa: direta, indireta, centralização e desconcentração","c"],
+    ["Serviço público e serviços essenciais","d"],
+    ["Lei 14.133/21: princípios, agentes e fases","dc"],
+    ["Lei 14.133/21: modalidades e critérios de julgamento","dc"],
+    ["Lei 14.133/21: contratação direta (dispensa e inexigibilidade)","dc"],
+    ["Lei 14.133/21: contratos, fiscalização e sanções","dc"],
+    ["Lei de Acesso à Informação (12.527/11)","c"],
+    ["LGPD (13.709/18) no setor público","c"]
+  ],"Os arts. 37 a 41 da Constituição caem nos três concursos. A Lei 14.133 é longa: estude por partes e leia a lei seca junto com questões."),
+  S("legdmae","Legislação Uberlândia / DMAE","#0EA5E9","d",[
+    ["Lei Orgânica do Município de Uberlândia","d"],
+    ["Estatuto dos Servidores (LC 40/1992)","d"],
+    ["Plano de Carreira do DMAE (Lei 12.048/2014)","d"],
+    ["Estrutura orgânica do Executivo (LC 751/2023)","d"],
+    ["Estrutura administrativa do DMAE (Decreto 20.288/2023)","d"],
+    ["Código de Ética do Servidor (Decreto 20.179/2023)","d"]
+  ],"São 5 questões e não pode zerar. Leia a lei seca com marca-texto nos prazos, números e proibições — banca municipal adora cobrar detalhe literal."),
+  S("cg","Conhecimentos Gerais e Atualidades","#A3A31F","dct",[
+    ["Atualidades 2025–2026: política, economia, sociedade e cultura","dct"],
+    ["Uberlândia: história, geografia e economia (IBGE Cidades)","d"],
+    ["Minas Gerais: história e geografia","d"],
+    ["Nova ordem mundial e problemas do século XXI (água, energia, clima, desigualdade)","d"],
+    ["DMAE: serviços e sustentabilidade (canais oficiais)","d"],
+    ["Estatuto da Pessoa com Deficiência (arts. 1–13 e 34–38)","t"]
+  ],"Atualidades não se estuda de uma vez: 15–20 min por dia lendo notícias e um resumo semanal. Para Uberlândia, use o IBGE Cidades e o site da Prefeitura."),
+  S("ctg","Contagem: legislação e município","#E4508F","c",[
+    ["Lei Orgânica de Contagem","c"],
+    ["Estatuto dos Servidores de Contagem (Lei 2.160/1990)","c"],
+    ["Plano de Cargos, Carreira e Salários (LC 105/2011)","c"],
+    ["História, geografia e economia de Contagem","c"],
+    ["Símbolos municipais e noções de cidadania","c"],
+    ["Notícias e atualidades de Contagem (site da Prefeitura)","c"]
+  ],"Deixe para depois do DMAE. Muitos pontos do Estatuto de Contagem se parecem com o de Uberlândia (posse, exercício, estágio probatório, deveres) — compare os dois."),
+  S("dconst","Direito Constitucional","#B45309","t",[
+    ["Direitos e deveres individuais e coletivos (art. 5º)","t"],
+    ["Direitos sociais (arts. 6º a 11)","t"],
+    ["Nacionalidade (arts. 12 e 13)","t"],
+    ["Administração Pública: disposições gerais (arts. 37 e 38)","dct"],
+    ["Servidores públicos (arts. 39 a 41)","dct"],
+    ["Órgãos do Poder Judiciário (art. 92)","t"]
+  ],"Comece o TJSP por aqui: é a porta de entrada do Direito e o art. 37 você já terá visto nos outros concursos."),
+  S("dadm","Direito Administrativo (SP)","#7C3AED","t",[
+    ["Estatuto dos Funcionários de SP (Lei 10.261/68), arts. 1º a 86","t"],
+    ["Lei 10.261/68, arts. 171 a 175","t"],
+    ["Lei 10.261/68, arts. 239 a 323: deveres, proibições, penalidades e processo","t"],
+    ["Lei de Improbidade (8.429/92, com a Lei 14.230/21)","t"]
+  ],"Lei seca pura. Faça quadros-resumo de prazos e penalidades."),
+  S("dpenal","Direito Penal","#BE123C","t",[
+    ["Crimes contra a fé pública (arts. 293 a 305, 307, 308, 311-A)","t"],
+    ["Crimes de funcionário público contra a Administração (arts. 312 a 317, 319 a 327)","t"],
+    ["Crimes de particular contra a Administração (arts. 328 a 333, 336 e 337)","t"],
+    ["Crimes contra a Administração da Justiça (arts. 339 a 347, 357 e 359)","t"]
+  ],"Foque nos verbos de cada crime e nas diferenças clássicas: peculato x concussão x corrupção passiva x prevaricação."),
+  S("dpp","Processo Penal","#9F1239","t",[
+    ["Juiz, MP, acusado e defensor (arts. 251 a 258, 261 a 267, 274)","t"],
+    ["Citações e intimações (arts. 351 a 372)","t"],
+    ["Procedimentos e Tribunal do Júri (arts. 394 a 497)","t"],
+    ["Arts. 531 a 538 e 541 a 548","t"],
+    ["Recursos e habeas corpus (arts. 574 a 667)","t"],
+    ["JECrim (Lei 9.099, arts. 60 a 83, 88 e 89)","t"]
+  ],"Priorize citações/intimações e prazos: é o dia a dia do escrevente e cai muito na VUNESP."),
+  S("dpc","Processo Civil","#0D9488","t",[
+    ["Impedimento, suspeição e auxiliares da justiça (arts. 144 a 155)","t"],
+    ["Atos processuais: forma, tempo, lugar, prazos e comunicação (arts. 188 a 275)","t"],
+    ["Tutela provisória (arts. 294 a 311)","t"],
+    ["Procedimento comum até coisa julgada (arts. 318 a 508)","t"],
+    ["Cumprimento de sentença (arts. 509 a 538)","t"],
+    ["Recursos (arts. 994 a 1.026)","t"],
+    ["Juizados Especiais Cíveis (Lei 9.099, arts. 3º a 19)","t"],
+    ["Juizados da Fazenda Pública (Lei 12.153/09)","t"]
+  ],"A maior fatia do Direito no TJSP. Atos processuais e prazos (arts. 188–275) são o coração da prova."),
+  S("normas","Normas internas do TJSP","#64748B","t",[
+    ["Resolução 850/2021 (teletrabalho)","t"],
+    ["Resolução 963/2025 (sistema eproc)","t"],
+    ["LC 1.111/2010 (plano de cargos do TJSP)","t"],
+    ["Regimento Interno do TJSP","t"],
+    ["Normas da Corregedoria (NSCGJ, Tomo I: caps. II, III e XI)","t"]
+  ],"Deixe para a reta final do TJSP e confira no edital do interior quais normas foram mantidas."),
+  S("red","Redação (TJSP)","#C026D3","t",[
+    ["Estrutura dissertativo-argumentativa: introdução, desenvolvimento, conclusão","t"],
+    ["Tese e argumentação com repertório","t"],
+    ["Coesão: conectivos e parágrafos","t"],
+    ["Critérios da VUNESP e motivos de nota zero","t"],
+    ["Treino: 1 redação por semana, corrigida","t"]
+  ],"Eliminatória: precisa de 20/40. Escreva à mão, com tempo marcado, e peça correção sempre que puder."),
+  S("rev","Revisão, questões e simulados","#475569","dct",[
+    ["Caderno de erros atualizado","dct"],
+    ["Simulado de prova anterior da Fundep","d"],
+    ["Simulado de prova anterior do IBGP","c"],
+    ["Simulado de prova anterior da VUNESP","t"]
+  ],"Use esta matéria no cronômetro quando fizer questões misturadas, simulados ou revisão do caderno de erros.")
+];
+
+/* ---------------- Rotinas sugeridas por fase (0=Dom … 6=Sáb) ---------------- */
+const B=(s,m)=>({s,m});
+const ROUTINES = {
+  1:{0:[B("rev",60),B("cg",60)],1:[B("port",60),B("adm",60),B("mat",60)],2:[B("arq",60),B("rl",60),B("legdmae",60)],3:[B("port",60),B("admpub",60),B("mat",60)],4:[B("adm",60),B("legdmae",45),B("cg",45)],5:[B("port",60),B("admpub",60),B("rl",60)],6:[B("rev",120),B("adm",60),B("legdmae",60)]},
+  2:{0:[B("rev",60),B("info",30),B("ctg",30)],1:[B("adm",60),B("port",60),B("admpub",60)],2:[B("arq",60),B("rl",60),B("admpub",60)],3:[B("port",60),B("adm",60),B("admpub",60)],4:[B("adm",60),B("ctg",60),B("info",45)],5:[B("port",45),B("arq",60),B("dconst",45)],6:[B("rev",120),B("adm",60)]},
+  3:{0:[B("rev",60),B("normas",45)],1:[B("dconst",60),B("port",60),B("info",45)],2:[B("dadm",60),B("dpenal",60),B("rl",45)],3:[B("port",60),B("dpc",60),B("mat",45)],4:[B("dpp",60),B("normas",60),B("info",45)],5:[B("dconst",45),B("dpc",60),B("cg",30)],6:[B("rev",120),B("red",60)]}
+};
+
+/* ---------------- Guia: fases ---------------- */
+const PHASES = [
+  {n:1, title:"Fase 1 — Foco total no DMAE", range:"21/09 a 01/11/2026 · 6 semanas",
+   intro:"Prova em 01/11. Critério: não zerar nenhuma disciplina e fazer ao menos 25 dos 50 pontos. Os Conhecimentos Específicos valem 20 pontos — é onde você mais ganha. Tudo de Português, Administração e Arquivo reaproveita em Contagem.",
+   weeks:[
+    {t:"Semana 1 · 21 a 27/09", items:["Português: interpretação de texto e classes de palavras","Administração: conceitos, funções e teorias","Arquivo: conceitos e as três idades","Matemática: frações, decimais e porcentagem","Legislação: Código de Ética (Decreto 20.179/2023)","Baixar uma prova antiga da Fundep de nível médio e só olhar como ela é"]},
+    {t:"Semana 2 · 28/09 a 04/10", items:["Português: concordância e pontuação","Administração: gestão de pessoas, RH e atendimento","Redação oficial: Manual da Presidência (princípios, pronomes, padrão ofício)","Matemática: razão, proporção e regra de três","Legislação: Estatuto LC 40/1992 (provimento, posse, exercício, estágio)"]},
+    {t:"Semana 3 · 05 a 11/10", items:["Português: crase e regência","Administração: almoxarifado, estoques e compras","Adm. Pública: CF arts. 37 a 41","Matemática: juros simples e compostos; conjuntos","Raciocínio lógico: proposições e conectivos","Legislação: Estatuto (direitos, deveres, penalidades) e Plano de Carreira do DMAE"]},
+    {t:"Semana 4 · 12 a 18/10", items:["Português: colocação pronominal, ortografia e acentuação","Administração: finanças, contabilidade e orçamento","Lei 14.133: princípios, modalidades e contratação direta","Raciocínio lógico: sequências e verdades/mentiras","Conhecimentos gerais: Uberlândia (história, geografia, IBGE)","Legislação: Lei Orgânica de Uberlândia","Primeiro simulado cronometrado (3h30)"]},
+    {t:"Semana 5 · 19 a 25/10", items:["Português: sintaxe, período composto, formação de palavras e variação","Lei 14.133: contratos, fiscalização e sanções","Matemática: estatística, PA/PG, combinatória e probabilidade","Legislação: LC 751/2023 e Decreto 20.288/2023 (estrutura do DMAE)","Conhecimentos gerais: atualidades, Minas Gerais e temas do século XXI","Segundo simulado + revisão do caderno de erros"]},
+    {t:"Semana 6 · 26/10 a 01/11 (prova)", items:["Só revisão: resumos, caderno de erros e lei seca da legislação municipal","Um último simulado até quarta-feira","Conferir local de prova no Cartão de Convocação (Fundep)","Sábado leve e dormir cedo; levar documento com foto e caneta preta"]}
+   ]},
+  {n:2, title:"Fase 2 — Contagem (Assistente Administrativo)", range:"02/11/2026 a 24/01/2027 · 12 semanas",
+   intro:"Prova em 24/01/2027: 45 questões, 100 pontos. Os Conhecimentos Específicos são 20 questões com peso 3 = 60 pontos. Português (10 × peso 2 = 20), Raciocínio Lógico (5 × 2 = 10), Informática (5 × 1) e Conhecimentos do Município (5 × 1) completam. Então: ~60% do tempo em Específicos, ~20% em Português e o resto dividido. Você chega do DMAE com boa parte dos Específicos já vista.",
+   weeks:[
+    {t:"Bloco A · 02/11 a 29/11", items:["Específicos: Adm. Pública — princípios, organização administrativa (direta, indireta, desconcentração)","Específicos: LAI (12.527/11) e LGPD (13.709/18)","Específicos: rotinas administrativas, atendimento ao cidadão, ética e relações no trabalho","Português: revisar tudo por questões do IBGP","Raciocínio lógico: tabelas-verdade, negação, equivalências e quantificadores","Contagem: Lei Orgânica","Informática (leve): Windows, Word e Excel","TJSP (semente): CF art. 5º, 45 min por semana"]},
+    {t:"Bloco B · 30/11 a 03/01", items:["Específicos: Lei 14.133 completa (revisão aprofundada + questões do IBGP)","Específicos: gestão de documentos e arquivos, redação oficial","Específicos: almoxarifado, estoques e inventário","Contagem: Estatuto (Lei 2.160/1990) e PCCS (LC 105/2011)","Raciocínio lógico: combinatória, probabilidade e conjuntos","Informática (leve): internet, segurança, backup, nuvem e IA","Contagem: história, geografia, economia e símbolos"]},
+    {t:"Bloco C · 04/01 a 24/01 (prova)", items:["Um simulado do IBGP por semana, cronometrado","Revisão dos Específicos pelo caderno de erros","Notícias recentes de Contagem no site da Prefeitura","Última semana só revisão; conferir local de prova"]}
+   ]},
+  {n:3, title:"Fase 3 — TJSP (Escrevente, interior)", range:"Depois de Contagem, até o edital do interior",
+   intro:"O edital que você mandou é o da Capital/1ª RAJ (2025). O do interior costuma seguir a mesma estrutura, mas confira quando sair. São 70 questões: Português 16, Direito 30, Conhecimentos Gerais 24. Blocos I e II exigem 50% de acertos cada, e a redação precisa de 20/40.",
+   weeks:[
+    {t:"Ordem sugerida do Direito", items:["Constitucional: arts. 5º a 13, 37 a 41 e 92","Administrativo: Estatuto de SP (10.261/68) e Improbidade (8.429/92)","Penal: crimes contra a fé pública e a Administração","Processo Penal: citações, intimações, procedimentos e recursos","Processo Civil: atos processuais e prazos primeiro, depois o resto","Juizados: Leis 9.099/95 e 12.153/09","Normas internas: resoluções, LC 1.111/2010, Regimento e NSCGJ"]},
+    {t:"Em paralelo, toda semana", items:["1 redação dissertativo-argumentativa com tempo marcado","Questões da VUNESP de Português (estilo diferente da Fundep e do IBGP)","Informática: Microsoft 365 e Teams","Atualidades a partir de 2025 e arts. 1–13 e 34–38 da Lei 13.146/2015"]}
+   ]}
+];
+
+const OVERLAP = [
+  ["Língua Portuguesa","10 questões (10 pts)","10 questões × peso 2 (20 pts)","16 questões (desempate)"],
+  ["Matemática","10 questões junto com RL","dentro de RL","4 questões"],
+  ["Raciocínio Lógico","junto com Matemática","5 questões × peso 2 (10 pts)","7 questões"],
+  ["Informática","—","5 questões × peso 1 (5 pts)","9 questões"],
+  ["Administração, arquivo e redação oficial","Específicos: 10 × 2 pts","Específicos: 20 × peso 3 (60 pts)","—"],
+  ["Adm. Pública e Licitações (14.133)","dentro dos Específicos","dentro dos Específicos","CF arts. 37–41 dentro de Direito"],
+  ["Legislação municipal","5 questões (Uberlândia/DMAE)","dentro de Conhec. do Município","—"],
+  ["Conhecimentos gerais / atualidades","5 questões","Conhec. do Município: 5 × peso 1 (5 pts)","4 questões"],
+  ["Direito (6 áreas + normas)","—","—","30 questões"],
+  ["Redação","— (só nível superior)","não aparece no quadro da prova objetiva","Eliminatória, mínimo 20/40"]
+];
+
+const METHOD = `
+<h3>O ciclo de cada sessão</h3>
+<ol class="prose">
+<li><b>Teoria curta (25–40 min):</b> videoaula ou PDF de um único tópico. Anote só o que você não sabia.</li>
+<li><b>Questões (20–30 min):</b> 10 a 20 questões da banca do próximo concurso sobre aquele tópico.</li>
+<li><b>Correção ativa (10 min):</b> cada erro vira uma linha no caderno de erros: o que errei, por quê, qual a regra certa.</li>
+<li><b>Marque o tópico aqui no site:</b> um clique = estudado; dois cliques = revisado.</li>
+</ol>
+<h3>Revisões que fixam</h3>
+<p class="prose">Revise cada tópico 1 dia, 7 dias e 30 dias depois de estudar. Revisão é rápida: reler as anotações e refazer as questões que errou. No sábado, use o bloco “Revisão, questões e simulados”.</p>
+<h3>Lei seca</h3>
+<p class="prose">Legislação municipal, Lei 14.133, LAI, LGPD e as leis do TJSP se estudam lendo o texto da lei (no site da Câmara, Planalto ou Leis Municipais), com marca-texto em prazos, números, “vedado”, “exceto” e “salvo”. Bancas copiam frases da lei e trocam uma palavra.</p>
+<h3>Simulados</h3>
+<p class="prose">A partir da semana 4 do DMAE, faça provas anteriores inteiras com o tempo real. Provas da Fundep ficam em gestaodeconcursos.com.br; da VUNESP em vunesp.com.br; do IBGP no site da banca. Bancos de questões (como QConcursos ou TEC) permitem filtrar por banca e assunto.</p>
+<h3>Para quem está começando</h3>
+<ul class="prose">
+<li>Constância ganha de maratona: 2h todo dia rendem mais que 8h no domingo.</li>
+<li>Não tente “terminar” a matéria antes de fazer questões. Questão é estudo, não teste final.</li>
+<li>Durma. Memória se consolida dormindo — virar noite antes da prova atrapalha.</li>
+<li>Se travar num tópico por mais de 2 sessões, pule e volte depois. Em concurso, abrangência vale mais que perfeição.</li>
+</ul>`;
+
+const DEFAULT_PHRASES = [
+  "Cada questão resolvida hoje é uma vaga mais perto, {nome}.",
+  "Constância vence intensidade. Bora?",
+  "Uma matéria de cada vez, {nome}. Você dá conta.",
+  "Estudar um pouco todo dia vale mais que muito de vez em quando.",
+  "O {nome} de daqui a um ano vai agradecer por hoje.",
+  "Café, caderno e foco. Vamos nessa, {nome}!"
+];
+
+/* ======================================================================
+   Utilidades
+   ====================================================================== */
+const $=(s,el=document)=>el.querySelector(s);
+const $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad=n=>String(n).padStart(2,"0");
+const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parseYmd=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+const todayStr=()=>ymd(new Date());
+const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const fmtHM=sec=>{const m=Math.round((sec||0)/60);const h=Math.floor(m/60),mm=m%60;return h?`${h}h${mm?pad(mm):""}`:`${mm}min`};
+const fmtClock=ms=>{const s=Math.max(0,Math.floor(ms/1000));return `${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)}`};
+const MONTHS_PT=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const WD=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+const WD_FULL=["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+const fmtDateLong=s=>{const d=parseYmd(s);return `${WD_FULL[d.getDay()]}, ${d.getDate()} de ${MONTHS_PT[d.getMonth()]} de ${d.getFullYear()}`};
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.remove("act");t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("show"),2400)}
+/* ---- Desfazer: guarda uma cópia antes da ação e oferece o botão por 8 segundos ---- */
+let UNDO=null;
+function snap(ym,keepRunning=true){return {u:JSON.stringify(U),ym:ym||null,m:ym?JSON.stringify(MONTHS[ym]||[]):null,keepRunning}}
+function offerUndo(msg,sn){
+  UNDO=sn;const t=$("#toast");
+  t.innerHTML=`<span>${esc(msg)}</span><button class="undo" id="undoBtn">Desfazer</button>`;
+  t.classList.add("show","act");clearTimeout(toast._t);
+  toast._t=setTimeout(()=>{t.classList.remove("show","act");UNDO=null},8000);
+}
+async function doUndo(){
+  if(!UNDO)return;const sn=UNDO;UNDO=null;
+  const running=U.running;U=JSON.parse(sn.u);if(sn.keepRunning)U.running=running;
+  saveUser(true);
+  if(sn.ym){MONTHS[sn.ym]=JSON.parse(sn.m);await saveMonth(sn.ym)}
+  cacheLockProfile();render();toast("Desfeito.");
+}
+function initials(name){const p=(name||"").trim().split(/\s+/);return ((p[0]||"?")[0]+(p[1]?p[1][0]:"")).toUpperCase()}
+function avatarHTML(p,cls=""){return `<div class="avatar ${cls}">${p&&p.photo?`<img src="${p.photo}" alt="">`:esc(initials(p&&p.name||"?"))}</div>`}
+function daysUntil(dateStr){if(!dateStr)return null;const a=parseYmd(todayStr()),b=parseYmd(dateStr);return Math.round((b-a)/86400000)}
+function greetWord(){const h=new Date().getHours();if(h>=5&&h<12)return "Bom dia";if(h>=12&&h<18)return "Boa tarde";return "Boa noite"}
+
+/* ======================================================================
+   Armazenamento (Firebase ou local)
+   ====================================================================== */
+let fb=null;
+const Store={
+  uid:null,
+  async init(){
+    const v="10.12.2", base=`https://www.gstatic.com/firebasejs/${v}/`;
+    const [appM,authM,fsM]=await Promise.all([import(base+"firebase-app.js"),import(base+"firebase-auth.js"),import(base+"firebase-firestore.js")]);
+    const app=appM.initializeApp(FIREBASE_CONFIG);
+    let db;
+    try{db=fsM.initializeFirestore(app,{localCache:fsM.persistentLocalCache({tabManager:fsM.persistentMultipleTabManager()})})}
+    catch(e){db=fsM.getFirestore(app)}
+    fb={auth:authM.getAuth(app),db,A:authM,F:fsM};
+  },
+  currentUser(){return new Promise(res=>{const un=fb.A.onAuthStateChanged(fb.auth,u=>{un();res(u)})})},
+  async login(pwd){const c=await fb.A.signInWithEmailAndPassword(fb.auth,LOGIN_EMAIL,pwd);return c.user},
+  async logout(){await fb.A.signOut(fb.auth)},
+  ref(...path){return fb.F.doc(fb.db,"users",DATA_ID,...path)},
+  async loadUser(){const s=await fb.F.getDoc(this.ref());return s.exists()?s.data():null},
+  async saveUser(data){await fb.F.setDoc(this.ref(),JSON.parse(JSON.stringify(data)))},
+  async loadMonth(ym){const s=await fb.F.getDoc(this.ref("months",ym));return s.exists()?(s.data().sessions||[]):[]},
+  async saveMonth(ym,sessions){await fb.F.setDoc(this.ref("months",ym),{sessions:JSON.parse(JSON.stringify(sessions))})}
+};
+function authMsg(e){
+  const c=e&&e.code||"";
+  if(c.includes("wrong-password")||c.includes("invalid-credential")||c.includes("invalid-login"))return "Senha incorreta. Tente de novo.";
+  if(c.includes("user-not-found")||c.includes("invalid-email"))return "O usuário do site não existe no Firebase. Confira o passo 3 do README.";
+  if(c.includes("too-many-requests"))return "Muitas tentativas. Espere alguns minutos e tente de novo.";
+  if(c.includes("network"))return "Sem conexão com a internet. Verifique e tente de novo.";
+  return "Não foi possível entrar ("+(c||"erro desconhecido")+").";
+}
+function setSync(state){
+  const el=$("#sync");if(!el)return;el.className="sync "+(state==="ok"?"":state);
+  el.querySelector("span").textContent=state==="saving"?"Salvando…":state==="error"?"Erro ao salvar — verifique a internet":"Tudo salvo na nuvem";
+}
+let saveTimer=null;
+function saveUser(now=false){
+  setSync("saving");clearTimeout(saveTimer);
+  const run=()=>Store.saveUser(U).then(()=>setSync("ok")).catch(e=>{console.error(e);setSync("error")});
+  if(now)return run();saveTimer=setTimeout(run,700);
+}
+async function saveMonth(ym){
+  setSync("saving");
+  try{await Store.saveMonth(ym,MONTHS[ym]||[]);setSync("ok")}catch(e){console.error(e);setSync("error");toast("Não salvou. Verifique a internet.")}
+}
+
+/* ======================================================================
+   Estado
+   ====================================================================== */
+let U=null;          // documento do usuário
+let MONTHS={};       // "AAAA-MM" -> [sessões]
+const UI={view:"inicio",calYear:new Date().getFullYear(),calMonth:new Date().getMonth(),subjFilter:"all",guideTab:"mapa",openSubj:null};
+
+function defaultUser(){
+  return {v:1,profile:{name:"",photo:"",phrases:DEFAULT_PHRASES.slice()},
+    settings:{goalMin:180,theme:"auto"},
+    exams:{dmae:"2026-11-01",contagem:"2027-01-24",tjsp:""},
+    routine:JSON.parse(JSON.stringify(ROUTINES[1])),
+    topics:{},guide:{},customSubjects:[],running:null,months:[]};
+}
+function subjects(){return DEFAULT_SUBJECTS.concat((U.customSubjects||[]).map(c=>({...c,topics:(c.topics||[]).map(t=>[t,c.ex]),custom:true})))}
+function subjById(id){return subjects().find(s=>s.id===id)||{id,name:"Matéria removida",color:"#999",ex:"",topics:[]}}
+function currentPhase(){
+  const t=todayStr();
+  if(U.exams.dmae&&t<=U.exams.dmae)return 1;
+  if(!U.exams.contagem||t<=U.exams.contagem)return 2;
+  return 3;
+}
+
+/* ---------- Agregações ---------- */
+function allSessions(){return Object.values(MONTHS).flat()}
+function dayMap(){
+  const m={};
+  for(const s of allSessions()){
+    const d=m[s.date]||(m[s.date]={total:0,by:{}});
+    d.total+=s.sec;d.by[s.subj]=(d.by[s.subj]||0)+s.sec;
+  }
+  return m;
+}
+function level(sec){const m=sec/60;if(m<=0)return 0;if(m<30)return 1;if(m<60)return 2;if(m<120)return 3;if(m<180)return 4;return 5}
+function streak(dm){
+  let n=0;const d=new Date();
+  if(!dm[ymd(d)])d.setDate(d.getDate()-1);
+  while(dm[ymd(d)]&&dm[ymd(d)].total>0){n++;d.setDate(d.getDate()-1)}
+  return n;
+}
+function bySubjectTotals(filterFn){
+  const t={};for(const s of allSessions()){if(filterFn&&!filterFn(s))continue;t[s.subj]=(t[s.subj]||0)+s.sec}return t;
+}
+
+/* ======================================================================
+   Sessões
+   ====================================================================== */
+async function addSession(sess){
+  const ym=sess.date.slice(0,7);
+  if(!MONTHS[ym])MONTHS[ym]=await Store.loadMonth(ym).catch(()=>[]);
+  MONTHS[ym].push(sess);
+  if(!U.months.includes(ym)){U.months.push(ym);U.months.sort();saveUser()}
+  await saveMonth(ym);
+}
+async function deleteSession(date,id){
+  const ym=date.slice(0,7);MONTHS[ym]=(MONTHS[ym]||[]).filter(s=>s.id!==id);await saveMonth(ym);
+}
+
+/* ======================================================================
+   Cronômetro
+   ====================================================================== */
+function elapsedMs(r){if(!r)return 0;return (r.acc||0)+(r.startedAt?Date.now()-r.startedAt:0)}
+function timerStart(subj,topic,mode){
+  U.running={subj,topic:topic||"",mode:mode||0,acc:0,startedAt:Date.now(),begin:new Date().toISOString(),date:todayStr(),alerted:false};
+  saveUser(true);render();
+}
+function timerPause(){const r=U.running;if(!r||!r.startedAt)return;r.acc=elapsedMs(r);r.startedAt=null;saveUser(true);render()}
+function timerResume(){const r=U.running;if(!r||r.startedAt)return;r.startedAt=Date.now();saveUser(true);render()}
+async function timerStop(){
+  const r=U.running;if(!r)return;
+  const sec=Math.round(elapsedMs(r)/1000);
+  const note=($("#tNote")&&$("#tNote").value||"").trim();
+  const date=r.date||todayStr(), sn=snap(date.slice(0,7),false);
+  U.running=null;saveUser(true);
+  if(sec<30){toast("Sessão muito curta — não foi registrada.");render();return}
+  await addSession({id:newId(),date,begin:r.begin,sec,subj:r.subj,topic:r.topic||"",note});
+  render();offerUndo(`Registrado: ${fmtHM(sec)} de ${subjById(r.subj).name}`,sn);
+}
+function timerDiscard(){const sn=snap(null,false);U.running=null;saveUser(true);render();offerUndo("Tempo descartado.",sn)}
+function beep(){
+  try{const ctx=new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(t=>{const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=880;g.gain.setValueAtTime(.001,ctx.currentTime+t);g.gain.exponentialRampToValueAtTime(.3,ctx.currentTime+t+.02);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+t+.28);o.connect(g).connect(ctx.destination);o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+.3)})}catch(e){}
+}
+setInterval(()=>{
+  const r=U&&U.running;if(!r)return;
+  const ms=elapsedMs(r);
+  const clk=$("#clock");if(clk)clk.textContent=fmtClock(ms);
+  if(r.mode){
+    const bar=$("#tBar");if(bar)bar.style.width=Math.min(100,ms/(r.mode*60000)*100)+"%";
+    if(ms>=r.mode*60000&&!r.alerted&&r.startedAt){r.alerted=true;timerPause();beep();toast(`${r.mode} minutos! Hora de uma pausa.`);
+      if("Notification" in window&&Notification.permission==="granted")new Notification("Pausa!",{body:`Você completou ${r.mode} min de ${subjById(r.subj).name}.`})}
+  }
+  document.title=(r.startedAt?"▶ ":"⏸ ")+fmtClock(ms)+" · "+subjById(r.subj).name;
+},1000);
+
+/* ======================================================================
+   Render: shell
+   ====================================================================== */
+const mqDark=matchMedia("(prefers-color-scheme: dark)");
+function themePref(){return (U&&U.settings.theme)||localStorage.getItem(LS+"theme")||"auto"}
+function isDark(){const t=themePref();return t==="dark"||(t==="auto"&&mqDark.matches)}
+function applyTheme(){
+  const t=themePref(), h=document.documentElement;
+  if(t==="auto")delete h.dataset.theme;else h.dataset.theme=t;
+  h.dataset.eff=isDark()?"dark":"light";
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=isDark()?"#0E1430":"#F6F8FC";
+}
+mqDark.addEventListener("change",applyTheme);
+function toggleTheme(btn){
+  const next=isDark()?"light":"dark";
+  const apply=()=>{localStorage.setItem(LS+"theme",next);if(U){U.settings.theme=next;saveUser();const sel=$("#sTheme");if(sel)sel.value=next}applyTheme()};
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce){apply();return}
+  if(!document.startViewTransition){ // navegadores sem View Transitions: troca suave de cores
+    const h=document.documentElement;h.classList.add("theming");apply();setTimeout(()=>h.classList.remove("theming"),500);return;
+  }
+  const r=btn.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2;
+  const rad=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+  const vt=document.startViewTransition(apply);
+  vt.ready.then(()=>document.documentElement.animate(
+    {clipPath:[`circle(0px at ${x}px ${y}px)`,`circle(${rad}px at ${x}px ${y}px)`]},
+    {duration:600,easing:"cubic-bezier(.6,0,.3,1)",pseudoElement:"::view-transition-new(root)"})).catch(()=>{});
+}
+document.addEventListener("click",e=>{const b=e.target.closest('[data-act="theme"]');if(b){e.stopPropagation();toggleTheme(b)}},true);
+applyTheme();
+function renderMe(){
+  const p=U.profile;
+  $("#meBox").innerHTML=`${avatarHTML(p)}<div><b>${esc(p.name||"Você")}</b><span class="tiny muted">sincronizado</span></div>`;
+}
+function render(){
+  applyTheme();renderMe();
+  $$("#menu a").forEach(a=>a.classList.toggle("on",a.dataset.v===UI.view));
+  const main=$("#main");
+  const V={inicio:viewHome,calendario:viewCal,materias:viewSubj,rotina:viewRoutine,guia:viewGuide,perfil:viewProfile}[UI.view]||viewHome;
+  main.innerHTML=V();
+  if(!U.running)document.title="Caderno de Estudos";
+  afterRender();
+}
+function afterRender(){
+  const cl=$("#clock");if(cl&&U.running)cl.textContent=fmtClock(elapsedMs(U.running));
+  const tsel=$("#tSubj");if(tsel)fillTopicSelect();
+}
+
+/* ---------- Início ---------- */
+function viewHome(){
+  const p=U.profile, name=(p.name||"").split(" ")[0]||"";
+  const phrases=(p.phrases&&p.phrases.length?p.phrases:DEFAULT_PHRASES);
+  if(!UI.phrase)UI.phrase=phrases[Math.floor(Math.random()*phrases.length)];
+  const phrase=UI.phrase.replaceAll("{nome}",name||"você");
+  const dm=dayMap(), today=todayStr(), td=dm[today]||{total:0,by:{}};
+  const goal=(U.settings.goalMin||180)*60;
+  const wd=new Date().getDay(), plan=U.routine[wd]||[];
+  const planned={};plan.forEach(b=>planned[b.s]=(planned[b.s]||0)+b.m*60);
+  const ph=currentPhase();
+
+  // semana (seg a dom)
+  const now=new Date(), monday=new Date(now);monday.setDate(now.getDate()-((now.getDay()+6)%7));
+  let wkMax=1;const wkDays=[];
+  for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);const k=ymd(d);const v=dm[k]||{total:0,by:{}};wkDays.push({k,d,v});wkMax=Math.max(wkMax,v.total)}
+  const wkTotal=wkDays.reduce((a,x)=>a+x.v.total,0);
+  const monthKey=today.slice(0,7);
+  const mTotal=(MONTHS[monthKey]||[]).reduce((a,s)=>a+s.sec,0);
+
+  const cds=[["d",U.exams.dmae],["c",U.exams.contagem],["t",U.exams.tjsp]].map(([k,dt])=>{
+    const n=daysUntil(dt);
+    if(n===null)return `<span class="cd"><span>${EX_SHORT[k]}</span><span class="small muted">data a definir</span></span>`;
+    if(n<0)return `<span class="cd"><span>${EX_SHORT[k]}</span><span class="small muted">prova realizada</span></span>`;
+    return `<span class="cd ${n<=45?"soon":""}"><b>${n===0?"Hoje!":n}</b><span>${n===0?"":n===1?"dia":"dias"} · ${EX_SHORT[k]}</span></span>`;
+  }).join("");
+
+  return `
+  <section class="hello">
+    ${avatarHTML(p)}
+    <div><div class="hand">${greetWord()}${name?", "+esc(name):""}!</div><div class="phrase">${esc(phrase)}</div></div>
+  </section>
+  <div class="countdowns">${cds}</div>
+  <div class="grid g-home">
+    <div class="grid" style="align-content:start">
+      ${timerCard()}
+      <div class="card">
+        <h3>Esta semana</h3>
+        <div class="stats"><div class="stat"><b>${fmtHM(wkTotal)}</b><span class="small muted">na semana</span></div>
+        <div class="stat"><b>${fmtHM(mTotal)}</b><span class="small muted">em ${MONTHS_PT[new Date().getMonth()]}</span></div>
+        <div class="stat"><b>${streak(dm)}</b><span class="small muted">dias seguidos</span></div></div>
+        <div class="week">${wkDays.map(x=>`<div class="col" data-day="${x.k}" title="">${Object.entries(x.v.by).map(([s,sec])=>`<span style="height:${sec/wkMax*100}%;background:${subjById(s).color}"></span>`).join("")}</div>`).join("")}</div>
+        <div class="week lbl" style="height:auto">${wkDays.map(x=>`<div>${WD[x.d.getDay()]}<b>${x.v.total?fmtHM(x.v.total):"–"}</b></div>`).join("")}</div>
+      </div>
+    </div>
+    <div class="grid" style="align-content:start">
+      <div class="card">
+        <h3>Hoje</h3>
+        <div class="row" style="align-items:baseline"><span class="stat"><b>${fmtHM(td.total)}</b></span><span class="muted small">de ${fmtHM(goal)} de meta</span></div>
+        <div class="prog" style="margin:8px 0 4px"><span style="width:${Math.min(100,td.total/goal*100)}%;--c:var(--ok)"></span></div>
+        ${td.total>=goal?`<p class="small" style="color:var(--ok);font-weight:700;margin-top:6px">Meta do dia cumprida! 🎉</p>`:""}
+      </div>
+      <div class="card">
+        <h3>Rotina de ${WD_FULL[wd].toLowerCase()}</h3>
+        ${plan.length?Object.entries(planned).map(([s,sec])=>{const d=td.by[s]||0,sj=subjById(s),pc=Math.min(100,d/sec*100);
+          return `<div class="plan-item ${pc>=100?"done":""}"><span class="dot" style="--c:${sj.color}"></span><span class="nm">${esc(sj.name)}</span>
+          <button class="btn sm ghost" data-act="quickstart" data-s="${s}" ${U.running?"disabled":""}>▶</button>
+          <div class="prog"><span style="width:${pc}%;--c:${sj.color}"></span></div>
+          <span class="tiny muted" style="grid-column:2/4">${fmtHM(d)} de ${fmtHM(sec)}</span></div>`}).join("")
+        :`<p class="muted">Nada planejado para hoje. <a href="#rotina">Monte sua rotina</a>.</p>`}
+      </div>
+      <div class="card">
+        <h3>Onde você está</h3>
+        <p><b>${PHASES[ph-1].title}</b><br><span class="muted small">${PHASES[ph-1].range}</span></p>
+        <a class="btn sm" href="#guia">Abrir o guia desta fase</a>
+      </div>
+    </div>
+  </div>`;
+}
+function timerCard(){
+  const r=U.running;
+  const subs=subjects();
+  if(!r){
+    const last=UI.lastSubj||(U.routine[new Date().getDay()]||[])[0]?.s||"port";
+    return `<div class="card timer">
+      <h3>Cronômetro</h3>
+      <div class="field"><label for="tSubj">Matéria</label>
+        <select id="tSubj">${subs.map(s=>`<option value="${s.id}" ${s.id===last?"selected":""}>${esc(s.name)}</option>`).join("")}</select></div>
+      <div class="field"><label for="tTopic">Assunto (opcional)</label><select id="tTopic"></select></div>
+      <div class="row" style="margin-bottom:12px"><span class="small muted">Modo</span>
+        <div class="segmented" id="tMode">${[[0,"Livre"],[25,"25 min"],[50,"50 min"]].map(([v,l])=>`<button data-mode="${v}" class="${(UI.mode||0)==v?"on":""}">${l}</button>`).join("")}</div></div>
+      <div class="clock" style="color:var(--ink3)">00:00:00</div>
+      <div class="row"><button class="btn primary" data-act="start">▶ Começar</button>
+      <button class="btn ghost sm" data-act="manual">+ Registrar tempo manualmente</button></div>
+    </div>`;
+  }
+  const sj=subjById(r.subj);
+  const topic=r.topic!==""?(sj.topics[+r.topic]||[""])[0]:"";
+  return `<div class="card timer ${r.startedAt?"running":"paused"}" style="--subj:${sj.color}">
+    <h3>Cronômetro <span class="state">${r.startedAt?"estudando…":"pausado"}${r.mode?` · meta ${r.mode} min`:""}</span></h3>
+    <div class="subjline"><span class="dot" style="--c:${sj.color}"></span>${esc(sj.name)}</div>
+    ${topic?`<div class="small muted">${esc(topic)}</div>`:""}
+    <div class="clock" id="clock">${fmtClock(elapsedMs(r))}</div>
+    <div class="field"><label for="tNote">Anotação da sessão (opcional)</label><input type="text" id="tNote" placeholder="Ex.: 15 questões, errei 4 de crase" value="${esc(UI.note||"")}"></div>
+    <div class="row">
+      ${r.startedAt?`<button class="btn" data-act="pause">⏸ Pausar</button>`:`<button class="btn" data-act="resume">▶ Continuar</button>`}
+      <button class="btn primary" data-act="stop">■ Encerrar e salvar</button>
+      <span class="spacer"></span><button class="btn sm danger" data-act="discard">Descartar</button>
+    </div>
+    ${r.mode?`<div class="bar" id="tBar" style="width:${Math.min(100,elapsedMs(r)/(r.mode*60000)*100)}%"></div>`:""}
+  </div>`;
+}
+function fillTopicSelect(){
+  const sj=subjById($("#tSubj").value);
+  $("#tTopic").innerHTML=`<option value="">— Geral —</option>`+sj.topics.map((t,i)=>`<option value="${i}">${esc(t[0])}</option>`).join("");
+}
+
+/* ---------- Calendário ---------- */
+function viewCal(){
+  const dm=dayMap(), y=UI.calYear, m=UI.calMonth;
+  const years=new Set([new Date().getFullYear()]);Object.keys(dm).forEach(k=>years.add(+k.slice(0,4)));
+  const yTotal=Object.entries(dm).filter(([k])=>k.startsWith(y+"-")).reduce((a,[,v])=>a+v.total,0);
+  const yDays=Object.entries(dm).filter(([k,v])=>k.startsWith(y+"-")&&v.total>0).length;
+
+  // mês
+  const first=new Date(y,m,1), last=new Date(y,m+1,0);
+  const lead=(first.getDay()+6)%7; const today=todayStr();
+  let cells="";for(let i=0;i<lead;i++)cells+=`<div class="day empty"></div>`;
+  let mTotal=0,mDays=0;const mBy={};
+  for(let d=1;d<=last.getDate();d++){
+    const k=`${y}-${pad(m+1)}-${pad(d)}`, v=dm[k];
+    if(v&&v.total){mTotal+=v.total;mDays++;for(const [s,sec] of Object.entries(v.by))mBy[s]=(mBy[s]||0)+sec}
+    const stack=v&&v.total?Object.entries(v.by).sort((a,b)=>b[1]-a[1]).map(([s,sec])=>`<span style="flex:${sec};background:${subjById(s).color}"></span>`).join(""):"";
+    cells+=`<button class="day ${k===today?"today":""}" data-day="${k}"><span class="n">${d}</span>${v&&v.total?`<div class="stack">${stack}</div><span class="t">${fmtHM(v.total)}</span>`:""}</button>`;
+  }
+  const mMax=Math.max(1,...Object.values(mBy));
+  return `
+  <div class="view-head"><h1>Calendário</h1><span class="spacer"></span>
+    <select id="calYear" style="width:auto">${[...years].sort().map(v=>`<option ${v===y?"selected":""}>${v}</option>`).join("")}</select></div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="row" style="margin-bottom:10px"><h3 style="margin:0">Ano de ${y}</h3><span class="muted small">${fmtHM(yTotal)} em ${yDays} ${yDays===1?"dia":"dias"}</span><span class="spacer"></span>
+      <span class="legend">menos <i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><i class="l5"></i> mais</span></div>
+    ${heatmapHTML(y,dm)}
+    <p class="tiny muted" style="margin:8px 0 0">Passe o mouse (ou toque) num quadradinho para ver as matérias do dia; clique para abrir o registro.</p>
+  </div>
+  <div class="grid g-2">
+    <div class="card">
+      <div class="row" style="margin-bottom:10px"><button class="btn sm ghost" data-act="mprev" aria-label="Mês anterior">‹</button>
+      <h3 style="margin:0; text-transform:capitalize">${MONTHS_PT[m]} ${y}</h3>
+      <button class="btn sm ghost" data-act="mnext" aria-label="Próximo mês">›</button></div>
+      <div class="mcal">${["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"].map(d=>`<div class="hd">${d}</div>`).join("")}${cells}</div>
+    </div>
+    <div class="card">
+      <h3>Resumo de ${MONTHS_PT[m]}</h3>
+      <div class="stats" style="margin-bottom:12px"><div class="stat"><b>${fmtHM(mTotal)}</b><span class="small muted">no mês</span></div>
+      <div class="stat"><b>${mDays}</b><span class="small muted">dias estudados</span></div>
+      <div class="stat"><b>${mDays?fmtHM(mTotal/mDays):"–"}</b><span class="small muted">média por dia estudado</span></div></div>
+      ${Object.keys(mBy).length?Object.entries(mBy).sort((a,b)=>b[1]-a[1]).map(([s,sec])=>{const sj=subjById(s);return `<div class="hbar"><span class="row" style="gap:.4em;flex-wrap:nowrap"><span class="dot" style="--c:${sj.color}"></span>${esc(sj.name)}</span><div class="prog"><span style="width:${sec/mMax*100}%;--c:${sj.color}"></span></div><span class="v">${fmtHM(sec)}</span></div>`}).join("")
+        :`<p class="muted">Nenhum estudo registrado neste mês ainda. Use o cronômetro na tela Início.</p>`}
+    </div>
+  </div>`;
+}
+function heatmapHTML(year,dm){
+  const start=new Date(year,0,1);start.setDate(start.getDate()-start.getDay());
+  const end=new Date(year,11,31);end.setDate(end.getDate()+(6-end.getDay()));
+  const today=todayStr();let cells="";const lbls=[];const d=new Date(start);
+  while(d<=end){
+    if(d.getDay()===0)lbls.push("");
+    if(d.getDate()===1&&d.getFullYear()===year)lbls[lbls.length-1]=MONTHS_PT[d.getMonth()].slice(0,3);
+    const k=ymd(d), inYear=d.getFullYear()===year, v=dm[k];
+    cells+=`<div class="c ${inYear?"l"+level(v?v.total:0):"out"} ${k===today?"today":""}" ${inYear?`data-day="${k}"`:""}></div>`;
+    d.setDate(d.getDate()+1);
+  }
+  return `<div class="heat-wrap"><div class="heat-row"><div class="heat-days"><span></span><span>seg</span><span></span><span>qua</span><span></span><span>sex</span><span></span></div>
+    <div><div class="months-lbl">${lbls.map(l=>`<span>${l}</span>`).join("")}</div><div class="heat">${cells}</div></div></div></div>`;
+}
+
+/* ---------- Tooltip dos dias ---------- */
+document.addEventListener("mouseover",e=>{
+  const el=e.target.closest("[data-day]");const tip=$("#tip");
+  if(!el||!U){tip.classList.add("hide");return}
+  const k=el.dataset.day, v=dayMap()[k];
+  tip.innerHTML=`<b>${fmtDateLong(k)}</b><div style="margin:4px 0 2px">${v&&v.total?"Total: <b>"+fmtHM(v.total)+"</b>":"Sem estudo registrado"}</div>`+
+    (v?Object.entries(v.by).sort((a,b)=>b[1]-a[1]).map(([s,sec])=>{const sj=subjById(s);return `<div class="r"><span class="dot" style="--c:${sj.color}"></span><span>${esc(sj.name)}</span><span>${fmtHM(sec)}</span></div>`}).join(""):"");
+  tip.classList.remove("hide");
+  const r=el.getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+  let x=r.left+r.width/2-tw/2, y=r.top-th-8;
+  x=Math.max(8,Math.min(x,innerWidth-tw-8)); if(y<8)y=r.bottom+8;
+  tip.style.left=x+"px";tip.style.top=y+"px";
+});
+addEventListener("scroll",()=>$("#tip").classList.add("hide"),{passive:true});
+
+function openDay(k){
+  const list=(MONTHS[k.slice(0,7)]||[]).filter(s=>s.date===k).sort((a,b)=>(a.begin||"").localeCompare(b.begin||""));
+  const v=dayMap()[k]||{total:0,by:{}};
+  openModal(`<div class="top"><h2 style="font-size:1.2rem">${fmtDateLong(k)}</h2><button class="close" data-close aria-label="Fechar">×</button></div>
+  <p><b style="font-family:var(--f-ui);font-size:1.4rem">${fmtHM(v.total)}</b> <span class="muted">estudados</span></p>
+  ${Object.entries(v.by).sort((a,b)=>b[1]-a[1]).map(([s,sec])=>{const sj=subjById(s);return `<div class="hbar"><span class="row" style="gap:.4em;flex-wrap:nowrap"><span class="dot" style="--c:${sj.color}"></span>${esc(sj.name)}</span><div class="prog"><span style="width:${sec/Math.max(1,v.total)*100}%;--c:${sj.color}"></span></div><span class="v">${fmtHM(sec)}</span></div>`}).join("")}
+  <h3 style="margin-top:16px">Sessões</h3>
+  ${list.length?list.map(s=>{const sj=subjById(s.subj);const tp=s.topic!==""&&s.topic!=null?(sj.topics[+s.topic]||[""])[0]:"";const hr=s.begin?new Date(s.begin).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}):"manual";
+    return `<div class="sess"><span class="dot" style="--c:${sj.color}"></span><div style="flex:1"><b>${esc(sj.name)}</b> · ${fmtHM(s.sec)} <span class="tiny muted">(${hr})</span>${tp?`<div class="small muted">${esc(tp)}</div>`:""}${s.note?`<div class="small">“${esc(s.note)}”</div>`:""}</div>
+    <button class="btn sm danger" data-act="delsess" data-date="${k}" data-id="${s.id}">Apagar</button></div>`}).join(""):`<p class="muted">Nenhuma sessão neste dia.</p>`}
+  <div class="row" style="margin-top:14px"><button class="btn" data-act="manual" data-date="${k}">+ Adicionar tempo neste dia</button></div>`);
+}
+
+/* ---------- Matérias ---------- */
+function viewSubj(){
+  const f=UI.subjFilter, tot=bySubjectTotals();
+  const list=subjects().filter(s=>f==="all"||s.ex.includes(f));
+  const cnt=(s)=>{const ts=s.topics.map((t,i)=>({t,i})).filter(x=>f==="all"||x.t[1].includes(f));const st=ts.map(x=>U.topics[s.id+":"+x.i]||0);return {n:ts.length,a:st.filter(v=>v>=1).length,b:st.filter(v=>v>=2).length,ts}};
+  const all=list.map(cnt).reduce((a,c)=>({n:a.n+c.n,a:a.a+c.a,b:a.b+c.b}),{n:0,a:0,b:0});
+  return `
+  <div class="view-head"><h1>Matérias</h1><span class="spacer"></span><button class="btn sm" data-act="newsubj">+ Nova matéria</button></div>
+  <div class="row" style="margin-bottom:14px">
+    <div class="chips">${[["all","Todas"],["d","DMAE"],["c","Contagem"],["t","TJSP"]].map(([k,l])=>`<button class="chip ${f===k?"on":""}" data-act="sfilter" data-f="${k}">${l}</button>`).join("")}</div>
+  </div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="row"><b style="font-family:var(--f-ui)">${all.a} de ${all.n} assuntos estudados</b><span class="muted small">· ${all.b} revisados</span></div>
+    <div class="prog" style="margin-top:8px"><span style="width:${all.n?all.a/all.n*100:0}%"></span></div>
+    <p class="tiny muted" style="margin:8px 0 0">Clique no quadradinho de cada assunto: 1 clique = estudado (colorido), 2 cliques = revisado (✓✓), 3 cliques = limpa.</p>
+  </div>
+  <div class="grid">
+  ${list.map(s=>{const c=cnt(s);return `<details class="card subj" style="--c:${s.color}" ${UI.openSubj===s.id?"open":""} data-sid="${s.id}">
+    <summary><div><h3>${esc(s.name)} ${s.ex.split("").map(k=>`<span class="tag ${k}">${EX_SHORT[k]}</span>`).join("")}</h3>
+      <div class="meta">${c.a}/${c.n} assuntos · ${fmtHM(tot[s.id]||0)} estudados</div></div>
+      <div style="width:110px"><div class="prog"><span style="width:${c.n?c.a/c.n*100:0}%;--c:${s.color}"></span></div></div></summary>
+    <div class="body">
+      ${s.tip?`<div class="tipbox">💡 ${esc(s.tip)}</div>`:""}
+      ${c.ts.map(({t,i})=>{const st=U.topics[s.id+":"+i]||0;return `<div class="topic"><button class="st s${st}" data-act="topic" data-k="${s.id}:${i}" aria-label="Marcar assunto">${st===1?"✓":st===2?"✓✓":""}</button>
+        <span class="tt">${esc(t[0])} ${t[1].split("").map(k=>`<span class="tag ${k}">${EX_SHORT[k]}</span>`).join("")}</span></div>`}).join("")}
+      <div class="row" style="margin-top:10px"><button class="btn sm" data-act="quickstart" data-s="${s.id}" ${U.running?"disabled":""}>▶ Estudar agora</button>
+      ${s.custom?`<span class="spacer"></span><button class="btn sm danger" data-act="delsubj" data-s="${s.id}">Remover matéria</button>`:""}</div>
+    </div></details>`}).join("")}
+  </div>`;
+}
+
+/* ---------- Rotina ---------- */
+function viewRoutine(){
+  const order=[1,2,3,4,5,6,0], wd=new Date().getDay();
+  const total=order.reduce((a,d)=>a+(U.routine[d]||[]).reduce((x,b)=>x+b.m,0),0);
+  return `
+  <div class="view-head"><h1>Rotina semanal</h1><span class="spacer"></span><span class="muted">${fmtHM(total*60)} planejadas por semana</span></div>
+  <div class="card" style="margin-bottom:16px">
+    <p style="margin:0 0 10px">Monte blocos por dia. Na tela Início você vê a rotina de hoje e quanto já cumpriu de cada bloco.</p>
+    <div class="row"><span class="small muted">Carregar rotina sugerida:</span>
+    ${PHASES.map(p=>`<button class="btn sm ${currentPhase()===p.n?"primary":""}" data-act="loadroutine" data-p="${p.n}">Fase ${p.n}</button>`).join("")}</div>
+  </div>
+  <div class="rout">${order.map(d=>{const bl=U.routine[d]||[];const m=bl.reduce((a,b)=>a+b.m,0);
+    return `<div class="rday ${d===wd?"today":""}"><h4><span>${WD_FULL[d]}</span><span class="small muted">${m?fmtHM(m*60):""}</span></h4>
+    ${bl.map((b,i)=>{const sj=subjById(b.s);return `<div class="blk" style="--c:${sj.color}"><span class="dot" style="--c:${sj.color}"></span><span>${esc(sj.name)}</span><span class="m">${b.m}′</span><button class="x" data-act="delblk" data-d="${d}" data-i="${i}" aria-label="Remover">×</button></div>`}).join("")}
+    <button class="btn sm ghost" style="width:100%;justify-content:center" data-act="addblk" data-d="${d}">+ bloco</button></div>`}).join("")}</div>`;
+}
+
+/* ---------- Guia ---------- */
+function viewGuide(){
+  const tab=UI.guideTab, ph=currentPhase();
+  const tabs=[["mapa","Mapa dos concursos"],["fases","Plano por fases"],["metodo","Como estudar"],["concursos","Detalhes das provas"]];
+  let body="";
+  if(tab==="mapa"){
+    body=`<div class="card"><h2>O que se repete entre os três</h2>
+    <p class="prose muted">Estudar pelo que se repete é o atalho: Português, Raciocínio Lógico, Administração/Arquivo e Adm. Pública servem a mais de um concurso. A ordem de prioridade é DMAE → Contagem → TJSP.</p>
+    <div class="tbl-wrap"><table class="map"><thead><tr><th>Matéria</th><th>DMAE · 01/11/2026</th><th>Contagem · 24/01/2027</th><th>TJSP · a definir</th></tr></thead>
+    <tbody>${OVERLAP.map(r=>`<tr>${r.map((c,i)=>i?`<td>${esc(c)}</td>`:`<th scope="row" style="background:transparent">${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div></div>
+    <div class="card" style="margin-top:16px"><h2>Prioridade de estudo agora</h2>
+    <ol class="prose">
+      <li><b>Conhecimentos Específicos do DMAE</b> (Administração, Arquivo, Redação Oficial, 14.133): 20 dos 50 pontos e reaproveita em Contagem.</li>
+      <li><b>Português</b>: cai nos três.</li>
+      <li><b>Legislação Uberlândia/DMAE</b>: 5 questões, não pode zerar, conteúdo fechado.</li>
+      <li><b>Matemática e Raciocínio Lógico</b>: foque no básico (porcentagem, regra de três, juros, lógica); a matemática avançada fica por último.</li>
+      <li><b>Conhecimentos gerais</b>: 15–20 min por dia de notícias + Uberlândia/MG.</li>
+    </ol></div>`;
+  }else if(tab==="fases"){
+    body=PHASES.map(p=>`<section class="phase ${p.n===ph?"now":""}"><h2>${esc(p.title)}${p.n===ph?`<span class="pill-now">você está aqui</span>`:""}<small>${esc(p.range)}</small></h2>
+      <p class="prose">${esc(p.intro)}</p>
+      ${p.weeks.map((w,wi)=>{const ids=w.items.map((_,ii)=>`f${p.n}w${wi}i${ii}`);const done=ids.filter(id=>U.guide[id]).length;
+        return `<div class="card wk"><div class="row"><h3 style="margin:0">${esc(w.t)}</h3><span class="spacer"></span><span class="small muted">${done}/${ids.length}</span></div>
+        <div class="prog" style="margin:8px 0 6px;height:6px"><span style="width:${done/ids.length*100}%"></span></div>
+        ${w.items.map((it,ii)=>{const id=ids[ii];return `<label class="chk ${U.guide[id]?"done":""}"><input type="checkbox" data-act="gchk" data-id="${id}" ${U.guide[id]?"checked":""}><span>${esc(it)}</span></label>`}).join("")}</div>`}).join("")}
+      <button class="btn sm" data-act="loadroutine" data-p="${p.n}">Usar a rotina sugerida da Fase ${p.n}</button></section>`).join("");
+  }else if(tab==="metodo"){
+    body=`<div class="card">${METHOD}</div>`;
+  }else{
+    body=`<div class="grid g-2">
+    <div class="card"><h2>DMAE Uberlândia</h2><p class="muted">Oficial Administrativo · banca Fundep · turno B</p>
+      <ul class="prose"><li>Prova objetiva em <b>01/11/2026</b> (domingo), em Uberlândia.</li>
+      <li>40 questões: Português 10, Matemática e RL 10, Conhecimentos Gerais 5, Legislação 5 (1 ponto cada) e Específicos 10 (2 pontos cada) = 50 pontos.</li>
+      <li>Aprovação: <b>não zerar nenhuma disciplina</b> e fazer no mínimo 25 pontos.</li>
+      <li>Sem redação para nível médio.</li>
+      <li>10 vagas (7 ampla concorrência) · R$ 3.968,08 · 40h semanais.</li>
+      <li>Provas anteriores e cartão de convocação: gestaodeconcursos.com.br</li></ul></div>
+    <div class="card"><h2>Prefeitura de Contagem</h2><p class="muted">Assistente Administrativo · banca IBGP</p>
+      <ul class="prose"><li>Prova em <b>24/01/2027</b>.</li>
+      <li>45 questões, 100 pontos: Português 10 (peso 2), Raciocínio Lógico 5 (peso 2), Informática 5 (peso 1), Conhecimentos Gerais do Município 5 (peso 1) e <b>Conhecimentos Específicos 20 (peso 3 = 60 pontos)</b>.</li>
+      <li>Específicos: Adm. Pública, Lei 14.133, rotinas administrativas, documentos e arquivo, almoxarifado, atendimento, ética, redação oficial, LAI e LGPD.</li>
+      <li>Critério mínimo de aprovação: confira no edital completo.</li></ul></div>
+    <div class="card"><h2>TJSP — Escrevente</h2><p class="muted">Banca VUNESP</p>
+      <ul class="prose"><li>70 questões + redação, em 5 horas.</li>
+      <li>Bloco I Português (16) e Bloco II Direito (30): mínimo de 50% de acertos em cada.</li>
+      <li>Bloco III (24): Atualidades 4, Matemática 4, Informática 9, RL 7 — só classifica.</li>
+      <li>Nota final mínima 5/10; redação eliminatória com mínimo 20/40.</li>
+      <li>O edital enviado é da Capital/1ª RAJ (2025). Confira o do interior quando sair.</li></ul></div>
+    <div class="card"><h2>Datas no seu contador</h2>
+      <p class="prose">DMAE: ${U.exams.dmae?fmtDateLong(U.exams.dmae):"a definir"}<br>Contagem: ${U.exams.contagem?fmtDateLong(U.exams.contagem):"a definir"}<br>TJSP: ${U.exams.tjsp?fmtDateLong(U.exams.tjsp):"a definir"}</p>
+      <a class="btn sm" href="#perfil">Editar datas</a></div></div>`;
+  }
+  return `<div class="view-head"><h1>Guia de estudos</h1></div>
+    <div class="tabs">${tabs.map(([k,l])=>`<button class="chip ${tab===k?"on":""}" data-act="gtab" data-t="${k}">${l}</button>`).join("")}</div>${body}`;
+}
+
+/* ---------- Perfil ---------- */
+function viewProfile(){
+  const p=U.profile;
+  return `<div class="view-head"><h1>Perfil</h1></div>
+  <div class="grid g-2">
+    <div class="card">
+      <h3>Você</h3>
+      <div class="photo-edit" style="margin-bottom:14px">${avatarHTML(p)}
+        <div class="row"><label class="btn sm" for="photoIn">Trocar foto</label><input type="file" id="photoIn" accept="image/*" class="hide">
+        ${p.photo?`<button class="btn sm ghost" data-act="rmphoto">Remover</button>`:""}</div></div>
+      <div class="field"><label for="pName">Seu nome</label><input type="text" id="pName" value="${esc(p.name)}" placeholder="Como quer ser chamado(a)?"></div>
+      <div class="field"><label for="pPhr">Frases da saudação (uma por linha — use {nome} para inserir seu nome)</label>
+        <textarea id="pPhr">${esc((p.phrases||[]).join("\n"))}</textarea></div>
+      <button class="btn primary" data-act="saveprof">Salvar perfil</button>
+    </div>
+    <div class="grid" style="align-content:start">
+      <div class="card"><h3>Metas e aparência</h3>
+        <div class="field"><label for="sGoal">Meta diária (minutos)</label><input type="number" id="sGoal" min="10" step="10" value="${U.settings.goalMin}"></div>
+        <div class="field"><label for="sTheme">Tema</label><select id="sTheme">${[["auto","Automático (segue o aparelho)"],["light","Claro"],["dark","Escuro"]].map(([v,l])=>`<option value="${v}" ${U.settings.theme===v?"selected":""}>${l}</option>`).join("")}</select></div>
+      </div>
+      <div class="card"><h3>Datas das provas</h3>
+        ${[["dmae","DMAE"],["contagem","Contagem"],["tjsp","TJSP"]].map(([k,l])=>`<div class="field"><label for="e_${k}">${l}</label><input type="date" id="e_${k}" value="${U.exams[k]||""}"></div>`).join("")}
+        <button class="btn" data-act="saveexams">Salvar datas</button>
+      </div>
+      <div class="card"><h3>Dados</h3>
+        <p class="small muted">Seus dados ficam no Firebase e aparecem em qualquer aparelho onde você entrar com a senha.</p>
+        <div class="row"><button class="btn sm" data-act="export">Baixar backup (.json)</button>
+        <label class="btn sm ghost" for="impIn">Restaurar backup</label><input type="file" id="impIn" accept="application/json" class="hide">
+        <span class="spacer"></span><button class="btn sm danger" data-act="logout">Sair</button></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ======================================================================
+   Modais
+   ====================================================================== */
+function openModal(html){
+  closeModal();const bg=document.createElement("div");bg.className="modal-bg";bg.id="modalBg";
+  bg.innerHTML=`<div class="modal" role="dialog" aria-modal="true">${html}</div>`;
+  bg.addEventListener("click",e=>{if(e.target===bg||e.target.closest("[data-close]"))closeModal()});
+  document.body.appendChild(bg);const f=bg.querySelector("input,select,button:not(.close)");if(f)f.focus();
+}
+function closeModal(){const m=$("#modalBg");if(m)m.remove()}
+addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"&&UNDO&&!e.target.closest("input,textarea,select")){e.preventDefault();doUndo()}});
+document.addEventListener("click",e=>{if(e.target.id==="undoBtn")doUndo()});
+
+function manualModal(date){
+  const subs=subjects();
+  openModal(`<div class="top"><h2>Registrar tempo</h2><button class="close" data-close aria-label="Fechar">×</button></div>
+  <div class="field"><label for="mDate">Dia</label><input type="date" id="mDate" value="${date||todayStr()}"></div>
+  <div class="field"><label for="mSubj">Matéria</label><select id="mSubj">${subs.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("")}</select></div>
+  <div class="row"><div class="field" style="flex:1"><label for="mH">Horas</label><input type="number" id="mH" min="0" value="1"></div>
+  <div class="field" style="flex:1"><label for="mM">Minutos</label><input type="number" id="mM" min="0" max="59" value="0"></div></div>
+  <div class="field"><label for="mNote">Anotação (opcional)</label><input type="text" id="mNote"></div>
+  <button class="btn primary" data-act="savemanual">Registrar</button>`);
+}
+function blockModal(d){
+  const subs=subjects();
+  openModal(`<div class="top"><h2>Novo bloco · ${WD_FULL[d]}</h2><button class="close" data-close aria-label="Fechar">×</button></div>
+  <div class="field"><label for="bSubj">Matéria</label><select id="bSubj">${subs.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("")}</select></div>
+  <div class="field"><label for="bMin">Duração (minutos)</label><input type="number" id="bMin" min="10" step="5" value="60"></div>
+  <button class="btn primary" data-act="saveblk" data-d="${d}">Adicionar bloco</button>`);
+}
+function subjModal(){
+  openModal(`<div class="top"><h2>Nova matéria</h2><button class="close" data-close aria-label="Fechar">×</button></div>
+  <div class="field"><label for="nsName">Nome</label><input type="text" id="nsName" placeholder="Ex.: Ética no serviço público"></div>
+  <div class="field"><label for="nsColor">Cor</label><input type="color" id="nsColor" value="#2B9348" style="height:42px;padding:2px"></div>
+  <div class="field"><label>Serve para</label><div class="row">${Object.entries(EX_SHORT).map(([k,l])=>`<label class="chk" style="padding:0"><input type="checkbox" class="nsEx" value="${k}" checked><span>${l}</span></label>`).join("")}</div></div>
+  <div class="field"><label for="nsTopics">Assuntos (um por linha)</label><textarea id="nsTopics"></textarea></div>
+  <button class="btn primary" data-act="savesubj">Criar matéria</button>`);
+}
+
+/* ======================================================================
+   Eventos
+   ====================================================================== */
+document.addEventListener("click",async e=>{
+  const dayEl=e.target.closest("[data-day]");
+  if(dayEl&&!e.target.closest("[data-act]")&&U){openDay(dayEl.dataset.day);return}
+  const b=e.target.closest("[data-act]");if(!b||!U)return;
+  const a=b.dataset.act;
+  if(a==="gchk")return; // tratado no change
+  if(a==="start"){const s=$("#tSubj").value,t=$("#tTopic").value;UI.lastSubj=s;UI.note="";timerStart(s,t,UI.mode||0);
+    if(UI.mode&&"Notification" in window&&Notification.permission==="default")Notification.requestPermission();}
+  else if(a==="quickstart"){if(U.running)return;UI.lastSubj=b.dataset.s;UI.note="";timerStart(b.dataset.s,"",0);closeModal();location.hash="#inicio"}
+  else if(a==="pause")timerPause();
+  else if(a==="resume"){U.running.alerted=U.running.mode?elapsedMs(U.running)>=U.running.mode*60000:false;timerResume()}
+  else if(a==="stop")await timerStop();
+  else if(a==="discard")timerDiscard();
+  else if(a==="manual")manualModal(b.dataset.date);
+  else if(a==="savemanual"){
+    const sec=((+$("#mH").value||0)*60+(+$("#mM").value||0))*60, date=$("#mDate").value;
+    if(!date||sec<=0){toast("Informe o dia e um tempo maior que zero.");return}
+    const sn=snap(date.slice(0,7));
+    await addSession({id:newId(),date,begin:"",sec,subj:$("#mSubj").value,topic:"",note:$("#mNote").value.trim()});
+    closeModal();render();offerUndo("Tempo registrado.",sn);
+  }
+  else if(a==="delsess"){const dt=b.dataset.date, sn=snap(dt.slice(0,7));await deleteSession(dt,b.dataset.id);render();openDay(dt);offerUndo("Sessão apagada.",sn)}
+  else if(a==="mprev"||a==="mnext"){UI.calMonth+=a==="mnext"?1:-1;if(UI.calMonth<0){UI.calMonth=11;UI.calYear--}if(UI.calMonth>11){UI.calMonth=0;UI.calYear++}await ensureYear(UI.calYear);render()}
+  else if(a==="sfilter"){UI.subjFilter=b.dataset.f;render()}
+  else if(a==="topic"){const k=b.dataset.k, sn=snap();const v=((U.topics[k]||0)+1)%3;if(v)U.topics[k]=v;else delete U.topics[k];UI.openSubj=k.split(":")[0];saveUser();render();offerUndo(["Marcação removida.","Marcado como estudado.","Marcado como revisado."][v],sn)}
+  else if(a==="newsubj")subjModal();
+  else if(a==="savesubj"){
+    const name=$("#nsName").value.trim();if(!name){toast("Dê um nome para a matéria.");return}
+    const ex=$$(".nsEx").filter(x=>x.checked).map(x=>x.value).join("")||"dct";
+    U.customSubjects.push({id:"c_"+newId(),name,color:$("#nsColor").value,ex,topics:$("#nsTopics").value.split("\n").map(s=>s.trim()).filter(Boolean),tip:""});
+    saveUser();closeModal();render();toast("Matéria criada.");
+  }
+  else if(a==="delsubj"){if(!confirm("Remover esta matéria? As horas já registradas continuam no histórico."))return;const sn=snap();U.customSubjects=U.customSubjects.filter(s=>s.id!==b.dataset.s);saveUser();render();offerUndo("Matéria removida.",sn)}
+  else if(a==="loadroutine"){if(!confirm(`Substituir sua rotina atual pela sugerida da Fase ${b.dataset.p}?`))return;const sn=snap();U.routine=JSON.parse(JSON.stringify(ROUTINES[b.dataset.p]));saveUser();if(UI.view!=="rotina")location.hash="#rotina";else render();setTimeout(()=>offerUndo("Rotina carregada.",sn),50)}
+  else if(a==="addblk")blockModal(+b.dataset.d);
+  else if(a==="saveblk"){const d=+b.dataset.d;const m=Math.max(5,+$("#bMin").value||60);const sn=snap();(U.routine[d]=U.routine[d]||[]).push({s:$("#bSubj").value,m});saveUser();closeModal();render();offerUndo("Bloco adicionado.",sn)}
+  else if(a==="delblk"){const sn=snap();U.routine[b.dataset.d].splice(+b.dataset.i,1);saveUser();render();offerUndo("Bloco removido.",sn)}
+  else if(a==="gtab"){UI.guideTab=b.dataset.t;render()}
+  else if(a==="saveprof"){U.profile.name=$("#pName").value.trim();U.profile.phrases=$("#pPhr").value.split("\n").map(s=>s.trim()).filter(Boolean);UI.phrase=null;cacheLockProfile();await saveUser(true);toast("Perfil salvo.");render()}
+  else if(a==="rmphoto"){const sn=snap();U.profile.photo="";cacheLockProfile();saveUser();render();offerUndo("Foto removida.",sn)}
+  else if(a==="saveexams"){["dmae","contagem","tjsp"].forEach(k=>U.exams[k]=$("#e_"+k).value);saveUser();toast("Datas salvas.");render()}
+  else if(a==="export"){await loadAllMonths();const blob=new Blob([JSON.stringify({user:U,months:MONTHS},null,1)],{type:"application/json"});const u=URL.createObjectURL(blob);const l=document.createElement("a");l.href=u;l.download=`caderno-backup-${todayStr()}.json`;l.click();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+  else if(a==="logout"){if(U.running&&!confirm("Há um cronômetro ativo. Ele continua salvo. Sair mesmo assim?"))return;await Store.logout();location.reload()}
+});
+document.addEventListener("change",async e=>{
+  if(!U)return;const t=e.target;
+  if(t.id==="tSubj"){UI.lastSubj=t.value;fillTopicSelect()}
+  else if(t.dataset&&t.dataset.act==="gchk"){const sn=snap();if(t.checked)U.guide[t.dataset.id]=1;else delete U.guide[t.dataset.id];saveUser();render();offerUndo(t.checked?"Tarefa marcada.":"Tarefa desmarcada.",sn)}
+  else if(t.id==="calYear"){UI.calYear=+t.value;await ensureYear(UI.calYear);render()}
+  else if(t.id==="sGoal"){U.settings.goalMin=Math.max(10,+t.value||180);saveUser()}
+  else if(t.id==="sTheme"){U.settings.theme=t.value;localStorage.setItem(LS+"theme",t.value);applyTheme();saveUser()}
+  else if(t.id==="photoIn"&&t.files[0]){cropModal(t.files[0]);t.value=""}
+  else if(t.id==="impIn"&&t.files[0]){
+    try{const data=JSON.parse(await t.files[0].text());if(!data.user||!data.months)throw 0;
+      if(!confirm("Restaurar este backup? Isso substitui os dados atuais."))return;
+      U={...defaultUser(),...data.user};MONTHS=data.months;U.months=Object.keys(MONTHS).sort();
+      await saveUser(true);for(const ym of U.months)await Store.saveMonth(ym,MONTHS[ym]);toast("Backup restaurado.");render();
+    }catch(err){toast("Arquivo de backup inválido.")}
+  }
+});
+document.addEventListener("toggle",e=>{const d=e.target;if(d.matches&&d.matches("details.subj")){if(d.open)UI.openSubj=d.dataset.sid;else if(UI.openSubj===d.dataset.sid)UI.openSubj=null}},true);
+document.addEventListener("input",e=>{if(e.target.id==="tNote")UI.note=e.target.value});
+document.addEventListener("click",e=>{const m=e.target.closest("#tMode button");if(!m)return;UI.mode=+m.dataset.mode;$$("#tMode button").forEach(x=>x.classList.toggle("on",x===m))});
+addEventListener("hashchange",()=>{UI.view=(location.hash||"#inicio").slice(1);if(UI.view==="inicio")UI.phrase=null;closeModal();render();scrollTo(0,0)});
+
+function resizeImage(file){return new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const s=240,c=document.createElement("canvas");c.width=c.height=s;const k=Math.max(s/img.width,s/img.height),w=img.width*k,h=img.height*k;c.getContext("2d").drawImage(img,(s-w)/2,(s-h)/2,w,h);URL.revokeObjectURL(img.src);res(c.toDataURL("image/jpeg",.82))};img.onerror=rej;img.src=URL.createObjectURL(file)})}
+/* ---------- Recorte da foto de perfil ---------- */
+function cropModal(file){
+  const url=URL.createObjectURL(file), img=new Image();
+  img.onerror=()=>{URL.revokeObjectURL(url);toast("Não consegui abrir essa imagem. Tente JPG, PNG ou WEBP.")};
+  img.onload=()=>{
+    const S=280, dpr=Math.min(3,window.devicePixelRatio||1);
+    const base=Math.max(S/img.width,S/img.height); // escala mínima que cobre o quadro
+    const st={z:1,ox:0,oy:0};
+    openModal(`<div class="top"><h2>Ajustar foto</h2><button class="close" data-close aria-label="Fechar">×</button></div>
+      <p class="small muted" style="margin-bottom:6px">Arraste para posicionar e use o controle para aproximar. O que ficar dentro do círculo vira sua foto.</p>
+      <div class="crop-stage"><canvas id="cropCv" width="${S*dpr}" height="${S*dpr}" aria-label="Área de recorte"></canvas></div>
+      <div class="zoomrow"><span aria-hidden="true">−</span><input type="range" id="cropZ" min="1" max="5" step="0.01" value="1" aria-label="Zoom"><span aria-hidden="true">+</span></div>
+      <div class="row"><button class="btn ghost" data-act="cropreset">Centralizar</button><span class="spacer"></span><button class="btn primary" id="cropOk">Usar esta foto</button></div>`);
+    const cv=$("#cropCv"), ctx=cv.getContext("2d"), zr=$("#cropZ");
+    const clamp=()=>{const k=base*st.z, mx=Math.max(0,(img.width*k-S)/2), my=Math.max(0,(img.height*k-S)/2);
+      st.ox=Math.max(-mx,Math.min(mx,st.ox));st.oy=Math.max(-my,Math.min(my,st.oy))};
+    const paint=(c,size,overlay)=>{const f=size/S,k=base*st.z*f,w=img.width*k,h=img.height*k;
+      c.fillStyle="#0E1430";c.fillRect(0,0,size,size);
+      c.imageSmoothingQuality="high";c.drawImage(img,size/2+st.ox*f-w/2,size/2+st.oy*f-h/2,w,h);
+      if(overlay){c.save();c.fillStyle="rgba(14,20,48,.55)";c.beginPath();c.rect(0,0,size,size);c.arc(size/2,size/2,size/2-6*f,0,Math.PI*2,true);c.fill("evenodd");
+        c.strokeStyle="rgba(255,255,255,.9)";c.lineWidth=2*f;c.beginPath();c.arc(size/2,size/2,size/2-6*f,0,Math.PI*2);c.stroke();c.restore()}};
+    const draw=()=>{clamp();paint(ctx,S*dpr,true)};
+    draw();
+    // arrastar (mouse, toque e caneta) + pinça com dois dedos
+    const pts=new Map();let pinch=null;
+    const scaleOf=()=>cv.getBoundingClientRect().width/S;
+    cv.addEventListener("pointerdown",e=>{cv.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(pts.size===2){const [a,b]=[...pts.values()];pinch={d:Math.hypot(a.x-b.x,a.y-b.y),z:st.z}}});
+    cv.addEventListener("pointermove",e=>{if(!pts.has(e.pointerId))return;const prev=pts.get(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(pts.size===2&&pinch){const [a,b]=[...pts.values()];st.z=Math.max(1,Math.min(5,pinch.z*Math.hypot(a.x-b.x,a.y-b.y)/pinch.d));zr.value=st.z}
+      else{const sc=scaleOf();st.ox+=(e.clientX-prev.x)/sc;st.oy+=(e.clientY-prev.y)/sc}
+      draw()});
+    const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pinch=null};
+    cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up);
+    cv.addEventListener("wheel",e=>{e.preventDefault();st.z=Math.max(1,Math.min(5,st.z*(e.deltaY<0?1.08:1/1.08)));zr.value=st.z;draw()},{passive:false});
+    zr.addEventListener("input",()=>{st.z=+zr.value;draw()});
+    $("[data-act=cropreset]").addEventListener("click",e=>{e.stopPropagation();st.z=1;st.ox=0;st.oy=0;zr.value=1;draw()});
+    cv.addEventListener("keydown",e=>{const step=10;if(e.key==="ArrowLeft")st.ox+=step;else if(e.key==="ArrowRight")st.ox-=step;else if(e.key==="ArrowUp")st.oy+=step;else if(e.key==="ArrowDown")st.oy-=step;else return;e.preventDefault();draw()});
+    cv.tabIndex=0;
+    $("#cropOk").addEventListener("click",async()=>{
+      const out=document.createElement("canvas");out.width=out.height=256;paint(out.getContext("2d"),256,false);
+      const sn=snap();U.profile.photo=out.toDataURL("image/jpeg",.85);URL.revokeObjectURL(url);
+      cacheLockProfile();closeModal();await saveUser(true);render();offerUndo("Foto atualizada.",sn);
+    });
+  };
+  img.src=url;
+}
+function cacheLockProfile(){try{localStorage.setItem(LS+"lock",JSON.stringify({name:U.profile.name,photo:U.profile.photo}))}catch(e){}}
+
+async function ensureYear(y){
+  const need=U.months.filter(ym=>ym.startsWith(y+"-")&&!MONTHS[ym]);
+  await Promise.all(need.map(async ym=>{MONTHS[ym]=await Store.loadMonth(ym).catch(()=>[])}));
+}
+async function loadAllMonths(){await Promise.all(U.months.filter(ym=>!MONTHS[ym]).map(async ym=>{MONTHS[ym]=await Store.loadMonth(ym).catch(()=>[])}))}
+
+/* ======================================================================
+   Inicialização
+   ====================================================================== */
+async function openApp(){
+  let data=await Store.loadUser();
+  if(!data){data=defaultUser();U=data;await saveUser(true)}
+  U={...defaultUser(),...data};
+  U.profile={...defaultUser().profile,...(data.profile||{})};
+  U.settings={...defaultUser().settings,...(data.settings||{})};
+  U.exams={...defaultUser().exams,...(data.exams||{})};
+  if(!U.exams.contagem)U.exams.contagem="2027-01-24";
+  // carrega todos os meses registrados (1 leitura por mês)
+  await loadAllMonths();
+  cacheLockProfile();
+  $("#lock").classList.add("hide");$("#app").classList.remove("hide");document.body.classList.add("inapp");
+  UI.view=(location.hash||"#inicio").slice(1);
+  render();setSync("ok");
+  if(!U.profile.name)setTimeout(()=>{location.hash="#perfil";toast("Bem-vindo(a)! Coloque seu nome e uma foto.")},300);
+}
+function showLock(){
+  const c=JSON.parse(localStorage.getItem(LS+"lock")||"null");
+  if(c){ if(c.photo)$("#lockAvatar").innerHTML=`<img src="${c.photo}" alt="">`;else if(c.name)$("#lockAvatar").textContent=initials(c.name);
+    if(c.name)$("#lockHello").textContent=`${greetWord()}, ${c.name.split(" ")[0]}!`; }
+  else $("#lockHello").textContent=greetWord()+"!";
+  $("#lockUser").value=LOGIN_EMAIL;
+  $("#lock").classList.remove("hide");$("#lockPwd").focus();
+}
+$("#lockForm").addEventListener("submit",async e=>{
+  e.preventDefault();const btn=$("#lockBtn");btn.disabled=true;$("#lockErr").textContent="";
+  try{const u=await Store.login($("#lockPwd").value);$("#lockPwd").value="";Store.uid=u.uid;await openApp()}
+  catch(err){console.error(err);$("#lockErr").textContent=authMsg(err)}
+  finally{btn.disabled=false}
+});
+(async()=>{
+  if(!FB_READY){showLock();$("#lockPwd").disabled=true;$("#lockBtn").disabled=true;
+    $("#lockErr").textContent="O site ainda não está ligado ao Firebase. Preencha a configuração no index.html (veja o README).";return}
+  try{await Store.init()}catch(e){console.error(e);showLock();$("#lockErr").textContent="Não foi possível carregar o Firebase. Verifique a configuração e a internet.";return}
+  const u=await Store.currentUser();
+  if(u){Store.uid=u.uid;try{await openApp()}catch(e){console.error(e);showLock();$("#lockErr").textContent="Não consegui carregar seus dados. Confira as regras do Firestore (README)."}}
+  else showLock();
+})();
+</script>
+</body>
+</html>
