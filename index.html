@@ -220,13 +220,29 @@ main{padding:28px clamp(16px,4vw,44px) 90px; max-width:1180px; width:100%}
 .tipbox{background:var(--hl2); border-radius:10px; padding:10px 12px; font-size:.92rem; margin:6px 0 10px}
 
 /* ---------- Rotina ---------- */
-.rout{display:grid; grid-template-columns:repeat(7,minmax(150px,1fr)); gap:10px; overflow-x:auto; padding-bottom:6px}
-.rday{background:var(--card); border:1.5px solid var(--line); border-radius:var(--r-md); padding:10px; min-width:150px}
+.rout{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px}
+.rday{background:var(--card); border:1.5px solid var(--line); border-radius:var(--r-md); padding:12px}
 .rday.today{border-color:var(--ink); box-shadow:inset 0 5px 0 var(--hl)}
-.rday h4{font-family:var(--f-ui); margin:0 0 6px; display:flex; justify-content:space-between}
-.blk{display:flex; align-items:center; gap:6px; padding:6px 7px; border-radius:8px; margin-bottom:5px; background:color-mix(in srgb, var(--c) 16%, var(--card)); font-size:.85rem}
-.blk .x{margin-left:auto; border:0; background:transparent; color:var(--ink2); font-size:1rem; line-height:1}
-.blk .m{font-family:var(--f-ui); font-weight:600; white-space:nowrap}
+.rday h4{font-family:var(--f-ui); margin:2px 0 10px; display:flex; justify-content:space-between; align-items:baseline}
+.rday .empty-day{font-size:.85rem; color:var(--ink3); margin:0 0 10px}
+.blk{border-radius:10px; margin-bottom:8px; padding:9px 10px 7px; background:color-mix(in srgb, var(--c) 15%, var(--card)); border-left:4px solid var(--c)}
+.blk .nm{display:block; width:100%; text-align:left; border:0; background:transparent; padding:0; font-size:.92rem; line-height:1.3; font-weight:600; color:var(--ink)}
+.blk .nm:hover{text-decoration:underline; text-underline-offset:3px}
+.blk .ctl{display:flex; align-items:center; gap:4px; margin-top:6px}
+.blk .ctl .step{width:28px; height:28px; border-radius:50%; border:1.5px solid color-mix(in srgb, var(--ink) 25%, transparent); background:var(--card); font-weight:700; line-height:1; display:grid; place-items:center; padding:0; color:var(--ink)}
+.blk .ctl .step:hover{border-color:var(--ink)}
+.blk .ctl .m{min-width:58px; text-align:center; font-family:var(--f-ui); font-weight:800; font-variant-numeric:tabular-nums}
+.blk .ctl .x{margin-left:auto; width:28px; height:28px; border-radius:50%; border:0; background:transparent; color:var(--ink2); font-size:1.15rem; line-height:1}
+.blk .ctl .x:hover{background:color-mix(in srgb, var(--bad) 14%, transparent); color:var(--bad)}
+.avail{display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin:10px 0 14px}
+.avail label{display:flex; flex-direction:column; gap:4px; font-family:var(--f-ui); font-weight:600; font-size:.82rem; text-align:center}
+.avail select{padding:.45em .3em; text-align:center}
+@media (max-width:700px){ .avail{grid-template-columns:repeat(4,1fr)} }
+.notice{display:flex; gap:10px; align-items:center; flex-wrap:wrap; background:var(--hl2); border-radius:10px; padding:10px 12px; margin-top:12px; font-size:.92rem}
+.plan-tbl{width:100%; border-collapse:collapse; font-size:.9rem; margin-top:8px}
+.plan-tbl td,.plan-tbl th{padding:6px 8px; border-bottom:1px dashed var(--line); text-align:left}
+.plan-tbl th{font-family:var(--f-ui); font-weight:600; color:var(--ink2)}
+.plan-tbl td.n{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
 
 /* ---------- Guia ---------- */
 .tabs{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px}
@@ -728,7 +744,7 @@ const UI={view:"inicio",calYear:new Date().getFullYear(),calMonth:new Date().get
 
 function defaultUser(){
   return {v:1,profile:{name:"",photo:"",phrases:DEFAULT_PHRASES.slice()},
-    settings:{goalMin:180,theme:"auto"},
+    settings:{goalMin:180,theme:"auto",avail:{0:120,1:180,2:180,3:180,4:180,5:180,6:240},blockMin:60,autoReorg:true,focus:"auto"},
     exams:{dmae:"2026-11-01",contagem:"2027-01-24",tjsp:""},
     routine:JSON.parse(JSON.stringify(ROUTINES[1])),
     topics:{},guide:{},customSubjects:[],running:null,months:[]};
@@ -1088,20 +1104,123 @@ function viewSubj(){
 }
 
 /* ---------- Rotina ---------- */
+/* ---------- Organizador automático ----------
+   Peso de cada matéria = pontos que ela vale na prova do foco.
+   Ajuste pelo progresso: o que falta estudar pesa mais; o que já foi estudado
+   (mas não revisado) ainda recebe um pouco; matéria toda revisada fica com ~25% do peso. */
+const EXAM_WEIGHTS={
+  d:{port:10,rl:3.5,mat:5,matav:1.5,cg:5,legdmae:5,adm:8,arq:5,admpub:7},
+  c:{port:20,rl:7,mat:3,info:5,ctg:5,adm:24,arq:14,admpub:22},
+  t:{port:16,dconst:6,dadm:4,dpenal:4,dpp:5,dpc:7,normas:4,info:9,rl:7,mat:4,cg:4,red:6}
+};
+const PHASE_EXAM={1:"d",2:"c",3:"t"};
+function focusExam(){const f=U.settings.focus;return f&&f!=="auto"?f:PHASE_EXAM[currentPhase()]}
+function remainingInfo(s,ex){
+  const idx=s.topics.map((_,i)=>i).filter(i=>s.topics[i][1].includes(ex));
+  if(!idx.length)return {n:0,nw:0,rv:0,frac:1};
+  let nw=0,rv=0;idx.forEach(i=>{const v=U.topics[s.id+":"+i]||0;if(!v)nw++;else if(v===1)rv++});
+  return {n:idx.length,nw,rv,frac:(nw+0.4*rv)/idx.length};
+}
+function studiedCount(ex){let n=0;for(const s of subjects())s.topics.forEach((t,i)=>{if(t[1].includes(ex)&&U.topics[s.id+":"+i])n++});return n}
+function buildAutoRoutine(ex,avail,B){
+  const W=EXAM_WEIGHTS[ex]||{};
+  const subs=subjects().filter(s=>s.id!=="rev"&&(W[s.id]!=null||(s.custom&&s.ex.includes(ex))));
+  const cap={};let total=0;for(let d=0;d<7;d++){cap[d]=Math.max(0,+avail[d]||0);total+=cap[d]}
+  if(total<30)return null;
+  const revMin=total>=300?Math.round(total*.15/15)*15:0;
+  const studyMin=total-revMin;
+  const rows=subs.map(s=>{const r=remainingInfo(s,ex),w=W[s.id]??3;return {id:s.id,w,r,score:w*(0.25+0.75*r.frac)}});
+  const sum=rows.reduce((a,x)=>a+x.score,0)||1;
+  rows.forEach(x=>{const m=studyMin*x.score/sum;x.min=m<20?0:Math.max(30,Math.round(m/15)*15)});
+  // acerta a soma para bater com o tempo disponível
+  let diff=studyMin-rows.reduce((a,x)=>a+x.min,0), guard=200;
+  while(Math.abs(diff)>=15&&guard--){const cand=rows.filter(x=>x.min>0&&(diff>0||x.min>30)).sort((a,b)=>b.score-a.score);if(!cand.length)break;
+    const k=diff>0?0:cand.length-1;cand[k].min+=diff>0?15:-15;diff+=diff>0?-15:15}
+  const split=(m,max)=>{const out=[];while(m>0){if(m>=max+30){out.push(max);m-=max}else{out.push(m);m=0}}return out};
+  const blocks=[];
+  split(revMin,120).forEach(m=>blocks.push({s:"rev",m,w:0}));
+  rows.forEach(x=>split(x.min,B).forEach(m=>blocks.push({s:x.id,m,w:x.w})));
+  blocks.sort((a,b)=>(a.s==="rev"?-1:0)-(b.s==="rev"?-1:0)||b.m-a.m||b.w-a.w);
+  const plan={0:[],1:[],2:[],3:[],4:[],5:[],6:[]};
+  for(const bl of blocks){
+    let best=-1,bs=-Infinity;
+    for(let d=0;d<7;d++){if(cap[d]<30)continue;
+      let sc=Math.min(cap[d],bl.m)*10+cap[d];
+      if(plan[d].some(x=>x.s===bl.s))sc-=5000;
+      if(plan[(d+6)%7].some(x=>x.s===bl.s)||plan[(d+1)%7].some(x=>x.s===bl.s))sc-=300;
+      if(bl.s==="rev"&&(d===0||d===6))sc+=3000;
+      if(sc>bs){bs=sc;best=d}}
+    if(best<0)continue;
+    const m=Math.min(bl.m,Math.floor(cap[best]/15)*15);if(m<30)continue;
+    const same=plan[best].find(x=>x.s===bl.s);
+    if(same)same.m+=m;else plan[best].push({s:bl.s,m,w:bl.w});
+    cap[best]-=m;
+  }
+  for(let d=0;d<7;d++){ // sobra do dia vai para o maior bloco
+    if(cap[d]>=15&&plan[d].length){plan[d].sort((a,b)=>b.m-a.m)[0].m+=Math.floor(cap[d]/15)*15}
+    plan[d].sort((a,b)=>(a.s==="rev")-(b.s==="rev")||b.w-a.w);
+    plan[d]=plan[d].map(({s,m})=>({s,m}));
+  }
+  const weekly={};for(let d=0;d<7;d++)plan[d].forEach(b=>weekly[b.s]=(weekly[b.s]||0)+b.m);
+  return {plan,summary:{ex,at:todayStr(),studied:studiedCount(ex),B,
+    rows:rows.map(x=>({id:x.id,w:x.w,n:x.r.n,nw:x.r.nw,rv:x.r.rv,min:weekly[x.id]||0})).sort((a,b)=>b.min-a.min),rev:weekly.rev||0}};
+}
+function runAutoRoutine(msg){
+  const ex=focusExam(), res=buildAutoRoutine(ex,U.settings.avail,U.settings.blockMin||60);
+  if(!res){toast("Coloque pelo menos 30 minutos disponíveis na semana.");return}
+  const sn=snap();U.routine=res.plan;U.autoPlan=res.summary;saveUser();render();
+  offerUndo(msg||"Rotina organizada.",sn);
+}
+function stalePlanReason(){
+  const ap=U.autoPlan;if(!ap)return "";
+  const ex=focusExam();
+  if(ap.ex!==ex)return `O foco agora é ${EX_SHORT[ex]}, mas a rotina foi organizada para ${EX_SHORT[ap.ex]}.`;
+  const d=studiedCount(ex)-ap.studied;
+  if(d>=5)return `Você marcou ${d} assuntos como estudados desde a última organização.`;
+  return "";
+}
+const hoursOpts=Array.from({length:25},(_,i)=>i*30);
 function viewRoutine(){
-  const order=[1,2,3,4,5,6,0], wd=new Date().getDay();
+  const order=[1,2,3,4,5,6,0], wd=new Date().getDay(), st=U.settings;
   const total=order.reduce((a,d)=>a+(U.routine[d]||[]).reduce((x,b)=>x+b.m,0),0);
+  const availTotal=order.reduce((a,d)=>a+(+st.avail[d]||0),0);
+  const ap=U.autoPlan, stale=stalePlanReason(), ex=focusExam();
   return `
   <div class="view-head"><h1>Rotina semanal</h1><span class="spacer"></span><span class="muted">${fmtHM(total*60)} planejadas por semana</span></div>
   <div class="card" style="margin-bottom:16px">
-    <p style="margin:0 0 10px">Monte blocos por dia. Na tela Início você vê a rotina de hoje e quanto já cumpriu de cada bloco.</p>
-    <div class="row"><span class="small muted">Carregar rotina sugerida:</span>
-    ${PHASES.map(p=>`<button class="btn sm ${currentPhase()===p.n?"primary":""}" data-act="loadroutine" data-p="${p.n}">Fase ${p.n}</button>`).join("")}</div>
+    <h3>Organizar automaticamente</h3>
+    <p class="small muted" style="margin:0">Distribui as matérias pelo peso de cada uma na prova, pelo que você já marcou em Matérias e pelo tempo que você tem. É uma sugestão: depois dá para mudar qualquer bloco.</p>
+    <div class="avail">${order.map(d=>`<label>${WD[d]}<select data-avail="${d}">${hoursOpts.map(m=>`<option value="${m}" ${(+st.avail[d]||0)===m?"selected":""}>${m?fmtHM(m*60):"folga"}</option>`).join("")}</select></label>`).join("")}</div>
+    <div class="row" style="gap:14px 18px; margin-bottom:12px">
+      <label class="row small" style="gap:6px"><span class="muted">Foco</span>
+        <select id="rFocus" style="width:auto">${[["auto",`Automático (${EX_SHORT[PHASE_EXAM[currentPhase()]]})`],["d","DMAE"],["c","Contagem"],["t","TJSP"]].map(([v,l])=>`<option value="${v}" ${st.focus===v?"selected":""}>${l}</option>`).join("")}</select></label>
+      <span class="row small" style="gap:6px"><span class="muted">Blocos de</span>
+        <span class="segmented">${[45,60,90].map(v=>`<button data-act="blocklen" data-v="${v}" class="${(st.blockMin||60)===v?"on":""}">${v} min</button>`).join("")}</span></span>
+      <label class="chk small" style="padding:0"><input type="checkbox" id="rAuto" ${st.autoReorg?"checked":""}><span>Reorganizar sozinho quando eu mudar o tempo disponível</span></label>
+    </div>
+    <div class="row"><button class="btn primary" data-act="autoroutine">Organizar minha rotina</button><span class="small muted">${fmtHM(availTotal*60)} disponíveis por semana · substitui a rotina atual (dá para desfazer)</span></div>
+    ${stale?`<div class="notice"><span>${esc(stale)} Quer reorganizar?</span><button class="btn sm primary" data-act="autoroutine">Reorganizar</button></div>`:""}
+    ${ap?`<details style="margin-top:12px"><summary class="small" style="cursor:pointer">Como o tempo foi dividido (${EX_SHORT[ap.ex]}, em ${ap.at.split("-").reverse().join("/")})</summary>
+      <table class="plan-tbl"><thead><tr><th>Matéria</th><th>Peso na prova</th><th>Falta estudar</th><th class="n">Por semana</th></tr></thead><tbody>
+      ${ap.rows.map(r=>{const sj=subjById(r.id);return `<tr><td><span class="row" style="gap:.4em;flex-wrap:nowrap"><span class="dot" style="--c:${sj.color}"></span>${esc(sj.name)}</span></td><td>${r.w} pts</td><td>${r.n?`${r.nw} de ${r.n} assuntos`:"—"}</td><td class="n">${r.min?fmtHM(r.min*60):"fica de fora"}</td></tr>`}).join("")}
+      ${ap.rev?`<tr><td>Revisão, questões e simulados</td><td>—</td><td>—</td><td class="n">${fmtHM(ap.rev*60)}</td></tr>`:""}
+      </tbody></table></details>`:""}
   </div>
   <div class="rout">${order.map(d=>{const bl=U.routine[d]||[];const m=bl.reduce((a,b)=>a+b.m,0);
     return `<div class="rday ${d===wd?"today":""}"><h4><span>${WD_FULL[d]}</span><span class="small muted">${m?fmtHM(m*60):""}</span></h4>
-    ${bl.map((b,i)=>{const sj=subjById(b.s);return `<div class="blk" style="--c:${sj.color}"><span class="dot" style="--c:${sj.color}"></span><span>${esc(sj.name)}</span><span class="m">${b.m}′</span><button class="x" data-act="delblk" data-d="${d}" data-i="${i}" aria-label="Remover">×</button></div>`}).join("")}
-    <button class="btn sm ghost" style="width:100%;justify-content:center" data-act="addblk" data-d="${d}">+ bloco</button></div>`}).join("")}</div>`;
+    ${bl.length?"":`<p class="empty-day">Dia de folga.</p>`}
+    ${bl.map((b,i)=>{const sj=subjById(b.s);return `<div class="blk" style="--c:${sj.color}">
+      <button class="nm" data-act="editblk" data-d="${d}" data-i="${i}" title="Editar bloco">${esc(sj.name)}</button>
+      <div class="ctl"><button class="step" data-act="stepblk" data-d="${d}" data-i="${i}" data-v="-15" aria-label="Menos 15 minutos">−</button>
+      <span class="m">${fmtHM(b.m*60)}</span>
+      <button class="step" data-act="stepblk" data-d="${d}" data-i="${i}" data-v="15" aria-label="Mais 15 minutos">+</button>
+      <button class="x" data-act="delblk" data-d="${d}" data-i="${i}" aria-label="Remover bloco">×</button></div></div>`}).join("")}
+    <button class="btn sm ghost" style="width:100%;justify-content:center" data-act="addblk" data-d="${d}">+ bloco</button></div>`}).join("")}</div>
+  <div class="card" style="margin-top:16px">
+    <div class="row"><span class="small muted">Ou carregue uma rotina pronta:</span>
+    ${PHASES.map(p=>`<button class="btn sm" data-act="loadroutine" data-p="${p.n}">Fase ${p.n}</button>`).join("")}
+    <span class="small muted">Dica: clique no nome de um bloco para trocar a matéria, o tempo ou o dia.</span></div>
+  </div>`;
 }
 
 /* ---------- Guia ---------- */
@@ -1225,6 +1344,15 @@ function blockModal(d){
   <div class="field"><label for="bMin">Duração (minutos)</label><input type="number" id="bMin" min="10" step="5" value="60"></div>
   <button class="btn primary" data-act="saveblk" data-d="${d}">Adicionar bloco</button>`);
 }
+function editBlockModal(d,i){
+  const b=(U.routine[d]||[])[i];if(!b)return;const subs=subjects();
+  openModal(`<div class="top"><h2>Editar bloco</h2><button class="close" data-close aria-label="Fechar">×</button></div>
+  <div class="field"><label for="eSubj">Matéria</label><select id="eSubj">${subs.map(s=>`<option value="${s.id}" ${s.id===b.s?"selected":""}>${esc(s.name)}</option>`).join("")}</select></div>
+  <div class="row"><div class="field" style="flex:1"><label for="eMin">Duração (minutos)</label><input type="number" id="eMin" min="5" max="600" step="5" value="${b.m}"></div>
+  <div class="field" style="flex:1"><label for="eDay">Dia</label><select id="eDay">${[1,2,3,4,5,6,0].map(x=>`<option value="${x}" ${x===d?"selected":""}>${WD_FULL[x]}</option>`).join("")}</select></div></div>
+  <div class="row"><button class="btn primary" data-act="saveedit" data-d="${d}" data-i="${i}">Salvar</button><span class="spacer"></span>
+  <button class="btn danger" data-act="delblk" data-d="${d}" data-i="${i}">Remover bloco</button></div>`);
+}
 function subjModal(){
   openModal(`<div class="top"><h2>Nova matéria</h2><button class="close" data-close aria-label="Fechar">×</button></div>
   <div class="field"><label for="nsName">Nome</label><input type="text" id="nsName" placeholder="Ex.: Ética no serviço público"></div>
@@ -1273,7 +1401,17 @@ document.addEventListener("click",async e=>{
   else if(a==="loadroutine"){if(!confirm(`Substituir sua rotina atual pela sugerida da Fase ${b.dataset.p}?`))return;const sn=snap();U.routine=JSON.parse(JSON.stringify(ROUTINES[b.dataset.p]));saveUser();if(UI.view!=="rotina")location.hash="#rotina";else render();setTimeout(()=>offerUndo("Rotina carregada.",sn),50)}
   else if(a==="addblk")blockModal(+b.dataset.d);
   else if(a==="saveblk"){const d=+b.dataset.d;const m=Math.max(5,+$("#bMin").value||60);const sn=snap();(U.routine[d]=U.routine[d]||[]).push({s:$("#bSubj").value,m});saveUser();closeModal();render();offerUndo("Bloco adicionado.",sn)}
-  else if(a==="delblk"){const sn=snap();U.routine[b.dataset.d].splice(+b.dataset.i,1);saveUser();render();offerUndo("Bloco removido.",sn)}
+  else if(a==="delblk"){const sn=snap();U.routine[b.dataset.d].splice(+b.dataset.i,1);saveUser();closeModal();render();offerUndo("Bloco removido.",sn)}
+  else if(a==="editblk")editBlockModal(+b.dataset.d,+b.dataset.i);
+  else if(a==="saveedit"){const d=+b.dataset.d,i=+b.dataset.i,sn=snap();const blk=U.routine[d][i];
+    const m=Math.max(5,Math.min(600,Math.round(+$("#eMin").value||blk.m)));const nd=+$("#eDay").value;
+    const nb={s:$("#eSubj").value,m};
+    if(nd===d)U.routine[d][i]=nb;else{U.routine[d].splice(i,1);(U.routine[nd]=U.routine[nd]||[]).push(nb)}
+    saveUser();closeModal();render();offerUndo("Bloco atualizado.",sn)}
+  else if(a==="stepblk"){const d=+b.dataset.d,i=+b.dataset.i,blk=U.routine[d][i];const nm=Math.max(15,Math.min(600,blk.m+(+b.dataset.v)));
+    if(nm===blk.m)return;const sn=snap();blk.m=nm;saveUser();render();offerUndo(`${subjById(blk.s).name}: ${fmtHM(nm*60)}`,sn)}
+  else if(a==="autoroutine")runAutoRoutine();
+  else if(a==="blocklen"){U.settings.blockMin=+b.dataset.v;saveUser();render()}
   else if(a==="gtab"){UI.guideTab=b.dataset.t;render()}
   else if(a==="saveprof"){U.profile.name=$("#pName").value.trim();U.profile.phrases=$("#pPhr").value.split("\n").map(s=>s.trim()).filter(Boolean);UI.phrase=null;cacheLockProfile();await saveUser(true);toast("Perfil salvo.");render()}
   else if(a==="rmphoto"){const sn=snap();U.profile.photo="";cacheLockProfile();saveUser();render();offerUndo("Foto removida.",sn)}
@@ -1286,6 +1424,10 @@ document.addEventListener("change",async e=>{
   if(t.id==="tSubj"){UI.lastSubj=t.value;fillTopicSelect()}
   else if(t.dataset&&t.dataset.act==="gchk"){const sn=snap();if(t.checked)U.guide[t.dataset.id]=1;else delete U.guide[t.dataset.id];saveUser();render();offerUndo(t.checked?"Tarefa marcada.":"Tarefa desmarcada.",sn)}
   else if(t.id==="calYear"){UI.calYear=+t.value;await ensureYear(UI.calYear);render()}
+  else if(t.dataset&&t.dataset.avail!=null){U.settings.avail[t.dataset.avail]=+t.value;saveUser();
+    if(U.settings.autoReorg&&U.autoPlan)runAutoRoutine("Tempo alterado — rotina reorganizada.");else render()}
+  else if(t.id==="rFocus"){U.settings.focus=t.value;saveUser();render()}
+  else if(t.id==="rAuto"){U.settings.autoReorg=t.checked;saveUser()}
   else if(t.id==="sGoal"){U.settings.goalMin=Math.max(10,+t.value||180);saveUser()}
   else if(t.id==="sTheme"){U.settings.theme=t.value;localStorage.setItem(LS+"theme",t.value);applyTheme();saveUser()}
   else if(t.id==="photoIn"&&t.files[0]){cropModal(t.files[0]);t.value=""}
@@ -1367,6 +1509,7 @@ async function openApp(){
   U={...defaultUser(),...data};
   U.profile={...defaultUser().profile,...(data.profile||{})};
   U.settings={...defaultUser().settings,...(data.settings||{})};
+  U.settings.avail={...defaultUser().settings.avail,...(U.settings.avail||{})};
   U.exams={...defaultUser().exams,...(data.exams||{})};
   if(!U.exams.contagem)U.exams.contagem="2027-01-24";
   // carrega todos os meses registrados (1 leitura por mês)
