@@ -203,9 +203,9 @@ main{padding:28px clamp(16px,4vw,44px) 90px; max-width:1180px; width:100%}
 .chip{border:1.5px solid var(--line); border-radius:999px; padding:.25em .75em; background:var(--card); font-family:var(--f-ui); font-weight:600; font-size:.85rem; color:var(--ink2)}
 .chip.on{border-color:var(--ink); color:var(--ink); background:var(--hl2)}
 .tag{display:inline-block; font-family:var(--f-ui); font-size:.68rem; font-weight:600; padding:.05em .5em; border-radius:6px; border:1px solid var(--line); color:var(--ink2); margin-left:4px; white-space:nowrap}
-.tag.d{border-color:#0EA5E9; color:#0B7FB5} .tag.c{border-color:#E4508F; color:#B8306C} .tag.t{border-color:#B45309; color:#9A4A0B}
-:root[data-theme="dark"] .tag.d{color:#6CCBF5} :root[data-theme="dark"] .tag.c{color:#F59BC3} :root[data-theme="dark"] .tag.t{color:#F0B37A}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag.d{color:#6CCBF5} :root:not([data-theme="light"]) .tag.c{color:#F59BC3} :root:not([data-theme="light"]) .tag.t{color:#F0B37A} }
+.tag.d{border-color:#0EA5E9; color:#0B7FB5} .tag.c{border-color:#E4508F; color:#B8306C} .tag.t{border-color:#B45309; color:#9A4A0B} .tag.k{border-color:#16A34A; color:#15803D}
+:root[data-theme="dark"] .tag.d{color:#6CCBF5} :root[data-theme="dark"] .tag.c{color:#F59BC3} :root[data-theme="dark"] .tag.t{color:#F0B37A} :root[data-theme="dark"] .tag.k{color:#6EE7A0}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag.d{color:#6CCBF5} :root:not([data-theme="light"]) .tag.c{color:#F59BC3} :root:not([data-theme="light"]) .tag.t{color:#F0B37A} :root:not([data-theme="light"]) .tag.k{color:#6EE7A0} }
 .subj{border-left:7px solid var(--c); padding:0}
 .subj>summary{list-style:none; cursor:pointer; padding:14px 18px; display:grid; grid-template-columns:1fr auto; gap:6px 14px; align-items:center}
 .subj>summary::-webkit-details-marker{display:none}
@@ -297,6 +297,86 @@ html.theming *, html.theming *::before{transition:background-color .45s, color .
 .crop-stage canvas:active{cursor:grabbing}
 .zoomrow{display:flex; align-items:center; gap:10px; margin-bottom:14px}
 .zoomrow input{flex:1; accent-color:var(--ink)}
+/* ---------- Curitiba: resumo do edital e questões ---------- */
+.cur{display:grid; gap:16px}
+.cur-hero{display:flex; gap:22px; align-items:center; flex-wrap:wrap}
+.cur-hero .main{flex:1; min-width:250px}
+.cur-hero h2{font-size:clamp(1.6rem,4vw,2.1rem); margin:.15em 0 .25em}
+.cur-kick{font-family:var(--f-ui); font-weight:600; font-size:.88rem; color:var(--ink2); margin:0}
+.cur-count{font-family:var(--f-hand); text-align:center; background:var(--hl); color:#1B2550; border:2px solid var(--ink); border-radius:16px; padding:8px 18px 10px; transform:rotate(-2deg); flex:none}
+.cur-count b{display:block; font-size:2.8rem; line-height:1}
+.cur-count span{font-size:1.25rem}
+.facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px 20px; margin:16px 0 0; width:100%}
+.facts div{border-top:1.5px dashed var(--line); padding-top:8px}
+.facts dt{font-family:var(--f-ui); font-weight:600; font-size:.82rem; color:var(--ink2)}
+.facts dd{margin:2px 0 0; font-weight:700; font-size:.95rem}
+
+.qgrid{display:grid; gap:14px; margin-top:6px}
+.qrow{display:grid; grid-template-columns:minmax(130px,190px) minmax(0,1fr) minmax(130px,170px) 70px; grid-template-areas:"nm sq rg pts"; gap:6px 14px; align-items:center}
+.qrow .nm{grid-area:nm; font-family:var(--f-ui); font-weight:600; font-size:.93rem; display:flex; gap:.45em; align-items:center}
+.qrow .pts{grid-area:pts; text-align:right; font-family:var(--f-ui); font-weight:800; font-variant-numeric:tabular-nums}
+.qrow .sq{grid-area:sq; display:flex; flex-wrap:wrap; gap:4px}
+.qrow .rg{grid-area:rg; display:flex; flex-direction:column; gap:2px}
+.sq i{width:17px; height:17px; border-radius:4px; border:1.5px solid var(--c); background:transparent; transition:background .15s}
+.sq i.on{background:var(--c)}
+.qrow input[type=range]{width:100%; accent-color:var(--ink)}
+@media (max-width:720px){
+  .qrow{grid-template-columns:1fr 70px; grid-template-areas:"nm pts" "sq sq" "rg rg"}
+}
+.meter{position:relative; height:14px; border-radius:99px; background:var(--h0); margin:26px 0 8px}
+.meter>span{position:absolute; top:0; bottom:0; left:0; border-radius:99px; background:var(--bad); transition:width .2s, background .2s}
+.meter>span.pass{background:var(--ok)}
+.meter .cut{position:absolute; top:-6px; bottom:-6px; left:60%; width:2px; background:var(--ink)}
+.meter .cut::after{content:"60 pts"; position:absolute; top:-19px; left:-16px; font-size:.72rem; font-family:var(--f-ui); font-weight:800; white-space:nowrap}
+.cur-msg{font-size:.95rem; margin:6px 0 10px}
+
+.tl{list-style:none; margin:0; padding:0}
+.tl li{position:relative; display:grid; grid-template-columns:106px 16px 1fr; gap:10px; align-items:start; padding:6px 0}
+.tl li::before{content:""; position:absolute; left:123px; top:0; bottom:0; width:2px; background:var(--line)}
+.tl li:first-child::before{top:12px} .tl li:last-child::before{bottom:calc(100% - 12px)}
+.tl .d{font-family:var(--f-ui); font-weight:600; font-size:.84rem; color:var(--ink2); text-align:right; font-variant-numeric:tabular-nums; padding-top:1px}
+.tl .pin{position:relative; z-index:1; width:16px; height:16px; border-radius:50%; border:2px solid var(--ink3); background:var(--card); margin-top:2px}
+.tl li.past{opacity:.55}
+.tl li.past .pin{background:var(--ink3)}
+.tl li.now .pin{background:var(--hl); border-color:var(--ink)}
+.tl li.prova .t{font-weight:700}
+.tl li.prova .pin{border-color:var(--ink); background:var(--ink)}
+
+.area{border-left:7px solid var(--c); padding:0}
+.area>summary{list-style:none; cursor:pointer; padding:14px 18px; display:flex; gap:6px 14px; align-items:center; flex-wrap:wrap}
+.area>summary::-webkit-details-marker{display:none}
+.area>summary h3{margin:0; flex:1; min-width:180px}
+.area>summary::after{content:"+"; font-family:var(--f-ui); font-weight:800; font-size:1.3rem; color:var(--ink2)}
+.area[open]>summary::after{content:"–"}
+.area .body{padding:0 18px 16px}
+.area .grp{font-family:var(--f-ui); font-weight:700; font-size:.92rem; margin:16px 0 2px}
+.ct{display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-top:1px dashed var(--line)}
+.ct .tt{flex:1}
+.ct input{width:18px; height:18px; accent-color:var(--ink); margin-top:.2em; flex:none}
+.ct.seen .tt{color:var(--ink3); text-decoration:line-through}
+.prio{font-family:var(--f-ui); font-size:.7rem; font-weight:700; padding:.1em .55em; border-radius:6px; white-space:nowrap; flex:none; margin-top:.2em; border:1px solid var(--line)}
+.prio.a{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.prio.m{background:var(--hl2); color:var(--ink)}
+.prio.b{color:var(--ink2)}
+.steps{margin:0; padding-left:1.3em} .steps li{margin-bottom:.55em}
+
+.cq-head{display:flex; align-items:center; gap:.5em; margin-bottom:8px}
+.cq-tx{margin:0 0 12px; padding:10px 14px; border-left:4px solid var(--line); background:var(--paper); border-radius:0 10px 10px 0; font-size:.95rem}
+.cq-en{font-weight:700; margin-bottom:10px}
+.cq-ops{display:grid; gap:6px}
+.cq-op{display:flex; gap:10px; align-items:flex-start; text-align:left; border:1.5px solid var(--line); background:var(--card); border-radius:10px; padding:.55em .75em; line-height:1.4; width:100%}
+.cq-op:hover:not([disabled]){border-color:var(--ink); background:var(--hl2)}
+.cq-op b{font-family:var(--f-ui); width:1.7em; height:1.7em; border-radius:50%; display:grid; place-items:center; border:1.5px solid var(--ink3); flex:none; font-size:.85rem}
+.cq-op[disabled]{cursor:default}
+.cq-op.right{border-color:var(--ok); background:color-mix(in srgb,var(--ok) 13%,var(--card))}
+.cq-op.right b{background:var(--ok); border-color:var(--ok); color:#fff}
+.cq-op.wrong{border-color:var(--bad); background:color-mix(in srgb,var(--bad) 11%,var(--card))}
+.cq-op.wrong b{background:var(--bad); border-color:var(--bad); color:#fff}
+.cq-op.dim{opacity:.6}
+.cq-ex{margin-top:10px; padding:10px 12px; border-radius:10px; font-size:.94rem; background:var(--hl2)}
+.cq-ex.ok b{color:var(--ok)} .cq-ex.no b{color:var(--bad)}
+.qsum{display:flex; gap:22px; align-items:center; flex-wrap:wrap; margin-bottom:10px}
+
 @media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
 </style>
 </head>
@@ -362,53 +442,500 @@ const DATA_ID = "caderno";
 const FB_READY = !!(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.projectId && LOGIN_EMAIL);
 const LS = "caderno_v1_";
 
+/* ======================================================================
+   CURITIBA — resumo do Edital nº 4/2026 (Agente Administrativo, FAFIPA)
+   e questões de treino. Módulo independente: funciona dentro do Caderno
+   (estado em U.cur, salvo no Firebase) ou numa página sozinha.
+   ====================================================================== */
+const CurMod=(()=>{
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad=n=>String(n).padStart(2,"0");
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`};
+const br=s=>s.split("-").reverse().join("/");
+const dayDiff=s=>{const [y,m,d]=s.split("-").map(Number),[a,b,c]=today().split("-").map(Number);return Math.round((new Date(y,m-1,d)-new Date(a,b-1,c))/86400000)};
+const fmtPts=n=>n.toLocaleString("pt-BR",{minimumFractionDigits:n%1?1:0,maximumFractionDigits:1});
+const L="ABCDE";
+
+/* ---------------- Áreas da prova (Tabela 10.1.1 e Anexo II) ---------------- */
+const AREAS=[
+ {id:"port",name:"Língua Portuguesa",q:5,color:"#E0A800",
+  how:"São 5 questões (12,5 pts). Não tente ver a gramática inteira: interpretação, concordância, pontuação e porquês dão o maior retorno. Literatura é vasta — veja só as escolas principais e as figuras de linguagem.",
+  groups:[{t:[
+   ["Interpretação de texto: ideia central, ponto de vista do autor e inferências","A"],
+   ["Coesão e coerência (conectivos e retomadas)","A"],
+   ["Concordância nominal e verbal","A"],
+   ["Pontuação","A"],
+   ["Uso dos porquês","A"],
+   ["Classes de palavras e funções sintáticas","M"],
+   ["Semântica: sinônimos, antônimos, sentido denotativo e conotativo","M"],
+   ["Ortografia e acentuação; letra e fonema, sílaba, encontros e dígrafos","M"],
+   ["Gêneros e tipologias textuais","M"],
+   ["Figuras de linguagem","M"],
+   ["Comunicação, linguagem e variação linguística","B"],
+   ["Literatura brasileira: prosa e poesia, autores e obras","B"]]}]},
+ {id:"rl",name:"Raciocínio Lógico",q:5,color:"#8E5CF7",
+  how:"Apesar do nome, é quase tudo matemática básica. Porcentagem, regra de três e média resolvem boa parte das questões. Faça as contas no papel, sempre.",
+  groups:[{t:[
+   ["Porcentagem, juros simples e sistema monetário","A"],
+   ["Razão, proporção, grandezas proporcionais e regra de três simples e composta","A"],
+   ["Quatro operações, arredondamentos, estimativas e resolução de problemas","A"],
+   ["Média, moda e mediana; leitura de tabelas e gráficos","A"],
+   ["Sequências de números, letras e figuras","M"],
+   ["Probabilidade: espaço amostral, eventos dependentes e independentes, união e interseção","M"],
+   ["Geometria: Teorema de Tales, comprimento da circunferência, áreas de triângulo, retângulo e círculo","M"],
+   ["Noções de direção: norte, sul, leste, oeste, esquerda e direita","B"]]}]},
+ {id:"info",name:"Noções de Informática",q:5,color:"#12B5A5",
+  how:"5 questões (12,5 pts). Estude com o computador aberto, testando cada atalho. Atenção: a prova cobra Word e Excel 2016 em português, e os atalhos mudam em relação ao inglês.",
+  groups:[{t:[
+   ["Windows 10 e 11: arquivos, pastas e atalhos de teclado","A"],
+   ["Word 2016: formatação e atalhos (Ctrl+N negrito, Ctrl+S sublinhado, Ctrl+B salvar)","A"],
+   ["Excel 2016: fórmulas e funções (SOMA, MÉDIA, SE), referências","A"],
+   ["Segurança de dados: vírus, phishing, ransomware, senhas e backup","A"],
+   ["Navegadores, busca na web e e-mail (Outlook, Gmail, Zimbra; Cc e Cco)","M"],
+   ["Google Drive e armazenamento em nuvem","M"],
+   ["IA generativa: ChatGPT, Copilot e Gemini","M"],
+   ["Conceitos, hardware de entrada e saída e software","M"],
+   ["Linux Ubuntu: noções e comandos básicos","B"]]}]},
+ {id:"leg",name:"Legislação",q:5,color:"#166534",
+  how:"Lista longa para só 5 questões. Priorize o que também cai nos Específicos (Constituição, improbidade, Estatuto) e as leis curtas. As leis de Curitiba se estudam pela lei seca, marcando prazos e números.",
+  groups:[{t:[
+   ["Constituição, arts. 37 a 41: princípios (LIMPE) e servidores públicos","A"],
+   ["Constituição, arts. 1º a 17: fundamentos, objetivos, direitos e garantias","A"],
+   ["Estatuto dos Funcionários de Curitiba (Lei 1.656/1958)","A"],
+   ["Lei de Acesso à Informação (Lei 12.527/2011)","A"],
+   ["Lei Orgânica do Município de Curitiba","M"],
+   ["Organização Administrativa do Executivo de Curitiba (Lei 7.671/1991)","M"],
+   ["Improbidade administrativa (Lei 8.429/1992 com a Lei 14.230/2021)","M"],
+   ["LGPD, Capítulo IV: tratamento de dados pelo Poder Público","M"],
+   ["Prioridade de atendimento (Lei 10.048/2000)","M"],
+   ["Constituição, arts. 18, 19, 29, 30 e 44 a 75 (organização do Estado e Poder Legislativo)","B"],
+   ["ECA: disposições preliminares e direitos fundamentais","B"],
+   ["LINDB, arts. 20 a 30","B"]]}]},
+ {id:"esp",name:"Conhecimentos Específicos",q:20,color:"#3B82F6",
+  how:"Metade da prova (50 pts) e primeiro critério de desempate. Boa parte você já estuda para o DMAE e Contagem (administração, arquivo, 14.133). O que é novo aqui: atos administrativos, bens públicos, Lei 13.460, poder constituinte e o processo administrativo de Curitiba.",
+  groups:[
+   {g:"Fundamentos da Administração Pública",t:[
+    ["Conceitos, princípios e organização da Administração Pública","A"],
+    ["Planejamento, organização, direção e controle","A"],
+    ["Processo administrativo: conceitos, princípios, fases e modalidades","A"],
+    ["Gestão de pessoas e organização do ambiente de trabalho","M"],
+    ["Orçamento público","M"]]},
+   {g:"Direito Administrativo",t:[
+    ["Atos administrativos: requisitos, atributos, anulação e revogação","A"],
+    ["Lei 14.133/2021: licitações e contratos","A"],
+    ["Processo administrativo municipal (Lei 16.466/2024) e PAD no Estatuto (Lei 1.656/1958)","A"],
+    ["Bens públicos e serviços públicos","M"],
+    ["Responsabilidade dos agentes públicos e improbidade","M"]]},
+   {g:"Direito Constitucional",t:[
+    ["Princípios fundamentais, direitos e garantias","A"],
+    ["Administração Pública na Constituição","A"],
+    ["Poder constituinte, normas constitucionais, hierarquia e interpretação","M"]]},
+   {g:"Ética, relacionamento e atendimento",t:[
+    ["Lei 13.460/2017: direitos do usuário dos serviços públicos","A"],
+    ["Ética, integridade, transparência e conflito de interesses","M"],
+    ["Relações interpessoais e comunicação","M"]]},
+   {g:"Informação, arquivo e redação oficial",t:[
+    ["Arquivologia: conceitos, três idades, gestão documental e Lei 8.159/1991","A"],
+    ["Redação oficial e correspondência comercial","A"],
+    ["Sistemas de informação organizacional","B"],
+    ["Métodos e técnicas de pesquisa","B"]]}
+  ]}
+];
+const PRIO={A:["Alta","a"],M:["Média","m"],B:["Baixa","b"]};
+const PRESETS={seg:{port:3,rl:3,info:3,leg:3,esp:14},min:{port:3,rl:2,info:3,leg:3,esp:13},zero:{port:0,rl:0,info:0,leg:0,esp:0}};
+
+/* ---------------- Cronograma (Anexo III) ---------------- */
+const TL=[
+ ["2026-09-22","2026-09-26","Prazo para impugnar o edital"],
+ ["2026-10-07","2026-10-13","Pedido de isenção da taxa"],
+ ["2026-10-07","2026-11-05","Inscrições em fundacaofafipa.org.br"],
+ ["2026-11-06",null,"Último dia para pagar a taxa (R$ 100)"],
+ ["2026-12-03",null,"Divulgação do local e horário da prova"],
+ ["2026-12-13",null,"Prova objetiva",1],
+ ["2026-12-14",null,"Gabarito preliminar e caderno de questões"],
+ ["2027-01-14",null,"Resultado definitivo da prova"],
+ ["2027-02-16",null,"Resultado final e classificação"],
+ ["2027-02-25",null,"Homologação"]
+];
+
+/* ---------------- Questões de treino (inéditas, no formato FAFIPA) ---------------- */
+const TX1="Nas repartições públicas, o bom atendimento começa antes da primeira palavra. Um ambiente organizado, informações claras na entrada e servidores que sabem para onde encaminhar cada pedido reduzem filas e evitam retrabalho. Ainda assim, nenhuma placa substitui a escuta atenta: é ouvindo o cidadão que o servidor descobre o que ele realmente precisa, e não apenas o que conseguiu dizer.";
+const Q=(id,a,en,op,c,ex,tx)=>({id,a,en,op,c,ex,tx});
+const QS=[
+ Q("p1","port","De acordo com o texto, é correto afirmar que:",[
+  "uma boa sinalização torna desnecessária a escuta do cidadão.",
+  "a organização do ambiente, sozinha, garante um atendimento de qualidade.",
+  "ouvir com atenção permite ao servidor identificar a necessidade real do cidadão, além do que ele expressou.",
+  "as filas nas repartições são causadas principalmente pela falta de servidores.",
+  "o atendimento só começa quando o servidor dirige a palavra ao cidadão."],2,
+  "O último período afirma que é ouvindo que o servidor descobre o que o cidadão realmente precisa, e não só o que ele conseguiu dizer. A e B contrariam o trecho “nenhuma placa substitui a escuta”; D não aparece no texto; E contraria a primeira frase.",TX1),
+ Q("p2","port","No trecho “Ainda assim, nenhuma placa substitui a escuta atenta”, a expressão “Ainda assim” estabelece, em relação ao que foi dito antes, uma relação de:",[
+  "conclusão.","oposição (contraste).","causa.","finalidade.","tempo."],1,
+  "“Ainda assim” equivale a “mesmo assim”, “apesar disso”: o autor reconhece o valor da organização, mas contrapõe que ela não basta. É uma relação de oposição.",TX1),
+ Q("p3","port","Assinale a alternativa em que o uso do porquê está CORRETO:",[
+  "Não sei o porque da demora.","Você saiu mais cedo por quê?","Porque você não veio à reunião?",
+  "O processo atrasou por que faltou uma assinatura.","Explique-me o por quê da decisão."],1,
+  "“Por quê”, separado e com acento, fica no fim de frase interrogativa. Correções: A) o porquê (substantivo); C) Por que você não veio? (pergunta); D) porque faltou (explicação); E) o porquê da decisão."),
+ Q("p4","port","Assinale a alternativa correta quanto à concordância verbal:",[
+  "Fazem dois anos que trabalho neste setor.","Houveram muitas reclamações na ouvidoria.","Existem vários documentos pendentes de assinatura.",
+  "Vende-se casas no centro da cidade.","Os Estados Unidos é um país populoso."],2,
+  "“Existir” concorda normalmente com o sujeito (“vários documentos”). Erros: A) “Faz dois anos” (fazer indicando tempo é impessoal); B) “Houve” (haver no sentido de existir é impessoal); D) “Vendem-se casas” (voz passiva: o verbo concorda com “casas”); E) “Os Estados Unidos são”."),
+ Q("p5","port","Todas as palavras estão acentuadas de acordo com o Novo Acordo Ortográfico em:",[
+  "idéia – assembléia – vôo","ideia – heroico – voo","ideia – herói – vôo","jóia – heroico – enjoo","ideia – boia – enjôo"],1,
+  "Perderam o acento os ditongos abertos ei e oi em paroxítonas (ideia, heroico, joia, boia, assembleia) e os hiatos oo e ee (voo, enjoo, leem). “Herói” continua acentuada por ser oxítona terminada em ói."),
+ Q("p6","port","Na frase “A cidade dormia sob a neblina, e as ruas guardavam segredos”, a figura de linguagem predominante é a:",[
+  "hipérbole.","prosopopeia (personificação).","antítese.","eufemismo.","ironia."],1,
+  "Atribuir ações humanas (dormir, guardar segredos) a seres inanimados é prosopopeia, também chamada personificação."),
+
+ Q("r1","rl","Um material de escritório custava R$ 80,00. O preço teve aumento de 15% e, depois, desconto de 10% sobre o novo valor. O preço final passou a ser:",[
+  "R$ 80,00","R$ 81,20","R$ 82,80","R$ 84,00","R$ 85,20"],2,
+  "Aumento: 80 × 1,15 = 92. Desconto de 10% sobre 92: 92 × 0,90 = 82,80. Cuidado: +15% e −10% não equivalem a +5% (que daria R$ 84,00)."),
+ Q("r2","rl","Seis servidores digitalizam um arquivo inteiro em 10 dias. Mantendo o mesmo ritmo, quantos dias 4 servidores levariam para digitalizar o mesmo arquivo?",[
+  "6","12","14","15","18"],3,
+  "Menos servidores, mais dias: grandezas inversamente proporcionais. 6 × 10 = 4 × x, então x = 60 ÷ 4 = 15 dias."),
+ Q("r3","rl","Em uma semana, um setor atendeu por dia os seguintes números de pessoas: 3, 5, 5, 6, 8 e 9. A média, a moda e a mediana desses valores são, respectivamente:",[
+  "6; 5; 5,5","6; 5; 6","5,5; 5; 6","6; 6; 5","5; 5; 5,5"],0,
+  "Média: 36 ÷ 6 = 6. Moda: o valor que mais se repete, 5. Mediana: com 6 valores em ordem, é a média dos dois centrais, (5 + 6) ÷ 2 = 5,5."),
+ Q("r4","rl","R$ 2.000,00 foram aplicados a juros simples de 2% ao mês durante 6 meses. O montante ao final do período foi de:",[
+  "R$ 2.024,00","R$ 2.240,00","R$ 2.252,32","R$ 2.400,00","R$ 2.120,00"],1,
+  "J = C × i × t = 2.000 × 0,02 × 6 = 240. Montante = 2.000 + 240 = R$ 2.240,00. R$ 2.252,32 seria o resultado com juros compostos."),
+ Q("r5","rl","Uma caixa tem 4 canetas azuis e 6 pretas. Retiram-se, ao acaso e sem reposição, duas canetas. A probabilidade de as duas serem azuis é:",[
+  "2/15","4/25","1/5","2/5","3/10"],0,
+  "Eventos dependentes: 1ª azul = 4/10; 2ª azul (restam 3 azuis em 9) = 3/9. Multiplicando: 4/10 × 3/9 = 12/90 = 2/15. O valor 4/25 seria com reposição."),
+ Q("r6","rl","Uma praça circular tem 10 m de raio. Considerando π = 3,14, o comprimento do contorno da praça é:",[
+  "31,4 m","62,8 m","314 m","125,6 m","628 m"],1,
+  "C = 2 × π × r = 2 × 3,14 × 10 = 62,8 m. O número 314 corresponde à área (π × r² = 314 m²), que é outra grandeza."),
+ Q("r7","rl","Uma pessoa está de frente para o norte. Ela gira 90° para a sua direita e, em seguida, dá meia-volta (180°). Para qual direção ela fica voltada?",[
+  "Norte","Sul","Leste","Oeste","Nordeste"],3,
+  "De frente para o norte, a direita é o leste. Meia-volta inverte o sentido: oeste."),
+ Q("r8","rl","Observe a sequência: 2, 6, 12, 20, 30, … O próximo termo é:",[
+  "40","41","42","44","48"],2,
+  "As diferenças crescem de 2 em 2: +4, +6, +8, +10. A próxima é +12, e 30 + 12 = 42. Outra leitura: 1×2, 2×3, 3×4, 4×5, 5×6, 6×7."),
+
+ Q("i1","info","No Excel 2016, as células A1, A2 e A3 contêm 4, 8 e 12. Qual o resultado da fórmula =SE(MÉDIA(A1:A3)>=7;\"Aprovado\";\"Reprovado\")?",[
+  "8","Reprovado","Aprovado","#VALOR!","24"],2,
+  "MÉDIA(A1:A3) = 24 ÷ 3 = 8. Como 8 ≥ 7 é verdadeiro, a função SE devolve o segundo argumento, “Aprovado”. Na versão em português, os argumentos são separados por ponto e vírgula."),
+ Q("i2","info","No Windows 10 e 11, o atalho de teclado que abre o Explorador de Arquivos é:",[
+  "Windows + D","Windows + L","Windows + E","Ctrl + Shift + Esc","Alt + Tab"],2,
+  "Windows + E abre o Explorador. Windows + D mostra a área de trabalho; Windows + L bloqueia a sessão; Ctrl + Shift + Esc abre o Gerenciador de Tarefas; Alt + Tab alterna janelas."),
+ Q("i3","info","No Microsoft Word 2016 em português, o atalho Ctrl + N serve para:",[
+  "criar um novo documento.","aplicar negrito.","aplicar sublinhado.","salvar o documento.","aplicar itálico."],1,
+  "Em português: Ctrl + N = negrito, Ctrl + I = itálico, Ctrl + S = sublinhado, Ctrl + B = salvar e Ctrl + O = novo documento. É pegadinha clássica, porque em inglês os atalhos são outros."),
+ Q("i4","info","Um servidor recebe um e-mail que imita a identidade visual de um banco e pede que ele clique em um link para “confirmar” a senha. Esse golpe é chamado de:",[
+  "ransomware.","phishing.","worm.","firewall.","backup."],1,
+  "Phishing é a mensagem falsa que se passa por instituição confiável para roubar dados. Ransomware criptografa arquivos e pede resgate; worm se espalha sozinho pela rede; firewall e backup são proteções."),
+ Q("i5","info","No terminal do Linux Ubuntu, o comando que lista os arquivos e pastas do diretório atual é:",[
+  "cd","ls","rm","mkdir","pwd"],1,
+  "ls lista o conteúdo. cd muda de diretório, rm remove, mkdir cria diretório e pwd mostra o caminho atual."),
+ Q("i6","info","Ao enviar um e-mail, o campo em que os destinatários recebem a mensagem sem que os demais vejam seus endereços é o:",[
+  "Para","Cc","Assunto","Cco","De"],3,
+  "Cco (cópia carbono oculta) esconde os endereços dos outros destinatários. Em Cc, todos veem quem recebeu cópia."),
+ Q("i7","info","Sobre ferramentas de IA generativa, como ChatGPT, Copilot e Gemini, é correto afirmar que:",[
+  "sempre apresentam informações verdadeiras, pois consultam bases oficiais.",
+  "dispensam revisão humana em documentos oficiais.",
+  "podem gerar respostas incorretas com aparência convincente, por isso o conteúdo deve ser conferido.",
+  "só funcionam com comandos em inglês.",
+  "são indicadas para receber dados pessoais de cidadãos sem restrição."],2,
+  "Essas ferramentas podem “alucinar”: produzir textos plausíveis, porém errados. O uso responsável exige conferir o resultado e não inserir dados pessoais ou sigilosos."),
+
+ Q("l1","leg","Segundo o art. 1º da Constituição Federal, NÃO é fundamento da República Federativa do Brasil:",[
+  "a soberania.","a cidadania.","a dignidade da pessoa humana.","o pluralismo político.","garantir o desenvolvimento nacional."],4,
+  "Fundamentos: soberania, cidadania, dignidade da pessoa humana, valores sociais do trabalho e da livre iniciativa e pluralismo político (macete SO-CI-DI-VA-PLU). Garantir o desenvolvimento nacional é objetivo fundamental (art. 3º)."),
+ Q("l2","leg","O art. 37, § 1º, da Constituição proíbe que a publicidade oficial contenha nomes, símbolos ou imagens que caracterizem promoção pessoal de autoridades. Essa regra concretiza principalmente o princípio da:",[
+  "legalidade.","impessoalidade.","eficiência.","economicidade.","supremacia do interesse privado."],1,
+  "Pela impessoalidade, a atuação é da Administração, não do agente. Lembre do LIMPE: Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência."),
+ Q("l3","leg","Pela Lei de Acesso à Informação (Lei 12.527/2011), quando não for possível conceder o acesso imediato, o órgão deverá responder em prazo não superior a:",[
+  "5 dias, sem prorrogação.","10 dias, prorrogáveis por mais 5.","15 dias, prorrogáveis por mais 15.",
+  "20 dias, prorrogáveis por mais 10, mediante justificativa expressa.","30 dias, prorrogáveis por mais 30."],3,
+  "Art. 11: até 20 dias, prorrogáveis por mais 10 com justificativa expressa, dando ciência ao requerente."),
+ Q("l4","leg","Para o Estatuto da Criança e do Adolescente (Lei 8.069/1990), considera-se adolescente a pessoa:",[
+  "de 10 a 16 anos.","de até 12 anos incompletos.","entre 12 e 18 anos de idade.","entre 14 e 21 anos.","de 12 a 21 anos, em qualquer caso."],2,
+  "Art. 2º: criança é a pessoa de até 12 anos incompletos; adolescente, entre 12 e 18 anos. Excepcionalmente, o ECA se aplica a pessoas de 18 a 21 anos nos casos previstos em lei."),
+ Q("l5","leg","Nos termos da Lei 10.048/2000, têm direito a atendimento prioritário, entre outros:",[
+  "pessoas com deficiência, idosos com 60 anos ou mais, gestantes, lactantes e pessoas com crianças de colo.",
+  "apenas idosos com 65 anos ou mais e gestantes.",
+  "somente pessoas com deficiência que apresentem laudo médico atualizado.",
+  "servidores públicos em horário de expediente.",
+  "qualquer pessoa que pague taxa de urgência."],0,
+  "O art. 1º lista, entre outros, pessoas com deficiência, idosos a partir de 60 anos, gestantes, lactantes, pessoas com crianças de colo e obesos; leis posteriores incluíram outros grupos. Leia a redação atualizada no site do Planalto."),
+ Q("l6","leg","Segundo o Capítulo IV da LGPD (Lei 13.709/2018), o tratamento de dados pessoais pelo Poder Público deve:",[
+  "depender sempre de autorização judicial prévia.","ser proibido para órgãos municipais.","ter como finalidade principal a obtenção de lucro.",
+  "atender à sua finalidade pública, na persecução do interesse público, para executar competências ou cumprir atribuições legais.",
+  "dispensar qualquer transparência sobre o uso dos dados."],3,
+  "Art. 23: o tratamento pelo Poder Público atende à finalidade pública e ao interesse público, para executar competências ou cumprir atribuições legais do serviço público, informando as hipóteses em que trata dados."),
+ Q("l7","leg","Após a Lei 14.230/2021, que alterou a Lei de Improbidade (Lei 8.429/1992), os atos de improbidade administrativa exigem:",[
+  "apenas culpa leve do agente.","conduta dolosa.","somente dano ao patrimônio privado.","condenação criminal prévia.","que o agente ocupe cargo em comissão."],1,
+  "Desde 2021, só condutas dolosas tipificadas nos arts. 9º, 10 e 11 configuram improbidade. A modalidade culposa deixou de existir."),
+ Q("l8","leg","Segundo o art. 20 da LINDB, nas esferas administrativa, controladora e judicial:",[
+  "as decisões podem se basear apenas em valores jurídicos abstratos.",
+  "não se decidirá com base em valores jurídicos abstratos sem considerar as consequências práticas da decisão.",
+  "a motivação das decisões é facultativa.",
+  "as consequências práticas só importam em decisões judiciais.",
+  "é vedado ao agente público considerar precedentes."],1,
+  "O art. 20 pede decisões atentas à realidade: quem decide deve considerar as consequências práticas e demonstrar, na motivação, a necessidade e a adequação da medida."),
+
+ Q("e1","esp","Entre as funções administrativas, aquela que consiste em acompanhar os resultados, compará-los com o planejado e corrigir desvios é:",[
+  "o planejamento.","a organização.","a direção.","o controle.","a departamentalização."],3,
+  "Controle = medir, comparar com o padrão e corrigir. Planejar define objetivos; organizar distribui tarefas e recursos; dirigir é liderar e motivar pessoas."),
+ Q("e2","esp","O atributo do ato administrativo que permite à Administração executar suas decisões sem autorização prévia do Poder Judiciário é a:",[
+  "presunção de legitimidade.","imperatividade.","autoexecutoriedade.","tipicidade.","discricionariedade."],2,
+  "Autoexecutoriedade: a Administração executa diretamente (ex.: apreender alimento estragado). Os atributos formam o macete PATI: Presunção de legitimidade, Autoexecutoriedade, Tipicidade e Imperatividade. Discricionariedade não é atributo."),
+ Q("e3","esp","São requisitos (elementos) do ato administrativo, EXCETO:",[
+  "competência.","finalidade.","forma.","motivo.","imperatividade."],4,
+  "Requisitos: competência, finalidade, forma, motivo e objeto (macete COFIFOMOB). Imperatividade é atributo, não requisito."),
+ Q("e4","esp","Sobre a extinção dos atos administrativos, é correto afirmar que a revogação:",[
+  "retira um ato válido por conveniência e oportunidade, com efeitos a partir de então (ex nunc).",
+  "retira um ato ilegal, com efeitos retroativos (ex tunc).",
+  "só pode ser feita pelo Poder Judiciário.",
+  "pode atingir atos vinculados e direitos adquiridos.",
+  "é o mesmo que anulação."],0,
+  "Revogação: ato válido, razão de mérito, feita pela própria Administração, efeitos ex nunc. Anulação: ato ilegal, pela Administração ou pelo Judiciário, efeitos em regra ex tunc. Atos vinculados e direitos adquiridos não podem ser revogados."),
+ Q("e5","esp","O prédio onde funciona uma secretaria municipal é classificado, quanto à destinação, como bem público:",[
+  "de uso comum do povo.","de uso especial.","dominical.","particular de uso público.","de domínio privado da União."],1,
+  "Código Civil, art. 99: uso comum do povo (ruas, praças, rios); uso especial (edifícios de serviço ou estabelecimento da Administração); dominicais (bens sem destinação pública específica)."),
+ Q("e6","esp","Conforme a Lei 14.133/2021, NÃO é modalidade de licitação:",[
+  "pregão.","concorrência.","tomada de preços.","leilão.","diálogo competitivo."],2,
+  "Art. 28: pregão, concorrência, concurso, leilão e diálogo competitivo. Tomada de preços e convite eram da antiga Lei 8.666/1993."),
+ Q("e7","esp","Pela Lei 14.133/2021, o pregão é a modalidade obrigatória para a aquisição de:",[
+  "obras de grande vulto, com critério de melhor técnica.",
+  "bens e serviços comuns, com critério de menor preço ou maior desconto.",
+  "trabalhos artísticos, com prêmio ao vencedor.",
+  "bens imóveis da Administração, pelo maior lance.",
+  "soluções inovadoras, após diálogo com os licitantes."],1,
+  "Art. 6º, XLI: pregão é obrigatório para bens e serviços comuns, julgado por menor preço ou maior desconto. Concurso escolhe trabalho técnico, científico ou artístico; leilão aliena bens; diálogo competitivo serve a contratações inovadoras."),
+ Q("e8","esp","Na teoria das três idades, os documentos de uso pouco frequente, que aguardam prazo para eliminação ou recolhimento ao arquivo permanente, formam o arquivo:",[
+  "corrente.","intermediário.","permanente.","histórico.","setorial."],1,
+  "Corrente: uso frequente. Intermediário: uso raro, aguardando destinação. Permanente (histórico): valor histórico, probatório e informativo, guardado para sempre."),
+ Q("e9","esp","De acordo com a Lei 8.159/1991, os documentos de valor permanente são:",[
+  "inalienáveis e imprescritíveis.","eliminados após 20 anos.","de acesso sempre restrito.","de propriedade do servidor que os produziu.","transferidos obrigatoriamente à iniciativa privada."],0,
+  "Art. 10: documentos de valor permanente são inalienáveis (não podem ser vendidos ou doados) e imprescritíveis."),
+ Q("e10","esp","Segundo o Manual de Redação da Presidência da República, em comunicação oficial dirigida a um Prefeito Municipal deve-se usar o pronome de tratamento:",[
+  "Vossa Senhoria.","Vossa Excelência.","Vossa Magnificência.","Vossa Eminência.","Meritíssimo Senhor."],1,
+  "Prefeitos recebem Vossa Excelência, com vocativo “Senhor Prefeito”. Vossa Magnificência é para reitores; Vossa Eminência, para cardeais. O verbo fica na 3ª pessoa: “Vossa Excelência decidiu”."),
+ Q("e11","esp","A Lei 13.460/2017 manda os órgãos divulgarem um documento com informações claras sobre serviços prestados, requisitos, prazos e formas de acesso. Esse documento é a:",[
+  "Lei Orgânica.","Ouvidoria-Geral.","Carta de Serviços ao Usuário.","Portaria de Atendimento.","Declaração de Bens."],2,
+  "Art. 7º: a Carta de Serviços ao Usuário informa os serviços, como acessá-los, prazos, requisitos e padrões de qualidade. A ouvidoria é o canal que recebe e trata manifestações."),
+ Q("e12","esp","A execução da despesa pública passa por estágios. A sequência correta é:",[
+  "pagamento, empenho e liquidação.","liquidação, empenho e pagamento.","empenho, liquidação e pagamento.","empenho, pagamento e liquidação.","licitação, pagamento e empenho."],2,
+  "Empenho (reserva do valor), liquidação (verificação de que o bem ou serviço foi entregue) e pagamento. A Lei 4.320/1964 proíbe despesa sem prévio empenho."),
+ Q("e13","esp","O poder constituinte originário, que cria uma nova Constituição, é caracterizado como:",[
+  "inicial, ilimitado e incondicionado.","derivado, limitado e condicionado.","exercido por emenda constitucional.","restrito às constituições estaduais.","subordinado à Constituição anterior."],0,
+  "O originário inaugura a ordem jurídica (inicial), não se sujeita à ordem anterior (ilimitado juridicamente) e não segue forma preestabelecida (incondicionado). O derivado — emendas e constituições estaduais — é limitado e condicionado."),
+ Q("e14","esp","Na hierarquia de necessidades de Maslow, as necessidades da base da pirâmide são as:",[
+  "de autorrealização.","de estima.","sociais.","fisiológicas.","de segurança."],3,
+  "De baixo para cima: fisiológicas, segurança, sociais, estima e autorrealização.")
+];
+const areaById=id=>AREAS.find(a=>a.id===id);
+
+/* ---------------- Calculadora ---------------- */
+const defCalc=()=>({...PRESETS.seg});
+function totals(c){let ac=0;AREAS.forEach(a=>ac+=+c[a.id]||0);return {ac,pts:ac*2.5}}
+function calcMsg(t){
+  if(t.pts>=60)return `Com <b>${t.ac} acertos</b> você faz <b>${fmtPts(t.pts)} pontos</b> e passa. ${t.pts>=67.5?"Boa margem de segurança.":"Margem apertada: mire em 2 ou 3 acertos a mais."}`;
+  const f=Math.ceil((60-t.pts)/2.5);
+  return `Com <b>${t.ac} acertos</b> você faz <b>${fmtPts(t.pts)} pontos</b>. Faltam <b>${f} ${f===1?"acerto":"acertos"}</b> para chegar aos 60.`;
+}
+
+/* ---------------- Tela: resumo do edital ---------------- */
+function edital(st,o){
+  o=o||{};
+  const prova=o.prova||"2026-12-13", n=dayDiff(prova), td=today();
+  if(!st.calc)st.calc=defCalc();
+  st.seen=st.seen||{};
+  const c=st.calc, t=totals(c);
+  const facts=[
+    ["Vagas","202 ampla concorrência + 13 PcD + 35 PPI, e cadastro reserva"],
+    ["Salário inicial","R$ 3.027,73 + auxílio-transporte, auxílio-alimentação e plano de saúde opcional"],
+    ["Jornada","40 horas semanais"],
+    ["Requisito","Ensino médio completo"],
+    ["Taxa","R$ 100,00 (isenção pode ser pedida de 07 a 13/10)"],
+    ["Prova",`${br(prova)}, em Curitiba: 40 questões de 5 alternativas, 4 horas`],
+    ["Para passar","60 dos 100 pontos no total. Não há nota mínima por matéria"],
+    ["Desempate","Idade (60+), depois Específicos, Português, RL, Informática e Legislação"]
+  ];
+  const cnt=n>0?[n,n===1?"dia até a prova":"dias até a prova"]:n===0?["Hoje","é o dia da prova"]:["✓","prova realizada"];
+  return `<div class="cur">
+  <section class="card cur-hero">
+    <div class="main">
+      <p class="cur-kick">Prefeitura de Curitiba, Edital nº 4/2026, banca FAFIPA</p>
+      <h2>Agente Administrativo</h2>
+      <p class="muted" style="margin:0">Resumo para quem está começando: o que cai, quanto vale e o que priorizar.</p>
+    </div>
+    <div class="cur-count"><b>${cnt[0]}</b><span>${cnt[1]}</span></div>
+    <dl class="facts">${facts.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+  </section>
+
+  <section class="card">
+    <h3>Quanto você precisa acertar</h3>
+    <p class="small muted" style="margin:0">Cada quadrado é uma questão, e todas valem 2,5 pontos. Arraste os controles para simular seus acertos.</p>
+    <div class="qgrid">${AREAS.map(a=>`<div class="qrow" style="--c:${a.color}">
+      <span class="nm"><span class="dot" style="--c:${a.color}"></span>${esc(a.name)}</span>
+      <span class="pts" id="cur-pts-${a.id}">${fmtPts(c[a.id]*2.5)} pts</span>
+      <span class="sq" aria-hidden="true">${Array.from({length:a.q},(_,i)=>`<i class="${i<c[a.id]?"on":""}"></i>`).join("")}</span>
+      <label class="rg"><span class="tiny muted"><span id="cur-ac-${a.id}">${c[a.id]}</span> de ${a.q} acertos</span>
+        <input type="range" min="0" max="${a.q}" value="${c[a.id]}" data-cin="calc" data-a="${a.id}" aria-label="Acertos em ${esc(a.name)}"></label>
+    </div>`).join("")}</div>
+    <div class="meter" aria-hidden="true"><span id="cur-bar" class="${t.pts>=60?"pass":""}" style="width:${t.pts}%"></span><i class="cut"></i></div>
+    <p class="cur-msg" id="cur-msg">${calcMsg(t)}</p>
+    <div class="row"><span class="small muted">Simular:</span>
+      <button class="btn sm" data-cact="preset" data-p="seg">Meta segura (65 pts)</button>
+      <button class="btn sm ghost" data-cact="preset" data-p="min">Mínimo (60 pts)</button>
+      <button class="btn sm ghost" data-cact="preset" data-p="zero">Zerar</button></div>
+    <p class="small" style="margin:12px 0 0">Os Específicos sozinhos valem 50 pontos. Acertando 14 dos 20, você só precisa de 10 acertos entre as outras 20 questões.</p>
+  </section>
+
+  <div class="grid g-2">
+    <section class="card">
+      <h3>Por onde começar</h3>
+      <ol class="steps">
+        <li>Faça a inscrição entre 07/10 e 05/11 e pague a taxa até 06/11. Quem tem direito à isenção pede de 07 a 13/10.</li>
+        <li>Comece pelos Específicos: eles valem metade da prova e você já estuda boa parte para o DMAE e Contagem.</li>
+        <li>Nas matérias básicas, estude só os assuntos de prioridade alta até dominar. Com 5 questões cada, abrangência vale mais que profundidade.</li>
+        <li>Veja como a FAFIPA pergunta: baixe provas anteriores de nível médio no site da fundação e resolva as questões de treino deste caderno.</li>
+        <li>A prova é em Curitiba. O local sai em 03/12: planeje a viagem para chegar na véspera.</li>
+      </ol>
+      <button class="btn primary" data-cact="goquiz" style="margin-top:8px">Treinar com questões</button>
+    </section>
+    <section class="card">
+      <h3>Datas do concurso</h3>
+      <ol class="tl">${TL.map(([s,e,txt,pv])=>{const end=e||s, cls=end<td?"past":(s<=td?"now":"");
+        return `<li class="${cls} ${pv?"prova":""}"><span class="d">${e?br(s).slice(0,5)+" a "+br(e).slice(0,5):br(s)}</span><span class="pin"></span><span class="t">${esc(txt)}${cls==="now"?` <span class="pill-now">agora</span>`:""}</span></li>`}).join("")}</ol>
+      <p class="tiny muted" style="margin:10px 0 0">O próprio edital avisa que as datas são uma projeção e podem mudar. Acompanhe fundacaofafipa.org.br e concursos.curitiba.pr.gov.br.</p>
+    </section>
+  </div>
+
+  <section>
+    <div class="row" style="margin-bottom:10px"><h3 style="margin:0">O que cai, por matéria</h3><span class="spacer"></span>
+      <span class="row small muted" style="gap:6px">Prioridade: <span class="prio a">Alta</span><span class="prio m">Média</span><span class="prio b">Baixa</span></span></div>
+    <div class="grid">${AREAS.map(a=>{
+      const all=a.groups.flatMap((g,gi)=>g.t.map((_,i)=>a.id+"-"+gi+"-"+i)), seen=all.filter(id=>st.seen[id]).length;
+      return `<details class="card area" style="--c:${a.color}">
+      <summary><h3>${esc(a.name)}</h3><span class="small muted">${a.q} questões, ${fmtPts(a.q*2.5)} pts${o.track?` · ${seen}/${all.length} vistos`:""}</span></summary>
+      <div class="body"><div class="tipbox">💡 ${esc(a.how)}</div>
+      ${a.groups.map((g,gi)=>`${g.g?`<p class="grp">${esc(g.g)}</p>`:""}${g.t.map(([tx,p],i)=>{const id=a.id+"-"+gi+"-"+i, s=!!st.seen[id];
+        return `<div class="ct ${o.track&&s?"seen":""}">${o.track?`<input type="checkbox" data-cact="seen" data-id="${id}" ${s?"checked":""} aria-label="Já estudei">`:""}<span class="tt">${esc(tx)}</span><span class="prio ${PRIO[p][1]}">${PRIO[p][0]}</span></div>`}).join("")}`).join("")}
+      ${o.app?`<div class="row" style="margin-top:12px"><button class="btn sm" data-act="gomat">Marcar assuntos em Matérias</button></div>`:""}
+      </div></details>`}).join("")}</div>
+  </section>
+  </div>`;
+}
+
+/* ---------------- Tela: questões ---------------- */
+function quiz(st,ui){
+  st.ans=st.ans||{};
+  const ans=st.ans, f=ui.qf||"all";
+  const list=QS.filter(q=>f==="all"||q.a===f);
+  const done=list.filter(q=>ans[q.id]!=null), ok=done.filter(q=>ans[q.id]===q.c).length;
+  const chips=[["all","Todas"]].concat(AREAS.map(a=>[a.id,a.name]));
+  const stats=AREAS.map(a=>{const qs=QS.filter(q=>q.a===a.id),d=qs.filter(q=>ans[q.id]!=null);return {a,n:qs.length,d:d.length,ok:d.filter(q=>ans[q.id]===q.c).length}});
+  return `<div class="cur">
+  <section class="card">
+    <h3>Questões no estilo FAFIPA</h3>
+    <p class="small muted">Questões inéditas, feitas a partir do conteúdo do edital, no formato da banca: 5 alternativas e uma correta. Não são cópias de provas. Para treinar com provas reais, baixe as anteriores no site da FAFIPA ou filtre pela banca num site de questões.</p>
+    <div class="chips" style="margin:10px 0 14px">${chips.map(([k,l])=>`<button class="chip ${f===k?"on":""}" data-cact="qf" data-f="${k}">${esc(l)}</button>`).join("")}</div>
+    <div class="qsum">
+      <div class="stat"><b>${done.length}/${list.length}</b><span class="small muted">respondidas</span></div>
+      <div class="stat"><b>${ok}</b><span class="small muted">acertos</span></div>
+      <div class="stat"><b>${done.length?Math.round(ok/done.length*100)+"%":"–"}</b><span class="small muted">aproveitamento</span></div>
+      <span class="spacer"></span>
+      ${done.length?`<button class="btn sm ghost" data-cact="reset">Refazer ${f==="all"?"todas":"esta matéria"}</button>`:""}
+    </div>
+    ${f==="all"?stats.map(s=>`<div class="hbar"><span class="row" style="gap:.4em;flex-wrap:nowrap"><span class="dot" style="--c:${s.a.color}"></span>${esc(s.a.name)}</span><div class="prog"><span style="width:${s.d?s.ok/s.d*100:0}%;--c:${s.a.color}"></span></div><span class="v">${s.ok}/${s.d||0}</span></div>`).join(""):""}
+  </section>
+  ${list.map((q,idx)=>{const a=areaById(q.a), r=ans[q.id], has=r!=null, right=has&&r===q.c;
+    return `<article class="card" id="cq-${q.id}">
+    <div class="cq-head"><span class="dot" style="--c:${a.color}"></span><span class="small muted">${esc(a.name)}</span><span class="spacer"></span><span class="tiny muted">Questão ${idx+1}</span></div>
+    ${q.tx?`<blockquote class="cq-tx">${esc(q.tx)}</blockquote>`:""}
+    <p class="cq-en">${esc(q.en)}</p>
+    <div class="cq-ops">${q.op.map((op,i)=>{let cl="";if(has){cl=i===q.c?"right":i===r?"wrong":"dim"}
+      return `<button class="cq-op ${cl}" data-cact="ans" data-q="${q.id}" data-i="${i}" ${has?"disabled":""}><b>${L[i]}</b><span>${esc(op)}</span></button>`}).join("")}</div>
+    ${has?`<div class="cq-ex ${right?"ok":"no"}"><b>${right?"Certo!":"Não foi dessa vez."}</b> Gabarito: ${L[q.c]}. ${esc(q.ex)}</div>`:""}
+    </article>`}).join("")}
+  </div>`;
+}
+
+/* ---------------- Eventos ---------------- */
+function onClick(b,st,ui){
+  const a=b.dataset.cact;st.ans=st.ans||{};st.seen=st.seen||{};
+  if(a==="ans"){const q=b.dataset.q;if(st.ans[q]!=null)return null;st.ans[q]=+b.dataset.i;return "save"}
+  if(a==="qf"){ui.qf=b.dataset.f;return "ui"}
+  if(a==="reset"){if(!confirm("Apagar suas respostas desta lista para refazer?"))return null;const f=ui.qf||"all";QS.forEach(q=>{if(f==="all"||q.a===f)delete st.ans[q.id]});return "save"}
+  if(a==="preset"){st.calc={...PRESETS[b.dataset.p]};return "save"}
+  if(a==="seen"){if(b.checked)st.seen[b.dataset.id]=1;else delete st.seen[b.dataset.id];return "save"}
+  if(a==="goquiz"){ui.guideTab="questoes";return "ui"}
+  if(a==="goedital"){ui.guideTab="curitiba";return "ui"}
+  return null;
+}
+function onInput(t,st){
+  if(!t.dataset||t.dataset.cin!=="calc")return false;
+  if(!st.calc)st.calc=defCalc();
+  const id=t.dataset.a, v=+t.value;st.calc[id]=v;
+  const row=t.closest(".qrow");if(row)row.querySelectorAll(".sq i").forEach((el,i)=>el.classList.toggle("on",i<v));
+  const set=(i,x)=>{const el=document.getElementById(i);if(el)el.innerHTML=x};
+  set("cur-pts-"+id,fmtPts(v*2.5)+" pts");set("cur-ac-"+id,v);
+  const tt=totals(st.calc), bar=document.getElementById("cur-bar");
+  if(bar){bar.style.width=tt.pts+"%";bar.classList.toggle("pass",tt.pts>=60)}
+  set("cur-msg",calcMsg(tt));
+  return true;
+}
+return {edital,quiz,onClick,onInput,AREAS,QS};
+})();
+
+
 /* ---------------- Dados fixos: concursos ---------------- */
 const EXAMS = {
   d:{key:"dmae", name:"DMAE Uberlândia", role:"Oficial Administrativo", banca:"Fundep"},
+  k:{key:"curitiba", name:"Prefeitura de Curitiba", role:"Agente Administrativo", banca:"FAFIPA"},
   c:{key:"contagem", name:"Prefeitura de Contagem", role:"Assistente Administrativo", banca:"IBGP"},
   t:{key:"tjsp", name:"TJSP", role:"Escrevente Técnico Judiciário", banca:"VUNESP"}
 };
-const EX_SHORT = {d:"DMAE", c:"Contagem", t:"TJSP"};
+const EX_SHORT = {d:"DMAE", k:"Curitiba", c:"Contagem", t:"TJSP"};
 
 /* ---------------- Dados fixos: matérias e tópicos ----------------
-   ex: d = DMAE, c = Contagem, t = TJSP                              */
+   ex: d = DMAE, k = Curitiba, c = Contagem, t = TJSP
+   Importante: tópicos novos entram SEMPRE no fim da lista, para não
+   bagunçar as marcações já salvas (que usam a posição do tópico).   */
 const S = (id,name,color,ex,topics,tip)=>({id,name,color,ex,topics,tip});
 const DEFAULT_SUBJECTS = [
-  S("port","Língua Portuguesa","#E0A800","dct",[
-    ["Interpretação de textos: informações literais, inferências e ponto de vista do autor","dct"],
-    ["Tipos e gêneros textuais","dc"],
-    ["Coesão e coerência; relações entre ideias","dct"],
-    ["Significação: sinônimos, antônimos, polissemia, sentido próprio e figurado","dct"],
-    ["Figuras de linguagem e de sintaxe","c"],
-    ["Fonologia, ortografia e acentuação (Novo Acordo)","dc"],
+  S("port","Língua Portuguesa","#E0A800","dctk",[
+    ["Interpretação de textos: informações literais, inferências e ponto de vista do autor","dctk"],
+    ["Tipos e gêneros textuais","dck"],
+    ["Coesão e coerência; relações entre ideias","dctk"],
+    ["Significação: sinônimos, antônimos, polissemia, sentido próprio e figurado","dctk"],
+    ["Figuras de linguagem e de sintaxe","ck"],
+    ["Fonologia, ortografia e acentuação (Novo Acordo)","dck"],
     ["Formação de palavras","dc"],
-    ["Classes de palavras e seu emprego","dct"],
+    ["Classes de palavras e seu emprego","dctk"],
     ["Verbos: tempos, modos, vozes e correlação","dc"],
-    ["Sintaxe: frase, oração, período e termos da oração","dc"],
+    ["Sintaxe: frase, oração, período e termos da oração","dck"],
     ["Período composto: coordenação e subordinação","dc"],
-    ["Pontuação","dct"],
-    ["Concordância verbal e nominal","dct"],
+    ["Pontuação","dctk"],
+    ["Concordância verbal e nominal","dctk"],
     ["Regência verbal e nominal","dct"],
     ["Crase","dct"],
     ["Colocação pronominal","dct"],
-    ["Variação linguística","dc"]
-  ],"É a matéria que aparece nos três concursos e desempata no TJSP. Estude um tópico de gramática por sessão e feche sempre com 10–15 questões da banca do próximo concurso. Interpretação se treina todo dia: um texto curto + questões."),
-  S("mat","Matemática básica","#FF7B39","dct",[
-    ["Conjuntos numéricos e operações (frações, decimais, potências, raízes)","dct"],
+    ["Variação linguística","dck"],
+    ["Uso dos porquês","k"],
+    ["Literatura brasileira: prosa e poesia, autores e obras","k"]
+  ],"É a matéria que aparece em todos os concursos e desempata no TJSP. Estude um tópico de gramática por sessão e feche sempre com 10–15 questões da banca do próximo concurso. Interpretação se treina todo dia: um texto curto + questões."),
+  S("mat","Matemática básica","#FF7B39","dctk",[
+    ["Conjuntos numéricos e operações (frações, decimais, potências, raízes)","dctk"],
     ["MMC e MDC","ct"],
-    ["Razão e proporção; grandezas direta e inversamente proporcionais","dct"],
-    ["Regra de três simples e composta","dct"],
-    ["Porcentagem","dct"],
-    ["Juros simples","dct"],
+    ["Razão e proporção; grandezas direta e inversamente proporcionais","dctk"],
+    ["Regra de três simples e composta","dctk"],
+    ["Porcentagem","dctk"],
+    ["Juros simples","dctk"],
     ["Juros compostos","d"],
     ["Equações do 1º e 2º grau","dct"],
     ["Sistemas de equações do 1º grau","dct"],
-    ["Média aritmética simples e ponderada","dct"],
-    ["Grandezas e medidas (sistema métrico, tempo, capacidade, massa)","ct"],
-    ["Leitura de gráficos e tabelas","dct"],
-    ["Geometria: perímetro, área, volume e Pitágoras","dt"],
-    ["Resolução de situações-problema","dct"]
-  ],"Base de tudo em exatas. Se você está enferrujado(a), comece por frações, porcentagem e regra de três: caem em qualquer banca e ajudam em juros e no raciocínio lógico."),
+    ["Média aritmética simples e ponderada","dctk"],
+    ["Grandezas e medidas (sistema métrico, tempo, capacidade, massa)","ctk"],
+    ["Leitura de gráficos e tabelas","dctk"],
+    ["Geometria: perímetro, área, volume e Pitágoras","dtk"],
+    ["Resolução de situações-problema","dctk"],
+    ["Teorema de Tales e comprimento da circunferência","k"],
+    ["Arredondamentos, estimativas e sistema monetário","k"]
+  ],"Base de tudo em exatas. Se você está enferrujado(a), comece por frações, porcentagem e regra de três: caem em qualquer banca e ajudam em juros e no raciocínio lógico. Em Curitiba, o “Raciocínio Lógico” é quase todo esta matéria."),
   S("matav","Matemática do ensino médio","#D6453D","d",[
     ["Funções afim e quadrática (raízes, vértice, sinal, inequações)","d"],
     ["Função exponencial e logaritmos","d"],
@@ -419,7 +946,7 @@ const DEFAULT_SUBJECTS = [
     ["Estatística: moda, mediana, variância e desvio padrão","d"],
     ["Intervalos reais e números irracionais","d"]
   ],"Conteúdo enorme para poucas questões (Matemática + RL somam 10 no DMAE). Para iniciante: PA/PG e estatística primeiro. Trigonometria, logaritmo e matrizes só se sobrar tempo — não compensa travar aqui."),
-  S("rl","Raciocínio Lógico","#8E5CF7","dct",[
+  S("rl","Raciocínio Lógico","#8E5CF7","dctk",[
     ["Proposições simples e compostas; conectivos","dct"],
     ["Tabelas-verdade","ct"],
     ["Negação de proposições","ct"],
@@ -427,65 +954,79 @@ const DEFAULT_SUBJECTS = [
     ["Quantificadores (todo, algum, nenhum)","c"],
     ["Argumentação: premissas, conclusão e validade","dct"],
     ["Diagramas lógicos e operações com conjuntos","dct"],
-    ["Sequências de números, letras, palavras e figuras","dct"],
+    ["Sequências de números, letras, palavras e figuras","dctk"],
     ["Associação lógica (problemas com tabelas)","dct"],
     ["Verdades e mentiras","dc"],
     ["Análise combinatória: PFC, arranjo, permutação e combinação","dc"],
-    ["Probabilidade","dc"],
-    ["Casa dos pombos; orientação espacial e temporal","d"]
+    ["Probabilidade","dck"],
+    ["Casa dos pombos; orientação espacial e temporal","d"],
+    ["Noções de direção: norte, sul, leste, oeste, esquerda e direita","k"],
+    ["Estatística: média, moda e mediana","k"]
   ],"RL se aprende fazendo: leia a teoria rápido e vá para questões resolvidas. Monte tabelas e desenhe diagramas no papel sempre."),
-  S("info","Informática","#12B5A5","ct",[
-    ["Windows 10/11: pastas, arquivos, atalhos e Explorador","ct"],
-    ["Área de transferência e atalhos de teclado","ct"],
-    ["Word: formatação, tabelas, quebras, cabeçalho, índices","ct"],
-    ["Excel: células, fórmulas, funções, gráficos, classificação","ct"],
+  S("info","Informática","#12B5A5","ctk",[
+    ["Windows 10/11: pastas, arquivos, atalhos e Explorador","ctk"],
+    ["Área de transferência e atalhos de teclado","ctk"],
+    ["Word: formatação, tabelas, quebras, cabeçalho, índices","ctk"],
+    ["Excel: células, fórmulas, funções, gráficos, classificação","ctk"],
     ["PowerPoint e apresentações","c"],
     ["Microsoft 365: Teams, OneDrive, SharePoint, OneNote","ct"],
-    ["Google Workspace (Docs, Planilhas, Drive)","c"],
-    ["Internet: navegadores, URL, busca e e-mail","ct"],
-    ["Hardware, software e periféricos","c"],
+    ["Google Workspace (Docs, Planilhas, Drive)","ck"],
+    ["Internet: navegadores, URL, busca e e-mail","ctk"],
+    ["Hardware, software e periféricos","ck"],
     ["Redes: internet, intranet, protocolos e nuvem","c"],
-    ["Segurança: malware, golpes, antivírus, firewall e senhas","c"],
-    ["Backup e recuperação de dados","c"],
-    ["Inteligência artificial: conceitos e uso responsável","c"]
-  ],"Não cai no DMAE, vale só 5 pontos em Contagem (5 questões, peso 1), mas são 9 questões no TJSP. Em Contagem estude o essencial; aprofunde de verdade na fase do TJSP. Pratique no computador enquanto estuda."),
-  S("adm","Noções de Administração","#3B82F6","dc",[
-    ["Conceitos, princípios e funções (planejar, organizar, dirigir, controlar)","dc"],
+    ["Segurança: malware, golpes, antivírus, firewall e senhas","ck"],
+    ["Backup e recuperação de dados","ck"],
+    ["Inteligência artificial: conceitos e uso responsável","ck"],
+    ["Linux Ubuntu: noções e comandos básicos","k"],
+    ["E-mail: Outlook, Gmail e Webmail (Zimbra)","k"]
+  ],"Não cai no DMAE, vale 12,5 pontos em Curitiba (5 questões), 5 pontos em Contagem e são 9 questões no TJSP. Curitiba cobra Word e Excel 2016 em português. Pratique no computador enquanto estuda."),
+  S("adm","Noções de Administração","#3B82F6","dck",[
+    ["Conceitos, princípios e funções (planejar, organizar, dirigir, controlar)","dck"],
     ["Teorias da Administração (clássica, burocrática, relações humanas, comportamental)","d"],
-    ["Estrutura organizacional e departamentalização","dc"],
-    ["Gestão de pessoas e recursos humanos","d"],
+    ["Estrutura organizacional e departamentalização","dck"],
+    ["Gestão de pessoas e recursos humanos","dk"],
     ["Rotinas de departamento pessoal","d"],
-    ["Relacionamento interpessoal, ética, motivação, liderança e conflitos","dc"],
-    ["Atendimento ao público: qualidade, acessibilidade, prioritário","dc"],
+    ["Relacionamento interpessoal, ética, motivação, liderança e conflitos","dck"],
+    ["Atendimento ao público: qualidade, acessibilidade, prioritário","dck"],
     ["Almoxarifado: recebimento, armazenagem, estoques e inventário","dc"],
     ["Compras: pesquisa, cotação e gestão de compras","d"],
     ["Finanças: juros, capitalização, descontos, empréstimos","d"],
     ["Noções de contabilidade: princípios, escrituração, demonstrativos","d"],
-    ["Orçamento: tradicional x programa; empenho e liquidação","d"],
-    ["Rotinas administrativas: planejamento, formulários, manuais","c"]
-  ],"No DMAE os Específicos valem 2 pontos por questão (20 dos 50 pontos). É a matéria de maior retorno até novembro — e quase tudo reaproveita em Contagem."),
-  S("arq","Arquivologia e Redação Oficial","#22A06B","dc",[
-    ["Conceitos de arquivo, documento e protocolo","dc"],
-    ["Ciclo de vida: arquivos corrente, intermediário e permanente","dc"],
-    ["Classificação, métodos de arquivamento e tramitação","dc"],
-    ["Conservação, destinação e documentos digitais","dc"],
-    ["Manual de Redação da Presidência: clareza, concisão, formalidade","dc"],
-    ["Pronomes de tratamento e padrão ofício","dc"],
-    ["Tipos de documentos: ofício, ata, requerimento, certidão, portaria, relatório","dc"],
-    ["Técnica legislativa: redação de leis e decretos","d"]
+    ["Orçamento: tradicional x programa; empenho e liquidação","dk"],
+    ["Rotinas administrativas: planejamento, formulários, manuais","ck"],
+    ["Organização do ambiente de trabalho","k"],
+    ["Métodos e técnicas de pesquisa","k"]
+  ],"No DMAE os Específicos valem 2 pontos por questão (20 dos 50 pontos). É a matéria de maior retorno até novembro — e quase tudo reaproveita em Curitiba e Contagem."),
+  S("arq","Arquivologia e Redação Oficial","#22A06B","dck",[
+    ["Conceitos de arquivo, documento e protocolo","dck"],
+    ["Ciclo de vida: arquivos corrente, intermediário e permanente","dck"],
+    ["Classificação, métodos de arquivamento e tramitação","dck"],
+    ["Conservação, destinação e documentos digitais","dck"],
+    ["Manual de Redação da Presidência: clareza, concisão, formalidade","dck"],
+    ["Pronomes de tratamento e padrão ofício","dck"],
+    ["Tipos de documentos: ofício, ata, requerimento, certidão, portaria, relatório","dck"],
+    ["Técnica legislativa: redação de leis e decretos","d"],
+    ["Lei 8.159/1991: política nacional de arquivos","k"],
+    ["Correspondência comercial","k"],
+    ["Sistemas de informação organizacional","k"]
   ],"Matéria curta e muito cobrada em cargos administrativos. O Manual de Redação da Presidência é gratuito no site do Planalto: leia os capítulos de princípios, pronomes e padrão ofício."),
-  S("admpub","Adm. Pública, Licitações e Transparência","#5B6CFF","dct",[
-    ["Princípios da Administração (CF, art. 37 — LIMPE)","dct"],
-    ["Servidores públicos na CF (arts. 37 a 41)","dct"],
-    ["Organização administrativa: direta, indireta, centralização e desconcentração","c"],
-    ["Serviço público e serviços essenciais","d"],
-    ["Lei 14.133/21: princípios, agentes e fases","dc"],
-    ["Lei 14.133/21: modalidades e critérios de julgamento","dc"],
-    ["Lei 14.133/21: contratação direta (dispensa e inexigibilidade)","dc"],
-    ["Lei 14.133/21: contratos, fiscalização e sanções","dc"],
-    ["Lei de Acesso à Informação (12.527/11)","c"],
-    ["LGPD (13.709/18) no setor público","c"]
-  ],"Os arts. 37 a 41 da Constituição caem nos três concursos. A Lei 14.133 é longa: estude por partes e leia a lei seca junto com questões."),
+  S("admpub","Adm. Pública, Licitações e Transparência","#5B6CFF","dctk",[
+    ["Princípios da Administração (CF, art. 37 — LIMPE)","dctk"],
+    ["Servidores públicos na CF (arts. 37 a 41)","dctk"],
+    ["Organização administrativa: direta, indireta, centralização e desconcentração","ck"],
+    ["Serviço público e serviços essenciais","dk"],
+    ["Lei 14.133/21: princípios, agentes e fases","dck"],
+    ["Lei 14.133/21: modalidades e critérios de julgamento","dck"],
+    ["Lei 14.133/21: contratação direta (dispensa e inexigibilidade)","dck"],
+    ["Lei 14.133/21: contratos, fiscalização e sanções","dck"],
+    ["Lei de Acesso à Informação (12.527/11)","ck"],
+    ["LGPD (13.709/18) no setor público","ck"],
+    ["Atos administrativos: requisitos, atributos, anulação e revogação","k"],
+    ["Bens públicos","k"],
+    ["Improbidade administrativa (Lei 8.429/92 com a Lei 14.230/21)","k"],
+    ["Lei 13.460/17: direitos do usuário do serviço público","k"],
+    ["Ética, integridade, transparência e conflito de interesses","k"]
+  ],"Os arts. 37 a 41 da Constituição caem em todos os concursos. A Lei 14.133 é longa: estude por partes e leia a lei seca junto com questões. Para Curitiba, some atos administrativos e bens públicos."),
   S("legdmae","Legislação Uberlândia / DMAE","#0EA5E9","d",[
     ["Lei Orgânica do Município de Uberlândia","d"],
     ["Estatuto dos Servidores (LC 40/1992)","d"],
@@ -494,6 +1035,16 @@ const DEFAULT_SUBJECTS = [
     ["Estrutura administrativa do DMAE (Decreto 20.288/2023)","d"],
     ["Código de Ética do Servidor (Decreto 20.179/2023)","d"]
   ],"São 5 questões e não pode zerar. Leia a lei seca com marca-texto nos prazos, números e proibições — banca municipal adora cobrar detalhe literal."),
+  S("legctba","Legislação Curitiba","#166534","k",[
+    ["Lei Orgânica do Município de Curitiba","k"],
+    ["Estatuto dos Funcionários (Lei 1.656/1958): direitos, deveres e penalidades","k"],
+    ["Estatuto (Lei 1.656/1958): processo administrativo disciplinar","k"],
+    ["Organização Administrativa do Executivo (Lei 7.671/1991)","k"],
+    ["Processo administrativo municipal (Lei 16.466/2024)","k"],
+    ["Prioridade de atendimento (Lei 10.048/2000)","k"],
+    ["ECA: disposições preliminares e direitos fundamentais (arts. 1º a 69)","k"],
+    ["LINDB, arts. 20 a 30","k"]
+  ],"Leis que só caem em Curitiba. Lei seca com marca-texto em prazos, números e penalidades. A Lei 10.048 e a LINDB (arts. 20–30) são curtas: leia inteiras. O Estatuto cai em Legislação e também nos Específicos (PAD)."),
   S("cg","Conhecimentos Gerais e Atualidades","#A3A31F","dct",[
     ["Atualidades 2025–2026: política, economia, sociedade e cultura","dct"],
     ["Uberlândia: história, geografia e economia (IBGE Cidades)","d"],
@@ -509,15 +1060,20 @@ const DEFAULT_SUBJECTS = [
     ["História, geografia e economia de Contagem","c"],
     ["Símbolos municipais e noções de cidadania","c"],
     ["Notícias e atualidades de Contagem (site da Prefeitura)","c"]
-  ],"Deixe para depois do DMAE. Muitos pontos do Estatuto de Contagem se parecem com o de Uberlândia (posse, exercício, estágio probatório, deveres) — compare os dois."),
-  S("dconst","Direito Constitucional","#B45309","t",[
-    ["Direitos e deveres individuais e coletivos (art. 5º)","t"],
-    ["Direitos sociais (arts. 6º a 11)","t"],
-    ["Nacionalidade (arts. 12 e 13)","t"],
-    ["Administração Pública: disposições gerais (arts. 37 e 38)","dct"],
-    ["Servidores públicos (arts. 39 a 41)","dct"],
-    ["Órgãos do Poder Judiciário (art. 92)","t"]
-  ],"Comece o TJSP por aqui: é a porta de entrada do Direito e o art. 37 você já terá visto nos outros concursos."),
+  ],"Deixe para depois de Curitiba. Muitos pontos do Estatuto de Contagem se parecem com os de Uberlândia e Curitiba (posse, exercício, estágio probatório, deveres) — compare."),
+  S("dconst","Direito Constitucional","#B45309","tk",[
+    ["Direitos e deveres individuais e coletivos (art. 5º)","tk"],
+    ["Direitos sociais (arts. 6º a 11)","tk"],
+    ["Nacionalidade (arts. 12 e 13)","tk"],
+    ["Administração Pública: disposições gerais (arts. 37 e 38)","dctk"],
+    ["Servidores públicos (arts. 39 a 41)","dctk"],
+    ["Órgãos do Poder Judiciário (art. 92)","t"],
+    ["Princípios fundamentais (arts. 1º a 4º)","k"],
+    ["Direitos políticos e partidos (arts. 14 a 17)","k"],
+    ["Organização do Estado (arts. 18, 19, 29 e 30)","k"],
+    ["Poder Legislativo (arts. 44 a 75)","k"],
+    ["Poder constituinte, normas constitucionais, hierarquia e interpretação","k"]
+  ],"Em Curitiba a Constituição cai em Legislação e nos Específicos: é aqui que você começa o Direito. Depois reaproveita quase tudo no TJSP."),
   S("dadm","Direito Administrativo (SP)","#7C3AED","t",[
     ["Estatuto dos Funcionários de SP (Lei 10.261/68), arts. 1º a 86","t"],
     ["Lei 10.261/68, arts. 171 a 175","t"],
@@ -562,60 +1118,75 @@ const DEFAULT_SUBJECTS = [
     ["Critérios da VUNESP e motivos de nota zero","t"],
     ["Treino: 1 redação por semana, corrigida","t"]
   ],"Eliminatória: precisa de 20/40. Escreva à mão, com tempo marcado, e peça correção sempre que puder."),
-  S("rev","Revisão, questões e simulados","#475569","dct",[
-    ["Caderno de erros atualizado","dct"],
+  S("rev","Revisão, questões e simulados","#475569","dctk",[
+    ["Caderno de erros atualizado","dctk"],
     ["Simulado de prova anterior da Fundep","d"],
     ["Simulado de prova anterior do IBGP","c"],
-    ["Simulado de prova anterior da VUNESP","t"]
+    ["Simulado de prova anterior da VUNESP","t"],
+    ["Simulado de prova anterior da FAFIPA","k"]
   ],"Use esta matéria no cronômetro quando fizer questões misturadas, simulados ou revisão do caderno de erros.")
 ];
 
-/* ---------------- Rotinas sugeridas por fase (0=Dom … 6=Sáb) ---------------- */
+/* ---------------- Rotinas sugeridas por fase (0=Dom … 6=Sáb) ----------------
+   Os números das fases são internos: 1 = DMAE, 4 = Curitiba, 2 = Contagem, 3 = TJSP */
 const B=(s,m)=>({s,m});
 const ROUTINES = {
   1:{0:[B("rev",60),B("cg",60)],1:[B("port",60),B("adm",60),B("mat",60)],2:[B("arq",60),B("rl",60),B("legdmae",60)],3:[B("port",60),B("admpub",60),B("mat",60)],4:[B("adm",60),B("legdmae",45),B("cg",45)],5:[B("port",60),B("admpub",60),B("rl",60)],6:[B("rev",120),B("adm",60),B("legdmae",60)]},
+  4:{0:[B("rev",60),B("legctba",60)],1:[B("admpub",60),B("port",60),B("info",60)],2:[B("dconst",60),B("mat",60),B("arq",60)],3:[B("admpub",60),B("legctba",60),B("info",45)],4:[B("adm",60),B("dconst",60),B("rl",45)],5:[B("port",45),B("admpub",60),B("legctba",45)],6:[B("rev",120),B("admpub",60),B("info",60)]},
   2:{0:[B("rev",60),B("info",30),B("ctg",30)],1:[B("adm",60),B("port",60),B("admpub",60)],2:[B("arq",60),B("rl",60),B("admpub",60)],3:[B("port",60),B("adm",60),B("admpub",60)],4:[B("adm",60),B("ctg",60),B("info",45)],5:[B("port",45),B("arq",60),B("dconst",45)],6:[B("rev",120),B("adm",60)]},
   3:{0:[B("rev",60),B("normas",45)],1:[B("dconst",60),B("port",60),B("info",45)],2:[B("dadm",60),B("dpenal",60),B("rl",45)],3:[B("port",60),B("dpc",60),B("mat",45)],4:[B("dpp",60),B("normas",60),B("info",45)],5:[B("dconst",45),B("dpc",60),B("cg",30)],6:[B("rev",120),B("red",60)]}
 };
 
-/* ---------------- Guia: fases ---------------- */
+/* ---------------- Guia: fases (na ordem em que acontecem) ----------------
+   "n" é o número interno (usado nas marcações salvas); "lbl" é o que aparece na tela.
+   Itens novos de uma semana entram no fim da lista, para não mudar as marcações. */
 const PHASES = [
-  {n:1, title:"Fase 1 — Foco total no DMAE", range:"21/09 a 01/11/2026 · 6 semanas",
-   intro:"Prova em 01/11. Critério: não zerar nenhuma disciplina e fazer ao menos 25 dos 50 pontos. Os Conhecimentos Específicos valem 20 pontos — é onde você mais ganha. Tudo de Português, Administração e Arquivo reaproveita em Contagem.",
+  {n:1, lbl:"Fase 1", title:"Fase 1 — Foco total no DMAE", range:"21/09 a 01/11/2026 · 6 semanas",
+   intro:"Prova em 01/11. Critério: não zerar nenhuma disciplina e fazer ao menos 25 dos 50 pontos. Os Conhecimentos Específicos valem 20 pontos — é onde você mais ganha. Tudo de Português, Administração e Arquivo reaproveita em Curitiba e Contagem.",
    weeks:[
     {t:"Semana 1 · 21 a 27/09", items:["Português: interpretação de texto e classes de palavras","Administração: conceitos, funções e teorias","Arquivo: conceitos e as três idades","Matemática: frações, decimais e porcentagem","Legislação: Código de Ética (Decreto 20.179/2023)","Baixar uma prova antiga da Fundep de nível médio e só olhar como ela é"]},
     {t:"Semana 2 · 28/09 a 04/10", items:["Português: concordância e pontuação","Administração: gestão de pessoas, RH e atendimento","Redação oficial: Manual da Presidência (princípios, pronomes, padrão ofício)","Matemática: razão, proporção e regra de três","Legislação: Estatuto LC 40/1992 (provimento, posse, exercício, estágio)"]},
-    {t:"Semana 3 · 05 a 11/10", items:["Português: crase e regência","Administração: almoxarifado, estoques e compras","Adm. Pública: CF arts. 37 a 41","Matemática: juros simples e compostos; conjuntos","Raciocínio lógico: proposições e conectivos","Legislação: Estatuto (direitos, deveres, penalidades) e Plano de Carreira do DMAE"]},
+    {t:"Semana 3 · 05 a 11/10", items:["Português: crase e regência","Administração: almoxarifado, estoques e compras","Adm. Pública: CF arts. 37 a 41","Matemática: juros simples e compostos; conjuntos","Raciocínio lógico: proposições e conectivos","Legislação: Estatuto (direitos, deveres, penalidades) e Plano de Carreira do DMAE","Curitiba: fazer a inscrição (abre 07/10); pedido de isenção só até 13/10"]},
     {t:"Semana 4 · 12 a 18/10", items:["Português: colocação pronominal, ortografia e acentuação","Administração: finanças, contabilidade e orçamento","Lei 14.133: princípios, modalidades e contratação direta","Raciocínio lógico: sequências e verdades/mentiras","Conhecimentos gerais: Uberlândia (história, geografia, IBGE)","Legislação: Lei Orgânica de Uberlândia","Primeiro simulado cronometrado (3h30)"]},
     {t:"Semana 5 · 19 a 25/10", items:["Português: sintaxe, período composto, formação de palavras e variação","Lei 14.133: contratos, fiscalização e sanções","Matemática: estatística, PA/PG, combinatória e probabilidade","Legislação: LC 751/2023 e Decreto 20.288/2023 (estrutura do DMAE)","Conhecimentos gerais: atualidades, Minas Gerais e temas do século XXI","Segundo simulado + revisão do caderno de erros"]},
-    {t:"Semana 6 · 26/10 a 01/11 (prova)", items:["Só revisão: resumos, caderno de erros e lei seca da legislação municipal","Um último simulado até quarta-feira","Conferir local de prova no Cartão de Convocação (Fundep)","Sábado leve e dormir cedo; levar documento com foto e caneta preta"]}
+    {t:"Semana 6 · 26/10 a 01/11 (prova)", items:["Só revisão: resumos, caderno de erros e lei seca da legislação municipal","Um último simulado até quarta-feira","Conferir local de prova no Cartão de Convocação (Fundep)","Sábado leve e dormir cedo; levar documento com foto e caneta preta","Curitiba: pagar a taxa de inscrição até 06/11 (inscrições vão até 05/11)"]}
    ]},
-  {n:2, title:"Fase 2 — Contagem (Assistente Administrativo)", range:"02/11/2026 a 24/01/2027 · 12 semanas",
-   intro:"Prova em 24/01/2027: 45 questões, 100 pontos. Os Conhecimentos Específicos são 20 questões com peso 3 = 60 pontos. Português (10 × peso 2 = 20), Raciocínio Lógico (5 × 2 = 10), Informática (5 × 1) e Conhecimentos do Município (5 × 1) completam. Então: ~60% do tempo em Específicos, ~20% em Português e o resto dividido. Você chega do DMAE com boa parte dos Específicos já vista.",
+  {n:4, lbl:"Fase 2", title:"Fase 2 — Prefeitura de Curitiba (Agente Administrativo)", range:"02/11 a 13/12/2026 · 6 semanas",
+   intro:"Prova em 13/12, em Curitiba: 40 questões de 2,5 pontos cada. Os Conhecimentos Específicos valem 50 dos 100 pontos; para passar, 60 pontos no total, sem mínimo por matéria. Você chega do DMAE com Português, Administração, Arquivo, 14.133 e art. 37 já vistos — o trabalho novo é Direito Administrativo (atos, bens, serviços), Constitucional, Informática e as leis de Curitiba. O resumo completo está na aba “Edital de Curitiba”.",
    weeks:[
-    {t:"Bloco A · 02/11 a 29/11", items:["Específicos: Adm. Pública — princípios, organização administrativa (direta, indireta, desconcentração)","Específicos: LAI (12.527/11) e LGPD (13.709/18)","Específicos: rotinas administrativas, atendimento ao cidadão, ética e relações no trabalho","Português: revisar tudo por questões do IBGP","Raciocínio lógico: tabelas-verdade, negação, equivalências e quantificadores","Contagem: Lei Orgânica","Informática (leve): Windows, Word e Excel","TJSP (semente): CF art. 5º, 45 min por semana"]},
-    {t:"Bloco B · 30/11 a 03/01", items:["Específicos: Lei 14.133 completa (revisão aprofundada + questões do IBGP)","Específicos: gestão de documentos e arquivos, redação oficial","Específicos: almoxarifado, estoques e inventário","Contagem: Estatuto (Lei 2.160/1990) e PCCS (LC 105/2011)","Raciocínio lógico: combinatória, probabilidade e conjuntos","Informática (leve): internet, segurança, backup, nuvem e IA","Contagem: história, geografia, economia e símbolos"]},
-    {t:"Bloco C · 04/01 a 24/01 (prova)", items:["Um simulado do IBGP por semana, cronometrado","Revisão dos Específicos pelo caderno de erros","Notícias recentes de Contagem no site da Prefeitura","Última semana só revisão; conferir local de prova"]}
+    {t:"Semana 1 · 02 a 08/11", items:["Direito Administrativo: atos administrativos (requisitos, atributos, anulação e revogação)","Constitucional: arts. 1º a 5º","Informática: Windows 10/11, gerenciamento de arquivos e atalhos","Legislação: Estatuto de Curitiba (Lei 1.656/58) — provimento, posse e exercício","Português: porquês, concordância e pontuação","Confirmar o pagamento da inscrição (até 06/11)"]},
+    {t:"Semana 2 · 09 a 15/11", items:["Direito Administrativo: bens públicos e serviços públicos","Constitucional: arts. 6º a 17, poder constituinte e normas constitucionais","Informática: Word e Excel 2016 em português (atalhos, SOMA, MÉDIA, SE)","Legislação: Lei Orgânica de Curitiba","Raciocínio lógico: porcentagem, juros simples e regra de três"]},
+    {t:"Semana 3 · 16 a 22/11", items:["Processo administrativo: Lei municipal 16.466/24 e PAD no Estatuto (Lei 1.656/58)","Ética, atendimento e Lei 13.460/17 (direitos do usuário)","Legislação: Lei 7.671/91, LAI e prioridade de atendimento (Lei 10.048/00)","Informática: segurança, e-mail, Google Drive e IA generativa","Raciocínio lógico: média, moda, mediana, gráficos e probabilidade"]},
+    {t:"Semana 4 · 23 a 29/11", items:["Revisar 14.133 e improbidade (8.429 com 14.230) por questões","Arquivo: Lei 8.159/91; redação oficial e correspondência comercial","Orçamento público e gestão de pessoas","Legislação: LGPD cap. IV, ECA (arts. 1º a 69) e LINDB (arts. 20 a 30)","Primeiro simulado cronometrado (4h, 40 questões)"]},
+    {t:"Semana 5 · 30/11 a 06/12", items:["Raciocínio lógico: geometria (Tales, circunferência, áreas) e sequências","Informática: Linux Ubuntu e navegadores","CF arts. 18, 19, 29, 30 e 44 a 75","Português: literatura brasileira e figuras de linguagem","Segundo simulado + caderno de erros","Ver local e horário da prova (sai em 03/12) e planejar a viagem"]},
+    {t:"Semana 6 · 07 a 13/12 (prova)", items:["Só revisão: Específicos, lei seca de Curitiba e caderno de erros","Refazer as questões erradas da aba Questões FAFIPA","Viajar com antecedência; levar documento com foto e caneta preta","Sábado leve e dormir cedo"]}
    ]},
-  {n:3, title:"Fase 3 — TJSP (Escrevente, interior)", range:"Depois de Contagem, até o edital do interior",
+  {n:2, lbl:"Fase 3", title:"Fase 3 — Contagem (Assistente Administrativo)", range:"14/12/2026 a 24/01/2027 · 6 semanas",
+   intro:"Prova em 24/01/2027: 45 questões, 100 pontos. Os Conhecimentos Específicos são 20 questões com peso 3 = 60 pontos. Português (10 × peso 2 = 20), Raciocínio Lógico (5 × 2 = 10), Informática (5 × 1) e Conhecimentos do Município (5 × 1) completam. Depois de Curitiba, boa parte dos Específicos (14.133, LAI, LGPD, arquivo, Adm. Pública) já estará vista: o foco é revisar no estilo do IBGP e cobrir o que é só de Contagem.",
+   weeks:[
+    {t:"Bloco A · 14/12 a 03/01", items:["Contagem: Lei Orgânica, Estatuto (Lei 2.160/1990) e PCCS (LC 105/2011)","Contagem: história, geografia, economia e símbolos","Específicos: almoxarifado, estoques, inventário e rotinas administrativas","Específicos: revisar 14.133, LAI, LGPD e arquivo com questões do IBGP","Raciocínio lógico: tabelas-verdade, negação, equivalências e quantificadores","Informática: PowerPoint, Microsoft 365 e redes","TJSP (semente): CF art. 5º, 45 min por semana"]},
+    {t:"Bloco B · 04/01 a 24/01 (prova)", items:["Um simulado do IBGP por semana, cronometrado","Revisão dos Específicos pelo caderno de erros","Notícias recentes de Contagem no site da Prefeitura","Última semana só revisão; conferir local de prova"]}
+   ]},
+  {n:3, lbl:"Fase 4", title:"Fase 4 — TJSP (Escrevente, interior)", range:"Depois de Contagem, até o edital do interior",
    intro:"O edital que você mandou é o da Capital/1ª RAJ (2025). O do interior costuma seguir a mesma estrutura, mas confira quando sair. São 70 questões: Português 16, Direito 30, Conhecimentos Gerais 24. Blocos I e II exigem 50% de acertos cada, e a redação precisa de 20/40.",
    weeks:[
     {t:"Ordem sugerida do Direito", items:["Constitucional: arts. 5º a 13, 37 a 41 e 92","Administrativo: Estatuto de SP (10.261/68) e Improbidade (8.429/92)","Penal: crimes contra a fé pública e a Administração","Processo Penal: citações, intimações, procedimentos e recursos","Processo Civil: atos processuais e prazos primeiro, depois o resto","Juizados: Leis 9.099/95 e 12.153/09","Normas internas: resoluções, LC 1.111/2010, Regimento e NSCGJ"]},
     {t:"Em paralelo, toda semana", items:["1 redação dissertativo-argumentativa com tempo marcado","Questões da VUNESP de Português (estilo diferente da Fundep e do IBGP)","Informática: Microsoft 365 e Teams","Atualidades a partir de 2025 e arts. 1–13 e 34–38 da Lei 13.146/2015"]}
    ]}
 ];
+const phaseByN=n=>PHASES.find(p=>p.n===+n)||PHASES[0];
 
 const OVERLAP = [
-  ["Língua Portuguesa","10 questões (10 pts)","10 questões × peso 2 (20 pts)","16 questões (desempate)"],
-  ["Matemática","10 questões junto com RL","dentro de RL","4 questões"],
-  ["Raciocínio Lógico","junto com Matemática","5 questões × peso 2 (10 pts)","7 questões"],
-  ["Informática","—","5 questões × peso 1 (5 pts)","9 questões"],
-  ["Administração, arquivo e redação oficial","Específicos: 10 × 2 pts","Específicos: 20 × peso 3 (60 pts)","—"],
-  ["Adm. Pública e Licitações (14.133)","dentro dos Específicos","dentro dos Específicos","CF arts. 37–41 dentro de Direito"],
-  ["Legislação municipal","5 questões (Uberlândia/DMAE)","dentro de Conhec. do Município","—"],
-  ["Conhecimentos gerais / atualidades","5 questões","Conhec. do Município: 5 × peso 1 (5 pts)","4 questões"],
-  ["Direito (6 áreas + normas)","—","—","30 questões"],
-  ["Redação","— (só nível superior)","não aparece no quadro da prova objetiva","Eliminatória, mínimo 20/40"]
+  ["Língua Portuguesa","10 questões (10 pts)","5 questões (12,5 pts)","10 questões × peso 2 (20 pts)","16 questões (desempate)"],
+  ["Matemática","10 questões junto com RL","dentro de RL","dentro de RL","4 questões"],
+  ["Raciocínio Lógico","junto com Matemática","5 questões (12,5 pts)","5 questões × peso 2 (10 pts)","7 questões"],
+  ["Informática","—","5 questões (12,5 pts)","5 questões × peso 1 (5 pts)","9 questões"],
+  ["Administração, arquivo e redação oficial","Específicos: 10 × 2 pts","Específicos: 20 × 2,5 pts (50 pts)","Específicos: 20 × peso 3 (60 pts)","—"],
+  ["Adm. Pública e Licitações (14.133)","dentro dos Específicos","dentro dos Específicos (+ atos, bens, improbidade)","dentro dos Específicos","CF arts. 37–41 dentro de Direito"],
+  ["Legislação municipal","5 questões (Uberlândia/DMAE)","Legislação: 5 questões (Curitiba + CF + leis federais)","dentro de Conhec. do Município","—"],
+  ["Conhecimentos gerais / atualidades","5 questões","—","Conhec. do Município: 5 × peso 1 (5 pts)","4 questões"],
+  ["Direito","—","Constitucional e Administrativo nos Específicos","—","30 questões (6 áreas + normas)"],
+  ["Redação","— (só nível superior)","—","não aparece no quadro da prova objetiva","Eliminatória, mínimo 20/40"]
 ];
 
 const METHOD = `
@@ -631,7 +1202,7 @@ const METHOD = `
 <h3>Lei seca</h3>
 <p class="prose">Legislação municipal, Lei 14.133, LAI, LGPD e as leis do TJSP se estudam lendo o texto da lei (no site da Câmara, Planalto ou Leis Municipais), com marca-texto em prazos, números, “vedado”, “exceto” e “salvo”. Bancas copiam frases da lei e trocam uma palavra.</p>
 <h3>Simulados</h3>
-<p class="prose">A partir da semana 4 do DMAE, faça provas anteriores inteiras com o tempo real. Provas da Fundep ficam em gestaodeconcursos.com.br; da VUNESP em vunesp.com.br; do IBGP no site da banca. Bancos de questões (como QConcursos ou TEC) permitem filtrar por banca e assunto.</p>
+<p class="prose">A partir da semana 4 de cada fase, faça provas anteriores inteiras com o tempo real. Provas da Fundep ficam em gestaodeconcursos.com.br; da FAFIPA em fundacaofafipa.org.br; da VUNESP em vunesp.com.br; do IBGP no site da banca. Bancos de questões (como QConcursos ou TEC) permitem filtrar por banca e assunto.</p>
 <h3>Para quem está começando</h3>
 <ul class="prose">
 <li>Constância ganha de maratona: 2h todo dia rendem mais que 8h no domingo.</li>
@@ -740,20 +1311,22 @@ async function saveMonth(ym){
    ====================================================================== */
 let U=null;          // documento do usuário
 let MONTHS={};       // "AAAA-MM" -> [sessões]
-const UI={view:"inicio",calYear:new Date().getFullYear(),calMonth:new Date().getMonth(),subjFilter:"all",guideTab:"mapa",openSubj:null};
+const UI={view:"inicio",calYear:new Date().getFullYear(),calMonth:new Date().getMonth(),subjFilter:"all",guideTab:"mapa",openSubj:null,qf:"all"};
 
 function defaultUser(){
   return {v:1,profile:{name:"",photo:"",phrases:DEFAULT_PHRASES.slice()},
     settings:{goalMin:180,theme:"auto",avail:{0:120,1:180,2:180,3:180,4:180,5:180,6:240},blockMin:60,autoReorg:true,focus:"auto"},
-    exams:{dmae:"2026-11-01",contagem:"2027-01-24",tjsp:""},
+    exams:{dmae:"2026-11-01",curitiba:"2026-12-13",contagem:"2027-01-24",tjsp:""},
     routine:JSON.parse(JSON.stringify(ROUTINES[1])),
-    topics:{},guide:{},customSubjects:[],running:null,months:[]};
+    topics:{},guide:{},customSubjects:[],running:null,months:[],
+    cur:{calc:null,ans:{},seen:{}}};
 }
 function subjects(){return DEFAULT_SUBJECTS.concat((U.customSubjects||[]).map(c=>({...c,topics:(c.topics||[]).map(t=>[t,c.ex]),custom:true})))}
 function subjById(id){return subjects().find(s=>s.id===id)||{id,name:"Matéria removida",color:"#999",ex:"",topics:[]}}
 function currentPhase(){
   const t=todayStr();
   if(U.exams.dmae&&t<=U.exams.dmae)return 1;
+  if(U.exams.curitiba&&t<=U.exams.curitiba)return 4;
   if(!U.exams.contagem||t<=U.exams.contagem)return 2;
   return 3;
 }
@@ -887,7 +1460,7 @@ function viewHome(){
   const goal=(U.settings.goalMin||180)*60;
   const wd=new Date().getDay(), plan=U.routine[wd]||[];
   const planned={};plan.forEach(b=>planned[b.s]=(planned[b.s]||0)+b.m*60);
-  const ph=currentPhase();
+  const ph=currentPhase(), PH=phaseByN(ph);
 
   // semana (seg a dom)
   const now=new Date(), monday=new Date(now);monday.setDate(now.getDate()-((now.getDay()+6)%7));
@@ -897,7 +1470,7 @@ function viewHome(){
   const monthKey=today.slice(0,7);
   const mTotal=(MONTHS[monthKey]||[]).reduce((a,s)=>a+s.sec,0);
 
-  const cds=[["d",U.exams.dmae],["c",U.exams.contagem],["t",U.exams.tjsp]].map(([k,dt])=>{
+  const cds=[["d",U.exams.dmae],["k",U.exams.curitiba],["c",U.exams.contagem],["t",U.exams.tjsp]].map(([k,dt])=>{
     const n=daysUntil(dt);
     if(n===null)return `<span class="cd"><span>${EX_SHORT[k]}</span><span class="small muted">data a definir</span></span>`;
     if(n<0)return `<span class="cd"><span>${EX_SHORT[k]}</span><span class="small muted">prova realizada</span></span>`;
@@ -940,8 +1513,9 @@ function viewHome(){
       </div>
       <div class="card">
         <h3>Onde você está</h3>
-        <p><b>${PHASES[ph-1].title}</b><br><span class="muted small">${PHASES[ph-1].range}</span></p>
-        <a class="btn sm" href="#guia">Abrir o guia desta fase</a>
+        <p><b>${esc(PH.title)}</b><br><span class="muted small">${esc(PH.range)}</span></p>
+        <div class="row"><a class="btn sm" href="#guia" data-act="gotab" data-t="fases">Abrir o guia desta fase</a>
+        <a class="btn sm ghost" href="#guia" data-act="gotab" data-t="curitiba">Edital de Curitiba</a></div>
       </div>
     </div>
   </div>`;
@@ -1081,7 +1655,7 @@ function viewSubj(){
   return `
   <div class="view-head"><h1>Matérias</h1><span class="spacer"></span><button class="btn sm" data-act="newsubj">+ Nova matéria</button></div>
   <div class="row" style="margin-bottom:14px">
-    <div class="chips">${[["all","Todas"],["d","DMAE"],["c","Contagem"],["t","TJSP"]].map(([k,l])=>`<button class="chip ${f===k?"on":""}" data-act="sfilter" data-f="${k}">${l}</button>`).join("")}</div>
+    <div class="chips">${[["all","Todas"],["d","DMAE"],["k","Curitiba"],["c","Contagem"],["t","TJSP"]].map(([k,l])=>`<button class="chip ${f===k?"on":""}" data-act="sfilter" data-f="${k}">${l}</button>`).join("")}</div>
   </div>
   <div class="card" style="margin-bottom:16px">
     <div class="row"><b style="font-family:var(--f-ui)">${all.a} de ${all.n} assuntos estudados</b><span class="muted small">· ${all.b} revisados</span></div>
@@ -1110,10 +1684,11 @@ function viewSubj(){
    (mas não revisado) ainda recebe um pouco; matéria toda revisada fica com ~25% do peso. */
 const EXAM_WEIGHTS={
   d:{port:10,rl:3.5,mat:5,matav:1.5,cg:5,legdmae:5,adm:8,arq:5,admpub:7},
+  k:{port:12.5,rl:6,mat:6.5,info:12.5,legctba:8,dconst:12,admpub:20,adm:12,arq:10},
   c:{port:20,rl:7,mat:3,info:5,ctg:5,adm:24,arq:14,admpub:22},
   t:{port:16,dconst:6,dadm:4,dpenal:4,dpp:5,dpc:7,normas:4,info:9,rl:7,mat:4,cg:4,red:6}
 };
-const PHASE_EXAM={1:"d",2:"c",3:"t"};
+const PHASE_EXAM={1:"d",4:"k",2:"c",3:"t"};
 function focusExam(){const f=U.settings.focus;return f&&f!=="auto"?f:PHASE_EXAM[currentPhase()]}
 function remainingInfo(s,ex){
   const idx=s.topics.map((_,i)=>i).filter(i=>s.topics[i][1].includes(ex));
@@ -1193,7 +1768,7 @@ function viewRoutine(){
     <div class="avail">${order.map(d=>`<label>${WD[d]}<select data-avail="${d}">${hoursOpts.map(m=>`<option value="${m}" ${(+st.avail[d]||0)===m?"selected":""}>${m?fmtHM(m*60):"folga"}</option>`).join("")}</select></label>`).join("")}</div>
     <div class="row" style="gap:14px 18px; margin-bottom:12px">
       <label class="row small" style="gap:6px"><span class="muted">Foco</span>
-        <select id="rFocus" style="width:auto">${[["auto",`Automático (${EX_SHORT[PHASE_EXAM[currentPhase()]]})`],["d","DMAE"],["c","Contagem"],["t","TJSP"]].map(([v,l])=>`<option value="${v}" ${st.focus===v?"selected":""}>${l}</option>`).join("")}</select></label>
+        <select id="rFocus" style="width:auto">${[["auto",`Automático (${EX_SHORT[PHASE_EXAM[currentPhase()]]})`],["d","DMAE"],["k","Curitiba"],["c","Contagem"],["t","TJSP"]].map(([v,l])=>`<option value="${v}" ${st.focus===v?"selected":""}>${l}</option>`).join("")}</select></label>
       <span class="row small" style="gap:6px"><span class="muted">Blocos de</span>
         <span class="segmented">${[45,60,90].map(v=>`<button data-act="blocklen" data-v="${v}" class="${(st.blockMin||60)===v?"on":""}">${v} min</button>`).join("")}</span></span>
       <label class="chk small" style="padding:0"><input type="checkbox" id="rAuto" ${st.autoReorg?"checked":""}><span>Reorganizar sozinho quando eu mudar o tempo disponível</span></label>
@@ -1218,7 +1793,7 @@ function viewRoutine(){
     <button class="btn sm ghost" style="width:100%;justify-content:center" data-act="addblk" data-d="${d}">+ bloco</button></div>`}).join("")}</div>
   <div class="card" style="margin-top:16px">
     <div class="row"><span class="small muted">Ou carregue uma rotina pronta:</span>
-    ${PHASES.map(p=>`<button class="btn sm" data-act="loadroutine" data-p="${p.n}">Fase ${p.n}</button>`).join("")}
+    ${PHASES.map(p=>`<button class="btn sm" data-act="loadroutine" data-p="${p.n}" title="${esc(p.title)}">${p.lbl}</button>`).join("")}
     <span class="small muted">Dica: clique no nome de um bloco para trocar a matéria, o tempo ou o dia.</span></div>
   </div>`;
 }
@@ -1226,20 +1801,21 @@ function viewRoutine(){
 /* ---------- Guia ---------- */
 function viewGuide(){
   const tab=UI.guideTab, ph=currentPhase();
-  const tabs=[["mapa","Mapa dos concursos"],["fases","Plano por fases"],["metodo","Como estudar"],["concursos","Detalhes das provas"]];
+  const tabs=[["mapa","Mapa dos concursos"],["fases","Plano por fases"],["curitiba","Edital de Curitiba"],["questoes","Questões FAFIPA"],["metodo","Como estudar"],["concursos","Detalhes das provas"]];
   let body="";
   if(tab==="mapa"){
-    body=`<div class="card"><h2>O que se repete entre os três</h2>
-    <p class="prose muted">Estudar pelo que se repete é o atalho: Português, Raciocínio Lógico, Administração/Arquivo e Adm. Pública servem a mais de um concurso. A ordem de prioridade é DMAE → Contagem → TJSP.</p>
-    <div class="tbl-wrap"><table class="map"><thead><tr><th>Matéria</th><th>DMAE · 01/11/2026</th><th>Contagem · 24/01/2027</th><th>TJSP · a definir</th></tr></thead>
+    body=`<div class="card"><h2>O que se repete entre os concursos</h2>
+    <p class="prose muted">Estudar pelo que se repete é o atalho: Português, Raciocínio Lógico, Administração/Arquivo e Adm. Pública servem a mais de um concurso. A ordem de prioridade é DMAE → Curitiba → Contagem → TJSP.</p>
+    <div class="tbl-wrap"><table class="map"><thead><tr><th>Matéria</th><th>DMAE · 01/11/2026</th><th>Curitiba · 13/12/2026</th><th>Contagem · 24/01/2027</th><th>TJSP · a definir</th></tr></thead>
     <tbody>${OVERLAP.map(r=>`<tr>${r.map((c,i)=>i?`<td>${esc(c)}</td>`:`<th scope="row" style="background:transparent">${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div></div>
     <div class="card" style="margin-top:16px"><h2>Prioridade de estudo agora</h2>
     <ol class="prose">
-      <li><b>Conhecimentos Específicos do DMAE</b> (Administração, Arquivo, Redação Oficial, 14.133): 20 dos 50 pontos e reaproveita em Contagem.</li>
-      <li><b>Português</b>: cai nos três.</li>
+      <li><b>Conhecimentos Específicos do DMAE</b> (Administração, Arquivo, Redação Oficial, 14.133): 20 dos 50 pontos e reaproveita em Curitiba e Contagem.</li>
+      <li><b>Português</b>: cai em todos.</li>
       <li><b>Legislação Uberlândia/DMAE</b>: 5 questões, não pode zerar, conteúdo fechado.</li>
       <li><b>Matemática e Raciocínio Lógico</b>: foque no básico (porcentagem, regra de três, juros, lógica); a matemática avançada fica por último.</li>
       <li><b>Conhecimentos gerais</b>: 15–20 min por dia de notícias + Uberlândia/MG.</li>
+      <li><b>Curitiba</b>: não esqueça da inscrição (07/10 a 05/11). Depois do DMAE, o foco vira Direito Administrativo, Constitucional e Informática.</li>
     </ol></div>`;
   }else if(tab==="fases"){
     body=PHASES.map(p=>`<section class="phase ${p.n===ph?"now":""}"><h2>${esc(p.title)}${p.n===ph?`<span class="pill-now">você está aqui</span>`:""}<small>${esc(p.range)}</small></h2>
@@ -1248,7 +1824,11 @@ function viewGuide(){
         return `<div class="card wk"><div class="row"><h3 style="margin:0">${esc(w.t)}</h3><span class="spacer"></span><span class="small muted">${done}/${ids.length}</span></div>
         <div class="prog" style="margin:8px 0 6px;height:6px"><span style="width:${done/ids.length*100}%"></span></div>
         ${w.items.map((it,ii)=>{const id=ids[ii];return `<label class="chk ${U.guide[id]?"done":""}"><input type="checkbox" data-act="gchk" data-id="${id}" ${U.guide[id]?"checked":""}><span>${esc(it)}</span></label>`}).join("")}</div>`}).join("")}
-      <button class="btn sm" data-act="loadroutine" data-p="${p.n}">Usar a rotina sugerida da Fase ${p.n}</button></section>`).join("");
+      <button class="btn sm" data-act="loadroutine" data-p="${p.n}">Usar a rotina sugerida da ${p.lbl}</button></section>`).join("");
+  }else if(tab==="curitiba"){
+    body=CurMod.edital(U.cur,{prova:U.exams.curitiba||"2026-12-13",app:true});
+  }else if(tab==="questoes"){
+    body=CurMod.quiz(U.cur,UI);
   }else if(tab==="metodo"){
     body=`<div class="card">${METHOD}</div>`;
   }else{
@@ -1260,6 +1840,14 @@ function viewGuide(){
       <li>Sem redação para nível médio.</li>
       <li>10 vagas (7 ampla concorrência) · R$ 3.968,08 · 40h semanais.</li>
       <li>Provas anteriores e cartão de convocação: gestaodeconcursos.com.br</li></ul></div>
+    <div class="card"><h2>Prefeitura de Curitiba</h2><p class="muted">Agente Administrativo · banca FAFIPA · Edital nº 4/2026</p>
+      <ul class="prose"><li>Prova objetiva em <b>13/12/2026</b>, em Curitiba, com 4 horas de duração.</li>
+      <li>40 questões de 2,5 pontos: Português 5, Raciocínio Lógico 5, Informática 5, Legislação 5 e <b>Específicos 20 (50 pontos)</b>.</li>
+      <li>Aprovação: <b>60 pontos no total</b>, sem mínimo por matéria.</li>
+      <li>202 vagas de ampla concorrência + 13 PcD + 35 PPI · R$ 3.027,73 · 40h semanais.</li>
+      <li>Inscrições de 07/10 a 05/11 (taxa R$ 100, pagar até 06/11); isenção de 07 a 13/10.</li>
+      <li>Site: fundacaofafipa.org.br</li></ul>
+      <button class="btn sm" data-act="gotab" data-t="curitiba">Ver o resumo completo</button></div>
     <div class="card"><h2>Prefeitura de Contagem</h2><p class="muted">Assistente Administrativo · banca IBGP</p>
       <ul class="prose"><li>Prova em <b>24/01/2027</b>.</li>
       <li>45 questões, 100 pontos: Português 10 (peso 2), Raciocínio Lógico 5 (peso 2), Informática 5 (peso 1), Conhecimentos Gerais do Município 5 (peso 1) e <b>Conhecimentos Específicos 20 (peso 3 = 60 pontos)</b>.</li>
@@ -1272,7 +1860,7 @@ function viewGuide(){
       <li>Nota final mínima 5/10; redação eliminatória com mínimo 20/40.</li>
       <li>O edital enviado é da Capital/1ª RAJ (2025). Confira o do interior quando sair.</li></ul></div>
     <div class="card"><h2>Datas no seu contador</h2>
-      <p class="prose">DMAE: ${U.exams.dmae?fmtDateLong(U.exams.dmae):"a definir"}<br>Contagem: ${U.exams.contagem?fmtDateLong(U.exams.contagem):"a definir"}<br>TJSP: ${U.exams.tjsp?fmtDateLong(U.exams.tjsp):"a definir"}</p>
+      <p class="prose">DMAE: ${U.exams.dmae?fmtDateLong(U.exams.dmae):"a definir"}<br>Curitiba: ${U.exams.curitiba?fmtDateLong(U.exams.curitiba):"a definir"}<br>Contagem: ${U.exams.contagem?fmtDateLong(U.exams.contagem):"a definir"}<br>TJSP: ${U.exams.tjsp?fmtDateLong(U.exams.tjsp):"a definir"}</p>
       <a class="btn sm" href="#perfil">Editar datas</a></div></div>`;
   }
   return `<div class="view-head"><h1>Guia de estudos</h1></div>
@@ -1300,7 +1888,7 @@ function viewProfile(){
         <div class="field"><label for="sTheme">Tema</label><select id="sTheme">${[["auto","Automático (segue o aparelho)"],["light","Claro"],["dark","Escuro"]].map(([v,l])=>`<option value="${v}" ${U.settings.theme===v?"selected":""}>${l}</option>`).join("")}</select></div>
       </div>
       <div class="card"><h3>Datas das provas</h3>
-        ${[["dmae","DMAE"],["contagem","Contagem"],["tjsp","TJSP"]].map(([k,l])=>`<div class="field"><label for="e_${k}">${l}</label><input type="date" id="e_${k}" value="${U.exams[k]||""}"></div>`).join("")}
+        ${[["dmae","DMAE"],["curitiba","Curitiba"],["contagem","Contagem"],["tjsp","TJSP"]].map(([k,l])=>`<div class="field"><label for="e_${k}">${l}</label><input type="date" id="e_${k}" value="${U.exams[k]||""}"></div>`).join("")}
         <button class="btn" data-act="saveexams">Salvar datas</button>
       </div>
       <div class="card"><h3>Dados</h3>
@@ -1393,12 +1981,12 @@ document.addEventListener("click",async e=>{
   else if(a==="newsubj")subjModal();
   else if(a==="savesubj"){
     const name=$("#nsName").value.trim();if(!name){toast("Dê um nome para a matéria.");return}
-    const ex=$$(".nsEx").filter(x=>x.checked).map(x=>x.value).join("")||"dct";
+    const ex=$$(".nsEx").filter(x=>x.checked).map(x=>x.value).join("")||"dkct";
     U.customSubjects.push({id:"c_"+newId(),name,color:$("#nsColor").value,ex,topics:$("#nsTopics").value.split("\n").map(s=>s.trim()).filter(Boolean),tip:""});
     saveUser();closeModal();render();toast("Matéria criada.");
   }
   else if(a==="delsubj"){if(!confirm("Remover esta matéria? As horas já registradas continuam no histórico."))return;const sn=snap();U.customSubjects=U.customSubjects.filter(s=>s.id!==b.dataset.s);saveUser();render();offerUndo("Matéria removida.",sn)}
-  else if(a==="loadroutine"){if(!confirm(`Substituir sua rotina atual pela sugerida da Fase ${b.dataset.p}?`))return;const sn=snap();U.routine=JSON.parse(JSON.stringify(ROUTINES[b.dataset.p]));saveUser();if(UI.view!=="rotina")location.hash="#rotina";else render();setTimeout(()=>offerUndo("Rotina carregada.",sn),50)}
+  else if(a==="loadroutine"){const P=phaseByN(b.dataset.p);if(!confirm(`Substituir sua rotina atual pela sugerida da ${P.lbl} (${P.title.split("— ")[1]||P.title})?`))return;const sn=snap();U.routine=JSON.parse(JSON.stringify(ROUTINES[P.n]));saveUser();if(UI.view!=="rotina")location.hash="#rotina";else render();setTimeout(()=>offerUndo("Rotina carregada.",sn),50)}
   else if(a==="addblk")blockModal(+b.dataset.d);
   else if(a==="saveblk"){const d=+b.dataset.d;const m=Math.max(5,+$("#bMin").value||60);const sn=snap();(U.routine[d]=U.routine[d]||[]).push({s:$("#bSubj").value,m});saveUser();closeModal();render();offerUndo("Bloco adicionado.",sn)}
   else if(a==="delblk"){const sn=snap();U.routine[b.dataset.d].splice(+b.dataset.i,1);saveUser();closeModal();render();offerUndo("Bloco removido.",sn)}
@@ -1413,11 +2001,20 @@ document.addEventListener("click",async e=>{
   else if(a==="autoroutine")runAutoRoutine();
   else if(a==="blocklen"){U.settings.blockMin=+b.dataset.v;saveUser();render()}
   else if(a==="gtab"){UI.guideTab=b.dataset.t;render()}
+  else if(a==="gotab"){UI.guideTab=b.dataset.t;if(UI.view==="guia"){render();scrollTo(0,0)}} // links com href="#guia" trocam a tela sozinhos
+  else if(a==="gomat"){UI.subjFilter="k";location.hash="#materias"}
   else if(a==="saveprof"){U.profile.name=$("#pName").value.trim();U.profile.phrases=$("#pPhr").value.split("\n").map(s=>s.trim()).filter(Boolean);UI.phrase=null;cacheLockProfile();await saveUser(true);toast("Perfil salvo.");render()}
   else if(a==="rmphoto"){const sn=snap();U.profile.photo="";cacheLockProfile();saveUser();render();offerUndo("Foto removida.",sn)}
-  else if(a==="saveexams"){["dmae","contagem","tjsp"].forEach(k=>U.exams[k]=$("#e_"+k).value);saveUser();toast("Datas salvas.");render()}
+  else if(a==="saveexams"){["dmae","curitiba","contagem","tjsp"].forEach(k=>U.exams[k]=$("#e_"+k).value);saveUser();toast("Datas salvas.");render()}
   else if(a==="export"){await loadAllMonths();const blob=new Blob([JSON.stringify({user:U,months:MONTHS},null,1)],{type:"application/json"});const u=URL.createObjectURL(blob);const l=document.createElement("a");l.href=u;l.download=`caderno-backup-${todayStr()}.json`;l.click();setTimeout(()=>URL.revokeObjectURL(u),2000)}
   else if(a==="logout"){if(U.running&&!confirm("Há um cronômetro ativo. Ele continua salvo. Sair mesmo assim?"))return;await Store.logout();location.reload()}
+});
+/* ---- Curitiba: questões, simulador de nota ---- */
+document.addEventListener("click",e=>{
+  const cb=e.target.closest("[data-cact]");if(!cb||!U)return;
+  const r=CurMod.onClick(cb,U.cur,UI);
+  if(r==="save"){saveUser();render()}else if(r==="ui")render();
+  if(r&&(cb.dataset.cact==="goquiz"||cb.dataset.cact==="goedital"))scrollTo(0,0);
 });
 document.addEventListener("change",async e=>{
   if(!U)return;const t=e.target;
@@ -1435,12 +2032,13 @@ document.addEventListener("change",async e=>{
     try{const data=JSON.parse(await t.files[0].text());if(!data.user||!data.months)throw 0;
       if(!confirm("Restaurar este backup? Isso substitui os dados atuais."))return;
       U={...defaultUser(),...data.user};MONTHS=data.months;U.months=Object.keys(MONTHS).sort();
+      U.exams={...defaultUser().exams,...(data.user.exams||{})};U.cur={...defaultUser().cur,...(data.user.cur||{})};
       await saveUser(true);for(const ym of U.months)await Store.saveMonth(ym,MONTHS[ym]);toast("Backup restaurado.");render();
     }catch(err){toast("Arquivo de backup inválido.")}
   }
 });
 document.addEventListener("toggle",e=>{const d=e.target;if(d.matches&&d.matches("details.subj")){if(d.open)UI.openSubj=d.dataset.sid;else if(UI.openSubj===d.dataset.sid)UI.openSubj=null}},true);
-document.addEventListener("input",e=>{if(e.target.id==="tNote")UI.note=e.target.value});
+document.addEventListener("input",e=>{if(e.target.id==="tNote")UI.note=e.target.value;else if(U&&CurMod.onInput(e.target,U.cur))saveUser()});
 document.addEventListener("click",e=>{const m=e.target.closest("#tMode button");if(!m)return;UI.mode=+m.dataset.mode;$$("#tMode button").forEach(x=>x.classList.toggle("on",x===m))});
 addEventListener("hashchange",()=>{UI.view=(location.hash||"#inicio").slice(1);if(UI.view==="inicio")UI.phrase=null;closeModal();render();scrollTo(0,0)});
 
@@ -1512,6 +2110,8 @@ async function openApp(){
   U.settings.avail={...defaultUser().settings.avail,...(U.settings.avail||{})};
   U.exams={...defaultUser().exams,...(data.exams||{})};
   if(!U.exams.contagem)U.exams.contagem="2027-01-24";
+  if(!U.exams.curitiba)U.exams.curitiba="2026-12-13";
+  U.cur={...defaultUser().cur,...(data.cur||{})};
   // carrega todos os meses registrados (1 leitura por mês)
   await loadAllMonths();
   cacheLockProfile();
