@@ -58,7 +58,7 @@ img{max-width:100%}
 
 /* ---------- Botões e campos ---------- */
 .btn{display:inline-flex; align-items:center; gap:.45em; border:1.5px solid var(--ink); background:var(--card); color:var(--ink);
-  padding:.55em 1em; border-radius:999px; font-family:var(--f-ui); font-weight:600; font-size:.95rem; transition:transform .08s, background .15s}
+  padding:.55em 1em; border-radius:999px; font-family:var(--f-ui); font-weight:600; font-size:.95rem; transition:transform .08s, background .15s; text-decoration:none}
 .btn:hover{background:var(--hl2)} .btn:active{transform:translateY(1px)}
 .btn.primary{background:var(--ink); color:var(--paper)} .btn.primary:hover{background:var(--h4); border-color:var(--h4)}
 .btn.ghost{border-color:var(--line)} .btn.danger{border-color:var(--bad); color:var(--bad)}
@@ -109,7 +109,7 @@ main{padding:28px clamp(16px,4vw,44px) 90px; max-width:1180px; width:100%}
   .side{position:fixed; top:auto; bottom:0; left:0; right:0; height:auto; z-index:40; flex-direction:row; padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px)); border-right:0; border-top:1.5px solid var(--line); gap:0}
   .brand,.me,.sync{display:none}
   nav.menu{flex-direction:row; width:100%; justify-content:space-around}
-  nav.menu a{flex-direction:column; gap:0; font-size:.68rem; padding:.35em .2em; text-align:center}
+  nav.menu a{flex-direction:column; gap:0; font-size:.66rem; padding:.35em .15em; text-align:center}
   nav.menu a .ic{font-size:1.25rem}
   nav.menu a.on{background:var(--hl2)}
   main{padding-bottom:110px}
@@ -152,10 +152,6 @@ main{padding:28px clamp(16px,4vw,44px) 90px; max-width:1180px; width:100%}
 .prog>span{display:block; height:100%; background:var(--c, var(--h3)); border-radius:99px}
 .stat{font-family:var(--f-ui)} .stat b{display:block; font-size:1.7rem; font-weight:800; line-height:1.1}
 .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px}
-.plan-item{display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center; padding:8px 0; border-bottom:1px dashed var(--line)}
-.plan-item:last-child{border-bottom:0}
-.plan-item .prog{grid-column:2/4; height:7px}
-.plan-item.done .nm{text-decoration:line-through; text-decoration-color:var(--ok); text-decoration-thickness:2px}
 
 /* ---------- Barras da semana ---------- */
 .week{display:grid; grid-template-columns:repeat(7,1fr); gap:8px; align-items:end; height:140px; margin-top:8px}
@@ -203,9 +199,10 @@ main{padding:28px clamp(16px,4vw,44px) 90px; max-width:1180px; width:100%}
 .chip{border:1.5px solid var(--line); border-radius:999px; padding:.25em .75em; background:var(--card); font-family:var(--f-ui); font-weight:600; font-size:.85rem; color:var(--ink2)}
 .chip.on{border-color:var(--ink); color:var(--ink); background:var(--hl2)}
 .tag{display:inline-block; font-family:var(--f-ui); font-size:.68rem; font-weight:600; padding:.05em .5em; border-radius:6px; border:1px solid var(--line); color:var(--ink2); margin-left:4px; white-space:nowrap}
-.tag.d{border-color:#0EA5E9; color:#0B7FB5} .tag.c{border-color:#E4508F; color:#B8306C} .tag.t{border-color:#B45309; color:#9A4A0B} .tag.k{border-color:#16A34A; color:#15803D}
-:root[data-theme="dark"] .tag.d{color:#6CCBF5} :root[data-theme="dark"] .tag.c{color:#F59BC3} :root[data-theme="dark"] .tag.t{color:#F0B37A} :root[data-theme="dark"] .tag.k{color:#6EE7A0}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag.d{color:#6CCBF5} :root:not([data-theme="light"]) .tag.c{color:#F59BC3} :root:not([data-theme="light"]) .tag.t{color:#F0B37A} :root:not([data-theme="light"]) .tag.k{color:#6EE7A0} }
+.tag.d{border-color:#0EA5E9; color:#0B7FB5} .tag.k{border-color:#16A34A; color:#15803D}
+.tag.adj{border-color:var(--warn); color:var(--warn)}
+:root[data-theme="dark"] .tag.d{color:#6CCBF5} :root[data-theme="dark"] .tag.k{color:#6EE7A0}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tag.d{color:#6CCBF5} :root:not([data-theme="light"]) .tag.k{color:#6EE7A0} }
 .subj{border-left:7px solid var(--c); padding:0}
 .subj>summary{list-style:none; cursor:pointer; padding:14px 18px; display:grid; grid-template-columns:1fr auto; gap:6px 14px; align-items:center}
 .subj>summary::-webkit-details-marker{display:none}
@@ -219,13 +216,13 @@ main{padding:28px clamp(16px,4vw,44px) 90px; max-width:1180px; width:100%}
 .topic .tt{flex:1}
 .tipbox{background:var(--hl2); border-radius:10px; padding:10px 12px; font-size:.92rem; margin:6px 0 10px}
 
-/* ---------- Rotina ---------- */
-.rout{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px}
+/* ---------- Semana-modelo ---------- */
+.rout{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px}
 .rday{background:var(--card); border:1.5px solid var(--line); border-radius:var(--r-md); padding:12px}
 .rday.today{border-color:var(--ink); box-shadow:inset 0 5px 0 var(--hl)}
-.rday h4{font-family:var(--f-ui); margin:2px 0 10px; display:flex; justify-content:space-between; align-items:baseline}
+.rday h4{font-family:var(--f-ui); margin:2px 0 10px; display:flex; justify-content:space-between; align-items:baseline; gap:8px}
 .rday .empty-day{font-size:.85rem; color:var(--ink3); margin:0 0 10px}
-.blk{border-radius:10px; margin-bottom:8px; padding:9px 10px 7px; background:color-mix(in srgb, var(--c) 15%, var(--card)); border-left:4px solid var(--c)}
+.blk{border-radius:10px; margin-bottom:8px; padding:9px 10px 8px; background:color-mix(in srgb, var(--c) 15%, var(--card)); border-left:4px solid var(--c)}
 .blk .nm{display:block; width:100%; text-align:left; border:0; background:transparent; padding:0; font-size:.92rem; line-height:1.3; font-weight:600; color:var(--ink)}
 .blk .nm:hover{text-decoration:underline; text-underline-offset:3px}
 .blk .ctl{display:flex; align-items:center; gap:4px; margin-top:6px}
@@ -243,6 +240,40 @@ main{padding:28px clamp(16px,4vw,44px) 90px; max-width:1180px; width:100%}
 .plan-tbl td,.plan-tbl th{padding:6px 8px; border-bottom:1px dashed var(--line); text-align:left}
 .plan-tbl th{font-family:var(--f-ui); font-weight:600; color:var(--ink2)}
 .plan-tbl td.n{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+
+/* ---------- Cronograma: dia a dia ---------- */
+.wk-ag{margin-bottom:12px}
+.wk-ag>summary{list-style:none; cursor:pointer; display:flex; gap:6px 12px; align-items:center; flex-wrap:wrap; padding:11px 16px; background:var(--card); border:1.5px solid var(--line); border-radius:var(--r-md); font-family:var(--f-ui)}
+.wk-ag>summary::-webkit-details-marker{display:none}
+.wk-ag>summary::before{content:"▸"; color:var(--ink2); transition:transform .15s; display:inline-block}
+.wk-ag[open]>summary::before{transform:rotate(90deg)}
+.wk-ag[open]>summary{margin-bottom:12px; border-color:var(--ink)}
+.wk-ag .wk-t{font-weight:800}
+.goals{margin-bottom:12px; padding:12px 16px}
+.goal-list{columns:2 280px; column-gap:26px; margin-top:6px}
+.goal-list .chk{break-inside:avoid; font-size:.92rem}
+.rday.past{opacity:.6}
+.rday h4 .dt{color:var(--ink2); font-weight:600; font-size:.85rem; margin-left:.35em}
+.ev{font-family:var(--f-ui); font-size:.8rem; font-weight:600; line-height:1.3; padding:6px 9px; border-radius:8px; background:var(--hl2); margin-bottom:8px}
+.ev.exam{background:var(--ink); color:var(--paper)}
+.blk .bn{font-family:var(--f-ui); font-size:.92rem; font-weight:700}
+.ag-t{display:flex; gap:7px; align-items:flex-start; font-size:.84rem; line-height:1.3; color:var(--ink2); margin:5px 0 0; cursor:pointer}
+.ag-t input{width:16px; height:16px; margin:.1em 0 0; accent-color:var(--ink); flex:none}
+.ag-t.ok span{text-decoration:line-through; color:var(--ink3)}
+.blk .go{margin-top:7px; padding:.2em .75em; font-size:.8rem}
+.task{font-size:.9rem; padding:3px 0}
+.cov{padding:12px 0; border-top:1px dashed var(--line)}
+.cov.first{border-top:0; padding-top:2px}
+.ed-row{display:flex; gap:8px; align-items:center; margin-bottom:8px}
+.ed-row select{flex:1; min-width:0}
+.ed-row input[type=number]{width:86px; flex:none}
+.ed-row input[type=text]{flex:1}
+.xbtn{width:32px; height:32px; border-radius:50%; border:0; background:transparent; color:var(--ink2); font-size:1.25rem; line-height:1; flex:none}
+.xbtn:hover{background:color-mix(in srgb, var(--bad) 14%, transparent); color:var(--bad)}
+.up{display:grid; grid-template-columns:62px 1fr; gap:10px; padding:8px 0; border-bottom:1px dashed var(--line); font-size:.92rem; align-items:start}
+.up:last-child{border-bottom:0}
+.up .d{font-family:var(--f-ui); font-weight:800; line-height:1.1}
+.up .d small{display:block; font-weight:600; color:var(--ink2); font-size:.72rem}
 
 /* ---------- Guia ---------- */
 .tabs{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px}
@@ -405,9 +436,9 @@ html.theming *, html.theming *::before{transition:background-color .45s, color .
     <div class="me" id="meBox"></div>
     <nav class="menu" id="menu">
       <a href="#inicio" data-v="inicio"><span class="ic">⏱</span>Início</a>
+      <a href="#cronograma" data-v="cronograma"><span class="ic">📋</span>Cronograma</a>
       <a href="#calendario" data-v="calendario"><span class="ic">🗓</span>Calendário</a>
       <a href="#materias" data-v="materias"><span class="ic">📚</span>Matérias</a>
-      <a href="#rotina" data-v="rotina"><span class="ic">🧭</span>Rotina</a>
       <a href="#guia" data-v="guia"><span class="ic">🗺</span>Guia</a>
       <a href="#perfil" data-v="perfil"><span class="ic">🙂</span>Perfil</a>
     </nav>
@@ -421,7 +452,7 @@ html.theming *, html.theming *::before{transition:background-color .45s, color .
 
 <script type="module">
 /* ==========================================================================
-   CONFIGURAÇÃO — cole aqui os dados do seu projeto Firebase (veja o README).
+   CONFIGURAÇÃO — dados do seu projeto Firebase (veja o README).
    A senha NÃO fica neste arquivo: quem confere a senha é o Firebase.
    ========================================================================== */
 const FIREBASE_CONFIG = {
@@ -433,7 +464,6 @@ const FIREBASE_CONFIG = {
   appId: "1:334734602042:web:a21126ccd2e1092330aa03"
 };
 // E-mail "de fachada" do usuário criado no Firebase > Authentication.
-// Não precisa existir de verdade e ninguém digita: a tela de login pede só a senha.
 const LOGIN_EMAIL = "caderno@meu-estudo.app";
 // Pasta onde os dados ficam no Firestore (não mude depois de começar a usar)
 const DATA_ID = "caderno";
@@ -444,8 +474,7 @@ const LS = "caderno_v1_";
 
 /* ======================================================================
    CURITIBA — resumo do Edital nº 4/2026 (Agente Administrativo, FAFIPA)
-   e questões de treino. Módulo independente: funciona dentro do Caderno
-   (estado em U.cur, salvo no Firebase) ou numa página sozinha.
+   e questões de treino.
    ====================================================================== */
 const CurMod=(()=>{
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -456,7 +485,6 @@ const dayDiff=s=>{const [y,m,d]=s.split("-").map(Number),[a,b,c]=today().split("
 const fmtPts=n=>n.toLocaleString("pt-BR",{minimumFractionDigits:n%1?1:0,maximumFractionDigits:1});
 const L="ABCDE";
 
-/* ---------------- Áreas da prova (Tabela 10.1.1 e Anexo II) ---------------- */
 const AREAS=[
  {id:"port",name:"Língua Portuguesa",q:5,color:"#E0A800",
   how:"São 5 questões (12,5 pts). Não tente ver a gramática inteira: interpretação, concordância, pontuação e porquês dão o maior retorno. Literatura é vasta — veja só as escolas principais e as figuras de linguagem.",
@@ -512,7 +540,7 @@ const AREAS=[
    ["ECA: disposições preliminares e direitos fundamentais","B"],
    ["LINDB, arts. 20 a 30","B"]]}]},
  {id:"esp",name:"Conhecimentos Específicos",q:20,color:"#3B82F6",
-  how:"Metade da prova (50 pts) e primeiro critério de desempate. Boa parte você já estuda para o DMAE e Contagem (administração, arquivo, 14.133). O que é novo aqui: atos administrativos, bens públicos, Lei 13.460, poder constituinte e o processo administrativo de Curitiba.",
+  how:"Metade da prova (50 pts) e primeiro critério de desempate. Boa parte você já estuda para o DMAE (administração, arquivo, 14.133). O que é novo aqui: atos administrativos, bens públicos, Lei 13.460, poder constituinte e o processo administrativo de Curitiba.",
   groups:[
    {g:"Fundamentos da Administração Pública",t:[
     ["Conceitos, princípios e organização da Administração Pública","A"],
@@ -544,7 +572,6 @@ const AREAS=[
 const PRIO={A:["Alta","a"],M:["Média","m"],B:["Baixa","b"]};
 const PRESETS={seg:{port:3,rl:3,info:3,leg:3,esp:14},min:{port:3,rl:2,info:3,leg:3,esp:13},zero:{port:0,rl:0,info:0,leg:0,esp:0}};
 
-/* ---------------- Cronograma (Anexo III) ---------------- */
 const TL=[
  ["2026-09-22","2026-09-26","Prazo para impugnar o edital"],
  ["2026-10-07","2026-10-13","Pedido de isenção da taxa"],
@@ -558,7 +585,6 @@ const TL=[
  ["2027-02-25",null,"Homologação"]
 ];
 
-/* ---------------- Questões de treino (inéditas, no formato FAFIPA) ---------------- */
 const TX1="Nas repartições públicas, o bom atendimento começa antes da primeira palavra. Um ambiente organizado, informações claras na entrada e servidores que sabem para onde encaminhar cada pedido reduzem filas e evitam retrabalho. Ainda assim, nenhuma placa substitui a escuta atenta: é ouvindo o cidadão que o servidor descobre o que ele realmente precisa, e não apenas o que conseguiu dizer.";
 const Q=(id,a,en,op,c,ex,tx)=>({id,a,en,op,c,ex,tx});
 const QS=[
@@ -727,7 +753,6 @@ const QS=[
 ];
 const areaById=id=>AREAS.find(a=>a.id===id);
 
-/* ---------------- Calculadora ---------------- */
 const defCalc=()=>({...PRESETS.seg});
 function totals(c){let ac=0;AREAS.forEach(a=>ac+=+c[a.id]||0);return {ac,pts:ac*2.5}}
 function calcMsg(t){
@@ -736,7 +761,6 @@ function calcMsg(t){
   return `Com <b>${t.ac} acertos</b> você faz <b>${fmtPts(t.pts)} pontos</b>. Faltam <b>${f} ${f===1?"acerto":"acertos"}</b> para chegar aos 60.`;
 }
 
-/* ---------------- Tela: resumo do edital ---------------- */
 function edital(st,o){
   o=o||{};
   const prova=o.prova||"2026-12-13", n=dayDiff(prova), td=today();
@@ -789,7 +813,7 @@ function edital(st,o){
       <h3>Por onde começar</h3>
       <ol class="steps">
         <li>Faça a inscrição entre 07/10 e 05/11 e pague a taxa até 06/11. Quem tem direito à isenção pede de 07 a 13/10.</li>
-        <li>Comece pelos Específicos: eles valem metade da prova e você já estuda boa parte para o DMAE e Contagem.</li>
+        <li>Comece pelos Específicos: eles valem metade da prova e você já estuda boa parte para o DMAE.</li>
         <li>Nas matérias básicas, estude só os assuntos de prioridade alta até dominar. Com 5 questões cada, abrangência vale mais que profundidade.</li>
         <li>Veja como a FAFIPA pergunta: baixe provas anteriores de nível médio no site da fundação e resolva as questões de treino deste caderno.</li>
         <li>A prova é em Curitiba. O local sai em 03/12: planeje a viagem para chegar na véspera.</li>
@@ -820,7 +844,6 @@ function edital(st,o){
   </div>`;
 }
 
-/* ---------------- Tela: questões ---------------- */
 function quiz(st,ui){
   st.ans=st.ans||{};
   const ans=st.ans, f=ui.qf||"all";
@@ -854,7 +877,6 @@ function quiz(st,ui){
   </div>`;
 }
 
-/* ---------------- Eventos ---------------- */
 function onClick(b,st,ui){
   const a=b.dataset.cact;st.ans=st.ans||{};st.seen=st.seen||{};
   if(a==="ans"){const q=b.dataset.q;if(st.ans[q]!=null)return null;st.ans[q]=+b.dataset.i;return "save"}
@@ -882,60 +904,59 @@ return {edital,quiz,onClick,onInput,AREAS,QS};
 })();
 
 
-/* ---------------- Dados fixos: concursos ---------------- */
+/* ---------------- Concursos ---------------- */
 const EXAMS = {
   d:{key:"dmae", name:"DMAE Uberlândia", role:"Oficial Administrativo", banca:"Fundep"},
-  k:{key:"curitiba", name:"Prefeitura de Curitiba", role:"Agente Administrativo", banca:"FAFIPA"},
-  c:{key:"contagem", name:"Prefeitura de Contagem", role:"Assistente Administrativo", banca:"IBGP"},
-  t:{key:"tjsp", name:"TJSP", role:"Escrevente Técnico Judiciário", banca:"VUNESP"}
+  k:{key:"curitiba", name:"Prefeitura de Curitiba", role:"Agente Administrativo", banca:"FAFIPA"}
 };
-const EX_SHORT = {d:"DMAE", k:"Curitiba", c:"Contagem", t:"TJSP"};
+const EX_SHORT = {d:"DMAE", k:"Curitiba"};
 
-/* ---------------- Dados fixos: matérias e tópicos ----------------
-   ex: d = DMAE, k = Curitiba, c = Contagem, t = TJSP
-   Importante: tópicos novos entram SEMPRE no fim da lista, para não
-   bagunçar as marcações já salvas (que usam a posição do tópico).   */
+/* ---------------- Matérias e assuntos ----------------
+   d = DMAE, k = Curitiba.
+   IMPORTANTE: as marcações salvas usam a POSIÇÃO do assunto na lista.
+   Por isso, assuntos que saíram ficam como null (não apague a linha)
+   e assuntos novos entram SEMPRE no fim da lista.                       */
 const S = (id,name,color,ex,topics,tip)=>({id,name,color,ex,topics,tip});
 const DEFAULT_SUBJECTS = [
-  S("port","Língua Portuguesa","#E0A800","dctk",[
-    ["Interpretação de textos: informações literais, inferências e ponto de vista do autor","dctk"],
-    ["Tipos e gêneros textuais","dck"],
-    ["Coesão e coerência; relações entre ideias","dctk"],
-    ["Significação: sinônimos, antônimos, polissemia, sentido próprio e figurado","dctk"],
-    ["Figuras de linguagem e de sintaxe","ck"],
-    ["Fonologia, ortografia e acentuação (Novo Acordo)","dck"],
-    ["Formação de palavras","dc"],
-    ["Classes de palavras e seu emprego","dctk"],
-    ["Verbos: tempos, modos, vozes e correlação","dc"],
-    ["Sintaxe: frase, oração, período e termos da oração","dck"],
-    ["Período composto: coordenação e subordinação","dc"],
-    ["Pontuação","dctk"],
-    ["Concordância verbal e nominal","dctk"],
-    ["Regência verbal e nominal","dct"],
-    ["Crase","dct"],
-    ["Colocação pronominal","dct"],
-    ["Variação linguística","dck"],
+  S("port","Língua Portuguesa","#E0A800","dk",[
+    ["Interpretação de textos: informações literais, inferências e ponto de vista do autor","dk"],
+    ["Tipos e gêneros textuais","dk"],
+    ["Coesão e coerência; relações entre ideias","dk"],
+    ["Significação: sinônimos, antônimos, polissemia, sentido próprio e figurado","dk"],
+    ["Figuras de linguagem e de sintaxe","k"],
+    ["Fonologia, ortografia e acentuação (Novo Acordo)","dk"],
+    ["Formação de palavras","d"],
+    ["Classes de palavras e seu emprego","dk"],
+    ["Verbos: tempos, modos, vozes e correlação","d"],
+    ["Sintaxe: frase, oração, período e termos da oração","dk"],
+    ["Período composto: coordenação e subordinação","d"],
+    ["Pontuação","dk"],
+    ["Concordância verbal e nominal","dk"],
+    ["Regência verbal e nominal","d"],
+    ["Crase","d"],
+    ["Colocação pronominal","d"],
+    ["Variação linguística","dk"],
     ["Uso dos porquês","k"],
     ["Literatura brasileira: prosa e poesia, autores e obras","k"]
-  ],"É a matéria que aparece em todos os concursos e desempata no TJSP. Estude um tópico de gramática por sessão e feche sempre com 10–15 questões da banca do próximo concurso. Interpretação se treina todo dia: um texto curto + questões."),
-  S("mat","Matemática básica","#FF7B39","dctk",[
-    ["Conjuntos numéricos e operações (frações, decimais, potências, raízes)","dctk"],
-    ["MMC e MDC","ct"],
-    ["Razão e proporção; grandezas direta e inversamente proporcionais","dctk"],
-    ["Regra de três simples e composta","dctk"],
-    ["Porcentagem","dctk"],
-    ["Juros simples","dctk"],
+  ],"Cai nos dois concursos. Estude um tópico de gramática por sessão e feche sempre com 10–15 questões da banca da próxima prova. Interpretação se treina todo dia: um texto curto + questões."),
+  S("mat","Matemática básica","#FF7B39","dk",[
+    ["Conjuntos numéricos e operações (frações, decimais, potências, raízes)","dk"],
+    null,
+    ["Razão e proporção; grandezas direta e inversamente proporcionais","dk"],
+    ["Regra de três simples e composta","dk"],
+    ["Porcentagem","dk"],
+    ["Juros simples","dk"],
     ["Juros compostos","d"],
-    ["Equações do 1º e 2º grau","dct"],
-    ["Sistemas de equações do 1º grau","dct"],
-    ["Média aritmética simples e ponderada","dctk"],
-    ["Grandezas e medidas (sistema métrico, tempo, capacidade, massa)","ctk"],
-    ["Leitura de gráficos e tabelas","dctk"],
-    ["Geometria: perímetro, área, volume e Pitágoras","dtk"],
-    ["Resolução de situações-problema","dctk"],
+    ["Equações do 1º e 2º grau","d"],
+    ["Sistemas de equações do 1º grau","d"],
+    ["Média aritmética simples e ponderada","dk"],
+    ["Grandezas e medidas (sistema métrico, tempo, capacidade, massa)","k"],
+    ["Leitura de gráficos e tabelas","dk"],
+    ["Geometria: perímetro, área, volume e Pitágoras","dk"],
+    ["Resolução de situações-problema","dk"],
     ["Teorema de Tales e comprimento da circunferência","k"],
     ["Arredondamentos, estimativas e sistema monetário","k"]
-  ],"Base de tudo em exatas. Se você está enferrujado(a), comece por frações, porcentagem e regra de três: caem em qualquer banca e ajudam em juros e no raciocínio lógico. Em Curitiba, o “Raciocínio Lógico” é quase todo esta matéria."),
+  ],"Base de tudo em exatas. Se você está enferrujado(a), comece por frações, porcentagem e regra de três: caem nas duas bancas e ajudam em juros e no raciocínio lógico. Em Curitiba, o “Raciocínio Lógico” é quase todo esta matéria."),
   S("matav","Matemática do ensino médio","#D6453D","d",[
     ["Funções afim e quadrática (raízes, vértice, sinal, inequações)","d"],
     ["Função exponencial e logaritmos","d"],
@@ -946,87 +967,83 @@ const DEFAULT_SUBJECTS = [
     ["Estatística: moda, mediana, variância e desvio padrão","d"],
     ["Intervalos reais e números irracionais","d"]
   ],"Conteúdo enorme para poucas questões (Matemática + RL somam 10 no DMAE). Para iniciante: PA/PG e estatística primeiro. Trigonometria, logaritmo e matrizes só se sobrar tempo — não compensa travar aqui."),
-  S("rl","Raciocínio Lógico","#8E5CF7","dctk",[
-    ["Proposições simples e compostas; conectivos","dct"],
-    ["Tabelas-verdade","ct"],
-    ["Negação de proposições","ct"],
-    ["Equivalências e implicações lógicas","ct"],
-    ["Quantificadores (todo, algum, nenhum)","c"],
-    ["Argumentação: premissas, conclusão e validade","dct"],
-    ["Diagramas lógicos e operações com conjuntos","dct"],
-    ["Sequências de números, letras, palavras e figuras","dctk"],
-    ["Associação lógica (problemas com tabelas)","dct"],
-    ["Verdades e mentiras","dc"],
-    ["Análise combinatória: PFC, arranjo, permutação e combinação","dc"],
-    ["Probabilidade","dck"],
+  S("rl","Raciocínio Lógico","#8E5CF7","dk",[
+    ["Proposições simples e compostas; conectivos","d"],
+    null,null,null,null,
+    ["Argumentação: premissas, conclusão e validade","d"],
+    ["Diagramas lógicos e operações com conjuntos","d"],
+    ["Sequências de números, letras, palavras e figuras","dk"],
+    ["Associação lógica (problemas com tabelas)","d"],
+    ["Verdades e mentiras","d"],
+    ["Análise combinatória: PFC, arranjo, permutação e combinação","d"],
+    ["Probabilidade","dk"],
     ["Casa dos pombos; orientação espacial e temporal","d"],
     ["Noções de direção: norte, sul, leste, oeste, esquerda e direita","k"],
     ["Estatística: média, moda e mediana","k"]
   ],"RL se aprende fazendo: leia a teoria rápido e vá para questões resolvidas. Monte tabelas e desenhe diagramas no papel sempre."),
-  S("info","Informática","#12B5A5","ctk",[
-    ["Windows 10/11: pastas, arquivos, atalhos e Explorador","ctk"],
-    ["Área de transferência e atalhos de teclado","ctk"],
-    ["Word: formatação, tabelas, quebras, cabeçalho, índices","ctk"],
-    ["Excel: células, fórmulas, funções, gráficos, classificação","ctk"],
-    ["PowerPoint e apresentações","c"],
-    ["Microsoft 365: Teams, OneDrive, SharePoint, OneNote","ct"],
-    ["Google Workspace (Docs, Planilhas, Drive)","ck"],
-    ["Internet: navegadores, URL, busca e e-mail","ctk"],
-    ["Hardware, software e periféricos","ck"],
-    ["Redes: internet, intranet, protocolos e nuvem","c"],
-    ["Segurança: malware, golpes, antivírus, firewall e senhas","ck"],
-    ["Backup e recuperação de dados","ck"],
-    ["Inteligência artificial: conceitos e uso responsável","ck"],
+  S("info","Informática","#12B5A5","k",[
+    ["Windows 10/11: pastas, arquivos, atalhos e Explorador","k"],
+    ["Área de transferência e atalhos de teclado","k"],
+    ["Word: formatação, tabelas, quebras, cabeçalho, índices","k"],
+    ["Excel: células, fórmulas, funções, gráficos, classificação","k"],
+    null,null,
+    ["Google Workspace (Docs, Planilhas, Drive)","k"],
+    ["Internet: navegadores, URL, busca e e-mail","k"],
+    ["Hardware, software e periféricos","k"],
+    null,
+    ["Segurança: malware, golpes, antivírus, firewall e senhas","k"],
+    ["Backup e recuperação de dados","k"],
+    ["Inteligência artificial: conceitos e uso responsável","k"],
     ["Linux Ubuntu: noções e comandos básicos","k"],
     ["E-mail: Outlook, Gmail e Webmail (Zimbra)","k"]
-  ],"Não cai no DMAE, vale 12,5 pontos em Curitiba (5 questões), 5 pontos em Contagem e são 9 questões no TJSP. Curitiba cobra Word e Excel 2016 em português. Pratique no computador enquanto estuda."),
-  S("adm","Noções de Administração","#3B82F6","dck",[
-    ["Conceitos, princípios e funções (planejar, organizar, dirigir, controlar)","dck"],
+  ],"Não cai no DMAE. Em Curitiba vale 12,5 pontos (5 questões) e a prova cobra Word e Excel 2016 em português. Pratique no computador enquanto estuda."),
+  S("adm","Noções de Administração","#3B82F6","dk",[
+    ["Conceitos, princípios e funções (planejar, organizar, dirigir, controlar)","dk"],
     ["Teorias da Administração (clássica, burocrática, relações humanas, comportamental)","d"],
-    ["Estrutura organizacional e departamentalização","dck"],
+    ["Estrutura organizacional e departamentalização","dk"],
     ["Gestão de pessoas e recursos humanos","dk"],
     ["Rotinas de departamento pessoal","d"],
-    ["Relacionamento interpessoal, ética, motivação, liderança e conflitos","dck"],
-    ["Atendimento ao público: qualidade, acessibilidade, prioritário","dck"],
-    ["Almoxarifado: recebimento, armazenagem, estoques e inventário","dc"],
+    ["Relacionamento interpessoal, ética, motivação, liderança e conflitos","dk"],
+    ["Atendimento ao público: qualidade, acessibilidade, prioritário","dk"],
+    ["Almoxarifado: recebimento, armazenagem, estoques e inventário","d"],
     ["Compras: pesquisa, cotação e gestão de compras","d"],
     ["Finanças: juros, capitalização, descontos, empréstimos","d"],
     ["Noções de contabilidade: princípios, escrituração, demonstrativos","d"],
     ["Orçamento: tradicional x programa; empenho e liquidação","dk"],
-    ["Rotinas administrativas: planejamento, formulários, manuais","ck"],
+    ["Rotinas administrativas: planejamento, formulários, manuais","k"],
     ["Organização do ambiente de trabalho","k"],
     ["Métodos e técnicas de pesquisa","k"]
-  ],"No DMAE os Específicos valem 2 pontos por questão (20 dos 50 pontos). É a matéria de maior retorno até novembro — e quase tudo reaproveita em Curitiba e Contagem."),
-  S("arq","Arquivologia e Redação Oficial","#22A06B","dck",[
-    ["Conceitos de arquivo, documento e protocolo","dck"],
-    ["Ciclo de vida: arquivos corrente, intermediário e permanente","dck"],
-    ["Classificação, métodos de arquivamento e tramitação","dck"],
-    ["Conservação, destinação e documentos digitais","dck"],
-    ["Manual de Redação da Presidência: clareza, concisão, formalidade","dck"],
-    ["Pronomes de tratamento e padrão ofício","dck"],
-    ["Tipos de documentos: ofício, ata, requerimento, certidão, portaria, relatório","dck"],
+  ],"No DMAE os Específicos valem 2 pontos por questão (20 dos 50 pontos). É a matéria de maior retorno até 01/11 — e quase tudo reaproveita em Curitiba."),
+  S("arq","Arquivologia e Redação Oficial","#22A06B","dk",[
+    ["Conceitos de arquivo, documento e protocolo","dk"],
+    ["Ciclo de vida: arquivos corrente, intermediário e permanente","dk"],
+    ["Classificação, métodos de arquivamento e tramitação","dk"],
+    ["Conservação, destinação e documentos digitais","dk"],
+    ["Manual de Redação da Presidência: clareza, concisão, formalidade","dk"],
+    ["Pronomes de tratamento e padrão ofício","dk"],
+    ["Tipos de documentos: ofício, ata, requerimento, certidão, portaria, relatório","dk"],
     ["Técnica legislativa: redação de leis e decretos","d"],
     ["Lei 8.159/1991: política nacional de arquivos","k"],
     ["Correspondência comercial","k"],
     ["Sistemas de informação organizacional","k"]
   ],"Matéria curta e muito cobrada em cargos administrativos. O Manual de Redação da Presidência é gratuito no site do Planalto: leia os capítulos de princípios, pronomes e padrão ofício."),
-  S("admpub","Adm. Pública, Licitações e Transparência","#5B6CFF","dctk",[
-    ["Princípios da Administração (CF, art. 37 — LIMPE)","dctk"],
-    ["Servidores públicos na CF (arts. 37 a 41)","dctk"],
-    ["Organização administrativa: direta, indireta, centralização e desconcentração","ck"],
+  S("admpub","Adm. Pública, Licitações e Transparência","#5B6CFF","dk",[
+    ["Princípios da Administração (CF, art. 37 — LIMPE)","dk"],
+    ["Servidores públicos na CF (arts. 37 a 41)","dk"],
+    ["Organização administrativa: direta, indireta, centralização e desconcentração","k"],
     ["Serviço público e serviços essenciais","dk"],
-    ["Lei 14.133/21: princípios, agentes e fases","dck"],
-    ["Lei 14.133/21: modalidades e critérios de julgamento","dck"],
-    ["Lei 14.133/21: contratação direta (dispensa e inexigibilidade)","dck"],
-    ["Lei 14.133/21: contratos, fiscalização e sanções","dck"],
-    ["Lei de Acesso à Informação (12.527/11)","ck"],
-    ["LGPD (13.709/18) no setor público","ck"],
+    ["Lei 14.133/21: princípios, agentes e fases","dk"],
+    ["Lei 14.133/21: modalidades e critérios de julgamento","dk"],
+    ["Lei 14.133/21: contratação direta (dispensa e inexigibilidade)","dk"],
+    ["Lei 14.133/21: contratos, fiscalização e sanções","dk"],
+    ["Lei de Acesso à Informação (12.527/11)","k"],
+    ["LGPD (13.709/18) no setor público","k"],
     ["Atos administrativos: requisitos, atributos, anulação e revogação","k"],
     ["Bens públicos","k"],
     ["Improbidade administrativa (Lei 8.429/92 com a Lei 14.230/21)","k"],
     ["Lei 13.460/17: direitos do usuário do serviço público","k"],
     ["Ética, integridade, transparência e conflito de interesses","k"]
-  ],"Os arts. 37 a 41 da Constituição caem em todos os concursos. A Lei 14.133 é longa: estude por partes e leia a lei seca junto com questões. Para Curitiba, some atos administrativos e bens públicos."),
+  ],"Os arts. 37 a 41 da Constituição caem nos dois concursos. A Lei 14.133 é longa: estude por partes e leia a lei seca junto com questões. Para Curitiba, some atos administrativos e bens públicos."),
   S("legdmae","Legislação Uberlândia / DMAE","#0EA5E9","d",[
     ["Lei Orgânica do Município de Uberlândia","d"],
     ["Estatuto dos Servidores (LC 40/1992)","d"],
@@ -1045,164 +1062,106 @@ const DEFAULT_SUBJECTS = [
     ["ECA: disposições preliminares e direitos fundamentais (arts. 1º a 69)","k"],
     ["LINDB, arts. 20 a 30","k"]
   ],"Leis que só caem em Curitiba. Lei seca com marca-texto em prazos, números e penalidades. A Lei 10.048 e a LINDB (arts. 20–30) são curtas: leia inteiras. O Estatuto cai em Legislação e também nos Específicos (PAD)."),
-  S("cg","Conhecimentos Gerais e Atualidades","#A3A31F","dct",[
-    ["Atualidades 2025–2026: política, economia, sociedade e cultura","dct"],
+  S("cg","Conhecimentos Gerais e Atualidades","#A3A31F","d",[
+    ["Atualidades 2025–2026: política, economia, sociedade e cultura","d"],
     ["Uberlândia: história, geografia e economia (IBGE Cidades)","d"],
     ["Minas Gerais: história e geografia","d"],
     ["Nova ordem mundial e problemas do século XXI (água, energia, clima, desigualdade)","d"],
     ["DMAE: serviços e sustentabilidade (canais oficiais)","d"],
-    ["Estatuto da Pessoa com Deficiência (arts. 1–13 e 34–38)","t"]
+    null
   ],"Atualidades não se estuda de uma vez: 15–20 min por dia lendo notícias e um resumo semanal. Para Uberlândia, use o IBGE Cidades e o site da Prefeitura."),
-  S("ctg","Contagem: legislação e município","#E4508F","c",[
-    ["Lei Orgânica de Contagem","c"],
-    ["Estatuto dos Servidores de Contagem (Lei 2.160/1990)","c"],
-    ["Plano de Cargos, Carreira e Salários (LC 105/2011)","c"],
-    ["História, geografia e economia de Contagem","c"],
-    ["Símbolos municipais e noções de cidadania","c"],
-    ["Notícias e atualidades de Contagem (site da Prefeitura)","c"]
-  ],"Deixe para depois de Curitiba. Muitos pontos do Estatuto de Contagem se parecem com os de Uberlândia e Curitiba (posse, exercício, estágio probatório, deveres) — compare."),
-  S("dconst","Direito Constitucional","#B45309","tk",[
-    ["Direitos e deveres individuais e coletivos (art. 5º)","tk"],
-    ["Direitos sociais (arts. 6º a 11)","tk"],
-    ["Nacionalidade (arts. 12 e 13)","tk"],
-    ["Administração Pública: disposições gerais (arts. 37 e 38)","dctk"],
-    ["Servidores públicos (arts. 39 a 41)","dctk"],
-    ["Órgãos do Poder Judiciário (art. 92)","t"],
+  S("dconst","Direito Constitucional","#B45309","k",[
+    ["Direitos e deveres individuais e coletivos (art. 5º)","k"],
+    ["Direitos sociais (arts. 6º a 11)","k"],
+    ["Nacionalidade (arts. 12 e 13)","k"],
+    ["Administração Pública: disposições gerais (arts. 37 e 38)","k"],
+    ["Servidores públicos (arts. 39 a 41)","k"],
+    null,
     ["Princípios fundamentais (arts. 1º a 4º)","k"],
     ["Direitos políticos e partidos (arts. 14 a 17)","k"],
     ["Organização do Estado (arts. 18, 19, 29 e 30)","k"],
     ["Poder Legislativo (arts. 44 a 75)","k"],
     ["Poder constituinte, normas constitucionais, hierarquia e interpretação","k"]
-  ],"Em Curitiba a Constituição cai em Legislação e nos Específicos: é aqui que você começa o Direito. Depois reaproveita quase tudo no TJSP."),
-  S("dadm","Direito Administrativo (SP)","#7C3AED","t",[
-    ["Estatuto dos Funcionários de SP (Lei 10.261/68), arts. 1º a 86","t"],
-    ["Lei 10.261/68, arts. 171 a 175","t"],
-    ["Lei 10.261/68, arts. 239 a 323: deveres, proibições, penalidades e processo","t"],
-    ["Lei de Improbidade (8.429/92, com a Lei 14.230/21)","t"]
-  ],"Lei seca pura. Faça quadros-resumo de prazos e penalidades."),
-  S("dpenal","Direito Penal","#BE123C","t",[
-    ["Crimes contra a fé pública (arts. 293 a 305, 307, 308, 311-A)","t"],
-    ["Crimes de funcionário público contra a Administração (arts. 312 a 317, 319 a 327)","t"],
-    ["Crimes de particular contra a Administração (arts. 328 a 333, 336 e 337)","t"],
-    ["Crimes contra a Administração da Justiça (arts. 339 a 347, 357 e 359)","t"]
-  ],"Foque nos verbos de cada crime e nas diferenças clássicas: peculato x concussão x corrupção passiva x prevaricação."),
-  S("dpp","Processo Penal","#9F1239","t",[
-    ["Juiz, MP, acusado e defensor (arts. 251 a 258, 261 a 267, 274)","t"],
-    ["Citações e intimações (arts. 351 a 372)","t"],
-    ["Procedimentos e Tribunal do Júri (arts. 394 a 497)","t"],
-    ["Arts. 531 a 538 e 541 a 548","t"],
-    ["Recursos e habeas corpus (arts. 574 a 667)","t"],
-    ["JECrim (Lei 9.099, arts. 60 a 83, 88 e 89)","t"]
-  ],"Priorize citações/intimações e prazos: é o dia a dia do escrevente e cai muito na VUNESP."),
-  S("dpc","Processo Civil","#0D9488","t",[
-    ["Impedimento, suspeição e auxiliares da justiça (arts. 144 a 155)","t"],
-    ["Atos processuais: forma, tempo, lugar, prazos e comunicação (arts. 188 a 275)","t"],
-    ["Tutela provisória (arts. 294 a 311)","t"],
-    ["Procedimento comum até coisa julgada (arts. 318 a 508)","t"],
-    ["Cumprimento de sentença (arts. 509 a 538)","t"],
-    ["Recursos (arts. 994 a 1.026)","t"],
-    ["Juizados Especiais Cíveis (Lei 9.099, arts. 3º a 19)","t"],
-    ["Juizados da Fazenda Pública (Lei 12.153/09)","t"]
-  ],"A maior fatia do Direito no TJSP. Atos processuais e prazos (arts. 188–275) são o coração da prova."),
-  S("normas","Normas internas do TJSP","#64748B","t",[
-    ["Resolução 850/2021 (teletrabalho)","t"],
-    ["Resolução 963/2025 (sistema eproc)","t"],
-    ["LC 1.111/2010 (plano de cargos do TJSP)","t"],
-    ["Regimento Interno do TJSP","t"],
-    ["Normas da Corregedoria (NSCGJ, Tomo I: caps. II, III e XI)","t"]
-  ],"Deixe para a reta final do TJSP e confira no edital do interior quais normas foram mantidas."),
-  S("red","Redação (TJSP)","#C026D3","t",[
-    ["Estrutura dissertativo-argumentativa: introdução, desenvolvimento, conclusão","t"],
-    ["Tese e argumentação com repertório","t"],
-    ["Coesão: conectivos e parágrafos","t"],
-    ["Critérios da VUNESP e motivos de nota zero","t"],
-    ["Treino: 1 redação por semana, corrigida","t"]
-  ],"Eliminatória: precisa de 20/40. Escreva à mão, com tempo marcado, e peça correção sempre que puder."),
-  S("rev","Revisão, questões e simulados","#475569","dctk",[
-    ["Caderno de erros atualizado","dctk"],
+  ],"Em Curitiba a Constituição cai em Legislação e nos Específicos. Para o DMAE, os arts. 37 a 41 já estão em Adm. Pública."),
+  S("rev","Revisão, questões e simulados","#475569","dk",[
+    ["Caderno de erros atualizado","dk"],
     ["Simulado de prova anterior da Fundep","d"],
-    ["Simulado de prova anterior do IBGP","c"],
-    ["Simulado de prova anterior da VUNESP","t"],
-    ["Simulado de prova anterior da FAFIPA","k"]
+    null,null,
+    ["Simulado de prova anterior da FAFIPA","k"],
+    ["Questões de treino FAFIPA deste caderno (aba Guia)","k"]
   ],"Use esta matéria no cronômetro quando fizer questões misturadas, simulados ou revisão do caderno de erros.")
 ];
+// Matérias que existiam antes (Contagem/TJSP): só para o histórico de horas mostrar o nome certo
+const LEGACY={ctg:["Contagem (antigo)","#E4508F"],dadm:["Direito Adm. SP (antigo)","#7C3AED"],dpenal:["Direito Penal (antigo)","#BE123C"],dpp:["Processo Penal (antigo)","#9F1239"],dpc:["Processo Civil (antigo)","#0D9488"],normas:["Normas do TJSP (antigo)","#64748B"],red:["Redação TJSP (antigo)","#C026D3"]};
 
-/* ---------------- Rotinas sugeridas por fase (0=Dom … 6=Sáb) ----------------
-   Os números das fases são internos: 1 = DMAE, 4 = Curitiba, 2 = Contagem, 3 = TJSP */
+/* ---------------- Semanas-modelo sugeridas (0=Dom … 6=Sáb) ---------------- */
 const B=(s,m)=>({s,m});
 const ROUTINES = {
-  1:{0:[B("rev",60),B("cg",60)],1:[B("port",60),B("adm",60),B("mat",60)],2:[B("arq",60),B("rl",60),B("legdmae",60)],3:[B("port",60),B("admpub",60),B("mat",60)],4:[B("adm",60),B("legdmae",45),B("cg",45)],5:[B("port",60),B("admpub",60),B("rl",60)],6:[B("rev",120),B("adm",60),B("legdmae",60)]},
-  4:{0:[B("rev",60),B("legctba",60)],1:[B("admpub",60),B("port",60),B("info",60)],2:[B("dconst",60),B("mat",60),B("arq",60)],3:[B("admpub",60),B("legctba",60),B("info",45)],4:[B("adm",60),B("dconst",60),B("rl",45)],5:[B("port",45),B("admpub",60),B("legctba",45)],6:[B("rev",120),B("admpub",60),B("info",60)]},
-  2:{0:[B("rev",60),B("info",30),B("ctg",30)],1:[B("adm",60),B("port",60),B("admpub",60)],2:[B("arq",60),B("rl",60),B("admpub",60)],3:[B("port",60),B("adm",60),B("admpub",60)],4:[B("adm",60),B("ctg",60),B("info",45)],5:[B("port",45),B("arq",60),B("dconst",45)],6:[B("rev",120),B("adm",60)]},
-  3:{0:[B("rev",60),B("normas",45)],1:[B("dconst",60),B("port",60),B("info",45)],2:[B("dadm",60),B("dpenal",60),B("rl",45)],3:[B("port",60),B("dpc",60),B("mat",45)],4:[B("dpp",60),B("normas",60),B("info",45)],5:[B("dconst",45),B("dpc",60),B("cg",30)],6:[B("rev",120),B("red",60)]}
+  d:{0:[B("rev",60),B("cg",60)],1:[B("port",60),B("adm",60),B("mat",60)],2:[B("arq",60),B("rl",60),B("legdmae",60)],3:[B("port",60),B("admpub",60),B("mat",60)],4:[B("adm",60),B("legdmae",45),B("cg",45)],5:[B("port",60),B("admpub",60),B("rl",60)],6:[B("rev",120),B("adm",60),B("legdmae",60)]},
+  k:{0:[B("rev",60),B("legctba",60)],1:[B("admpub",60),B("port",60),B("info",60)],2:[B("dconst",60),B("mat",60),B("arq",60)],3:[B("admpub",60),B("legctba",60),B("info",45)],4:[B("adm",60),B("dconst",60),B("rl",45)],5:[B("port",45),B("admpub",60),B("legctba",45)],6:[B("rev",120),B("admpub",60),B("info",60)]}
 };
 
-/* ---------------- Guia: fases (na ordem em que acontecem) ----------------
-   "n" é o número interno (usado nas marcações salvas); "lbl" é o que aparece na tela.
-   Itens novos de uma semana entram no fim da lista, para não mudar as marcações. */
+/* ---------------- Datas importantes ---------------- */
+const MILESTONES=[
+  ["2026-10-07","Curitiba: abrem as inscrições (até 05/11) e o pedido de isenção da taxa (até 13/10)"],
+  ["2026-10-13","Curitiba: último dia para pedir isenção da taxa"],
+  ["2026-11-05","Curitiba: último dia de inscrição"],
+  ["2026-11-06","Curitiba: último dia para pagar a taxa (R$ 100)"],
+  ["2026-12-03","Curitiba: sai o local e o horário da prova"],
+  ["2026-12-14","Curitiba: gabarito preliminar"]
+];
+
+/* ---------------- Guia: fases ----------------
+   "n" é o número interno (usado nas marcações salvas). "s" é a segunda-feira da semana. */
 const PHASES = [
-  {n:1, lbl:"Fase 1", title:"Fase 1 — Foco total no DMAE", range:"21/09 a 01/11/2026 · 6 semanas",
-   intro:"Prova em 01/11. Critério: não zerar nenhuma disciplina e fazer ao menos 25 dos 50 pontos. Os Conhecimentos Específicos valem 20 pontos — é onde você mais ganha. Tudo de Português, Administração e Arquivo reaproveita em Curitiba e Contagem.",
+  {n:1, ex:"d", lbl:"Fase 1", title:"Fase 1 — Foco total no DMAE", range:"21/09 a 01/11/2026 · 6 semanas",
+   intro:"Prova em 01/11. Critério: não zerar nenhuma disciplina e fazer ao menos 25 dos 50 pontos. Os Conhecimentos Específicos valem 20 pontos — é onde você mais ganha. Tudo de Português, Administração e Arquivo reaproveita em Curitiba.",
    weeks:[
-    {t:"Semana 1 · 21 a 27/09", items:["Português: interpretação de texto e classes de palavras","Administração: conceitos, funções e teorias","Arquivo: conceitos e as três idades","Matemática: frações, decimais e porcentagem","Legislação: Código de Ética (Decreto 20.179/2023)","Baixar uma prova antiga da Fundep de nível médio e só olhar como ela é"]},
-    {t:"Semana 2 · 28/09 a 04/10", items:["Português: concordância e pontuação","Administração: gestão de pessoas, RH e atendimento","Redação oficial: Manual da Presidência (princípios, pronomes, padrão ofício)","Matemática: razão, proporção e regra de três","Legislação: Estatuto LC 40/1992 (provimento, posse, exercício, estágio)"]},
-    {t:"Semana 3 · 05 a 11/10", items:["Português: crase e regência","Administração: almoxarifado, estoques e compras","Adm. Pública: CF arts. 37 a 41","Matemática: juros simples e compostos; conjuntos","Raciocínio lógico: proposições e conectivos","Legislação: Estatuto (direitos, deveres, penalidades) e Plano de Carreira do DMAE","Curitiba: fazer a inscrição (abre 07/10); pedido de isenção só até 13/10"]},
-    {t:"Semana 4 · 12 a 18/10", items:["Português: colocação pronominal, ortografia e acentuação","Administração: finanças, contabilidade e orçamento","Lei 14.133: princípios, modalidades e contratação direta","Raciocínio lógico: sequências e verdades/mentiras","Conhecimentos gerais: Uberlândia (história, geografia, IBGE)","Legislação: Lei Orgânica de Uberlândia","Primeiro simulado cronometrado (3h30)"]},
-    {t:"Semana 5 · 19 a 25/10", items:["Português: sintaxe, período composto, formação de palavras e variação","Lei 14.133: contratos, fiscalização e sanções","Matemática: estatística, PA/PG, combinatória e probabilidade","Legislação: LC 751/2023 e Decreto 20.288/2023 (estrutura do DMAE)","Conhecimentos gerais: atualidades, Minas Gerais e temas do século XXI","Segundo simulado + revisão do caderno de erros"]},
-    {t:"Semana 6 · 26/10 a 01/11 (prova)", items:["Só revisão: resumos, caderno de erros e lei seca da legislação municipal","Um último simulado até quarta-feira","Conferir local de prova no Cartão de Convocação (Fundep)","Sábado leve e dormir cedo; levar documento com foto e caneta preta","Curitiba: pagar a taxa de inscrição até 06/11 (inscrições vão até 05/11)"]}
+    {s:"2026-09-21", t:"Semana 1 · 21 a 27/09", items:["Português: interpretação de texto e classes de palavras","Administração: conceitos, funções e teorias","Arquivo: conceitos e as três idades","Matemática: frações, decimais e porcentagem","Legislação: Código de Ética (Decreto 20.179/2023)","Baixar uma prova antiga da Fundep de nível médio e só olhar como ela é"]},
+    {s:"2026-09-28", t:"Semana 2 · 28/09 a 04/10", items:["Português: concordância e pontuação","Administração: gestão de pessoas, RH e atendimento","Redação oficial: Manual da Presidência (princípios, pronomes, padrão ofício)","Matemática: razão, proporção e regra de três","Legislação: Estatuto LC 40/1992 (provimento, posse, exercício, estágio)"]},
+    {s:"2026-10-05", t:"Semana 3 · 05 a 11/10", items:["Português: crase e regência","Administração: almoxarifado, estoques e compras","Adm. Pública: CF arts. 37 a 41","Matemática: juros simples e compostos; conjuntos","Raciocínio lógico: proposições e conectivos","Legislação: Estatuto (direitos, deveres, penalidades) e Plano de Carreira do DMAE","Curitiba: fazer a inscrição (abre 07/10); pedido de isenção só até 13/10"]},
+    {s:"2026-10-12", t:"Semana 4 · 12 a 18/10", items:["Português: colocação pronominal, ortografia e acentuação","Administração: finanças, contabilidade e orçamento","Lei 14.133: princípios, modalidades e contratação direta","Raciocínio lógico: sequências e verdades/mentiras","Conhecimentos gerais: Uberlândia (história, geografia, IBGE)","Legislação: Lei Orgânica de Uberlândia","Primeiro simulado cronometrado (3h30)"]},
+    {s:"2026-10-19", t:"Semana 5 · 19 a 25/10", items:["Português: sintaxe, período composto, formação de palavras e variação","Lei 14.133: contratos, fiscalização e sanções","Matemática: estatística, PA/PG, combinatória e probabilidade","Legislação: LC 751/2023 e Decreto 20.288/2023 (estrutura do DMAE)","Conhecimentos gerais: atualidades, Minas Gerais e temas do século XXI","Segundo simulado + revisão do caderno de erros"]},
+    {s:"2026-10-26", t:"Semana 6 · 26/10 a 01/11 (prova)", items:["Só revisão: resumos, caderno de erros e lei seca da legislação municipal","Um último simulado até quarta-feira","Conferir local de prova no Cartão de Convocação (Fundep)","Sábado leve e dormir cedo; levar documento com foto e caneta preta","Curitiba: pagar a taxa de inscrição até 06/11 (inscrições vão até 05/11)"]}
    ]},
-  {n:4, lbl:"Fase 2", title:"Fase 2 — Prefeitura de Curitiba (Agente Administrativo)", range:"02/11 a 13/12/2026 · 6 semanas",
+  {n:4, ex:"k", lbl:"Fase 2", title:"Fase 2 — Prefeitura de Curitiba (Agente Administrativo)", range:"02/11 a 13/12/2026 · 6 semanas",
    intro:"Prova em 13/12, em Curitiba: 40 questões de 2,5 pontos cada. Os Conhecimentos Específicos valem 50 dos 100 pontos; para passar, 60 pontos no total, sem mínimo por matéria. Você chega do DMAE com Português, Administração, Arquivo, 14.133 e art. 37 já vistos — o trabalho novo é Direito Administrativo (atos, bens, serviços), Constitucional, Informática e as leis de Curitiba. O resumo completo está na aba “Edital de Curitiba”.",
    weeks:[
-    {t:"Semana 1 · 02 a 08/11", items:["Direito Administrativo: atos administrativos (requisitos, atributos, anulação e revogação)","Constitucional: arts. 1º a 5º","Informática: Windows 10/11, gerenciamento de arquivos e atalhos","Legislação: Estatuto de Curitiba (Lei 1.656/58) — provimento, posse e exercício","Português: porquês, concordância e pontuação","Confirmar o pagamento da inscrição (até 06/11)"]},
-    {t:"Semana 2 · 09 a 15/11", items:["Direito Administrativo: bens públicos e serviços públicos","Constitucional: arts. 6º a 17, poder constituinte e normas constitucionais","Informática: Word e Excel 2016 em português (atalhos, SOMA, MÉDIA, SE)","Legislação: Lei Orgânica de Curitiba","Raciocínio lógico: porcentagem, juros simples e regra de três"]},
-    {t:"Semana 3 · 16 a 22/11", items:["Processo administrativo: Lei municipal 16.466/24 e PAD no Estatuto (Lei 1.656/58)","Ética, atendimento e Lei 13.460/17 (direitos do usuário)","Legislação: Lei 7.671/91, LAI e prioridade de atendimento (Lei 10.048/00)","Informática: segurança, e-mail, Google Drive e IA generativa","Raciocínio lógico: média, moda, mediana, gráficos e probabilidade"]},
-    {t:"Semana 4 · 23 a 29/11", items:["Revisar 14.133 e improbidade (8.429 com 14.230) por questões","Arquivo: Lei 8.159/91; redação oficial e correspondência comercial","Orçamento público e gestão de pessoas","Legislação: LGPD cap. IV, ECA (arts. 1º a 69) e LINDB (arts. 20 a 30)","Primeiro simulado cronometrado (4h, 40 questões)"]},
-    {t:"Semana 5 · 30/11 a 06/12", items:["Raciocínio lógico: geometria (Tales, circunferência, áreas) e sequências","Informática: Linux Ubuntu e navegadores","CF arts. 18, 19, 29, 30 e 44 a 75","Português: literatura brasileira e figuras de linguagem","Segundo simulado + caderno de erros","Ver local e horário da prova (sai em 03/12) e planejar a viagem"]},
-    {t:"Semana 6 · 07 a 13/12 (prova)", items:["Só revisão: Específicos, lei seca de Curitiba e caderno de erros","Refazer as questões erradas da aba Questões FAFIPA","Viajar com antecedência; levar documento com foto e caneta preta","Sábado leve e dormir cedo"]}
-   ]},
-  {n:2, lbl:"Fase 3", title:"Fase 3 — Contagem (Assistente Administrativo)", range:"14/12/2026 a 24/01/2027 · 6 semanas",
-   intro:"Prova em 24/01/2027: 45 questões, 100 pontos. Os Conhecimentos Específicos são 20 questões com peso 3 = 60 pontos. Português (10 × peso 2 = 20), Raciocínio Lógico (5 × 2 = 10), Informática (5 × 1) e Conhecimentos do Município (5 × 1) completam. Depois de Curitiba, boa parte dos Específicos (14.133, LAI, LGPD, arquivo, Adm. Pública) já estará vista: o foco é revisar no estilo do IBGP e cobrir o que é só de Contagem.",
-   weeks:[
-    {t:"Bloco A · 14/12 a 03/01", items:["Contagem: Lei Orgânica, Estatuto (Lei 2.160/1990) e PCCS (LC 105/2011)","Contagem: história, geografia, economia e símbolos","Específicos: almoxarifado, estoques, inventário e rotinas administrativas","Específicos: revisar 14.133, LAI, LGPD e arquivo com questões do IBGP","Raciocínio lógico: tabelas-verdade, negação, equivalências e quantificadores","Informática: PowerPoint, Microsoft 365 e redes","TJSP (semente): CF art. 5º, 45 min por semana"]},
-    {t:"Bloco B · 04/01 a 24/01 (prova)", items:["Um simulado do IBGP por semana, cronometrado","Revisão dos Específicos pelo caderno de erros","Notícias recentes de Contagem no site da Prefeitura","Última semana só revisão; conferir local de prova"]}
-   ]},
-  {n:3, lbl:"Fase 4", title:"Fase 4 — TJSP (Escrevente, interior)", range:"Depois de Contagem, até o edital do interior",
-   intro:"O edital que você mandou é o da Capital/1ª RAJ (2025). O do interior costuma seguir a mesma estrutura, mas confira quando sair. São 70 questões: Português 16, Direito 30, Conhecimentos Gerais 24. Blocos I e II exigem 50% de acertos cada, e a redação precisa de 20/40.",
-   weeks:[
-    {t:"Ordem sugerida do Direito", items:["Constitucional: arts. 5º a 13, 37 a 41 e 92","Administrativo: Estatuto de SP (10.261/68) e Improbidade (8.429/92)","Penal: crimes contra a fé pública e a Administração","Processo Penal: citações, intimações, procedimentos e recursos","Processo Civil: atos processuais e prazos primeiro, depois o resto","Juizados: Leis 9.099/95 e 12.153/09","Normas internas: resoluções, LC 1.111/2010, Regimento e NSCGJ"]},
-    {t:"Em paralelo, toda semana", items:["1 redação dissertativo-argumentativa com tempo marcado","Questões da VUNESP de Português (estilo diferente da Fundep e do IBGP)","Informática: Microsoft 365 e Teams","Atualidades a partir de 2025 e arts. 1–13 e 34–38 da Lei 13.146/2015"]}
+    {s:"2026-11-02", t:"Semana 1 · 02 a 08/11", items:["Direito Administrativo: atos administrativos (requisitos, atributos, anulação e revogação)","Constitucional: arts. 1º a 5º","Informática: Windows 10/11, gerenciamento de arquivos e atalhos","Legislação: Estatuto de Curitiba (Lei 1.656/58) — provimento, posse e exercício","Português: porquês, concordância e pontuação","Confirmar o pagamento da inscrição (até 06/11)"]},
+    {s:"2026-11-09", t:"Semana 2 · 09 a 15/11", items:["Direito Administrativo: bens públicos e serviços públicos","Constitucional: arts. 6º a 17, poder constituinte e normas constitucionais","Informática: Word e Excel 2016 em português (atalhos, SOMA, MÉDIA, SE)","Legislação: Lei Orgânica de Curitiba","Raciocínio lógico: porcentagem, juros simples e regra de três"]},
+    {s:"2026-11-16", t:"Semana 3 · 16 a 22/11", items:["Processo administrativo: Lei municipal 16.466/24 e PAD no Estatuto (Lei 1.656/58)","Ética, atendimento e Lei 13.460/17 (direitos do usuário)","Legislação: Lei 7.671/91, LAI e prioridade de atendimento (Lei 10.048/00)","Informática: segurança, e-mail, Google Drive e IA generativa","Raciocínio lógico: média, moda, mediana, gráficos e probabilidade"]},
+    {s:"2026-11-23", t:"Semana 4 · 23 a 29/11", items:["Revisar 14.133 e improbidade (8.429 com 14.230) por questões","Arquivo: Lei 8.159/91; redação oficial e correspondência comercial","Orçamento público e gestão de pessoas","Legislação: LGPD cap. IV, ECA (arts. 1º a 69) e LINDB (arts. 20 a 30)","Primeiro simulado cronometrado (4h, 40 questões)"]},
+    {s:"2026-11-30", t:"Semana 5 · 30/11 a 06/12", items:["Raciocínio lógico: geometria (Tales, circunferência, áreas) e sequências","Informática: Linux Ubuntu e navegadores","CF arts. 18, 19, 29, 30 e 44 a 75","Português: literatura brasileira e figuras de linguagem","Segundo simulado + caderno de erros","Ver local e horário da prova (sai em 03/12) e planejar a viagem"]},
+    {s:"2026-12-07", t:"Semana 6 · 07 a 13/12 (prova)", items:["Só revisão: Específicos, lei seca de Curitiba e caderno de erros","Refazer as questões erradas da aba Questões FAFIPA","Viajar com antecedência; levar documento com foto e caneta preta","Sábado leve e dormir cedo"]}
    ]}
 ];
-const phaseByN=n=>PHASES.find(p=>p.n===+n)||PHASES[0];
 
 const OVERLAP = [
-  ["Língua Portuguesa","10 questões (10 pts)","5 questões (12,5 pts)","10 questões × peso 2 (20 pts)","16 questões (desempate)"],
-  ["Matemática","10 questões junto com RL","dentro de RL","dentro de RL","4 questões"],
-  ["Raciocínio Lógico","junto com Matemática","5 questões (12,5 pts)","5 questões × peso 2 (10 pts)","7 questões"],
-  ["Informática","—","5 questões (12,5 pts)","5 questões × peso 1 (5 pts)","9 questões"],
-  ["Administração, arquivo e redação oficial","Específicos: 10 × 2 pts","Específicos: 20 × 2,5 pts (50 pts)","Específicos: 20 × peso 3 (60 pts)","—"],
-  ["Adm. Pública e Licitações (14.133)","dentro dos Específicos","dentro dos Específicos (+ atos, bens, improbidade)","dentro dos Específicos","CF arts. 37–41 dentro de Direito"],
-  ["Legislação municipal","5 questões (Uberlândia/DMAE)","Legislação: 5 questões (Curitiba + CF + leis federais)","dentro de Conhec. do Município","—"],
-  ["Conhecimentos gerais / atualidades","5 questões","—","Conhec. do Município: 5 × peso 1 (5 pts)","4 questões"],
-  ["Direito","—","Constitucional e Administrativo nos Específicos","—","30 questões (6 áreas + normas)"],
-  ["Redação","— (só nível superior)","—","não aparece no quadro da prova objetiva","Eliminatória, mínimo 20/40"]
+  ["Língua Portuguesa","10 questões (10 pts)","5 questões (12,5 pts)"],
+  ["Matemática e Raciocínio Lógico","10 questões juntas (10 pts)","RL: 5 questões (12,5 pts), quase tudo matemática básica"],
+  ["Informática","não cai","5 questões (12,5 pts)"],
+  ["Administração, arquivo e redação oficial","Específicos: 10 questões × 2 pts (20 pts)","Específicos: 20 questões × 2,5 pts (50 pts)"],
+  ["Adm. Pública e Licitações (14.133)","dentro dos Específicos","dentro dos Específicos, junto com atos, bens e improbidade"],
+  ["Constituição","arts. 37 a 41, dentro dos Específicos","em Legislação e nos Específicos (bem mais artigos)"],
+  ["Legislação municipal","5 questões (Uberlândia/DMAE)","Legislação: 5 questões (Curitiba + CF + leis federais)"],
+  ["Conhecimentos gerais / atualidades","5 questões","não cai"],
+  ["Para passar","não zerar nenhuma matéria e fazer 25 dos 50 pontos","60 dos 100 pontos, sem mínimo por matéria"]
 ];
 
 const METHOD = `
 <h3>O ciclo de cada sessão</h3>
 <ol class="prose">
-<li><b>Teoria curta (25–40 min):</b> videoaula ou PDF de um único tópico. Anote só o que você não sabia.</li>
-<li><b>Questões (20–30 min):</b> 10 a 20 questões da banca do próximo concurso sobre aquele tópico.</li>
+<li><b>Teoria curta (25–40 min):</b> videoaula ou PDF do assunto que o Cronograma indicou para o bloco. Anote só o que você não sabia.</li>
+<li><b>Questões (20–30 min):</b> 10 a 20 questões da banca da próxima prova (Fundep para o DMAE, FAFIPA para Curitiba) sobre aquele assunto.</li>
 <li><b>Correção ativa (10 min):</b> cada erro vira uma linha no caderno de erros: o que errei, por quê, qual a regra certa.</li>
-<li><b>Marque o tópico aqui no site:</b> um clique = estudado; dois cliques = revisado.</li>
+<li><b>Marque o assunto:</b> no Cronograma ou em Matérias. Se você usar o cronômetro por 20 min ou mais com o assunto escolhido, ele é marcado sozinho.</li>
 </ol>
 <h3>Revisões que fixam</h3>
-<p class="prose">Revise cada tópico 1 dia, 7 dias e 30 dias depois de estudar. Revisão é rápida: reler as anotações e refazer as questões que errou. No sábado, use o bloco “Revisão, questões e simulados”.</p>
+<p class="prose">Revise cada tópico 1 dia, 7 dias e 30 dias depois de estudar. Revisão é rápida: reler as anotações e refazer as questões que errou. No fim de semana, use o bloco “Revisão, questões e simulados”.</p>
 <h3>Lei seca</h3>
-<p class="prose">Legislação municipal, Lei 14.133, LAI, LGPD e as leis do TJSP se estudam lendo o texto da lei (no site da Câmara, Planalto ou Leis Municipais), com marca-texto em prazos, números, “vedado”, “exceto” e “salvo”. Bancas copiam frases da lei e trocam uma palavra.</p>
+<p class="prose">Legislação de Uberlândia e de Curitiba, Lei 14.133, LAI e LGPD se estudam lendo o texto da lei (no site da Câmara, do Planalto ou do Leis Municipais), com marca-texto em prazos, números, “vedado”, “exceto” e “salvo”. Bancas copiam frases da lei e trocam uma palavra.</p>
 <h3>Simulados</h3>
-<p class="prose">A partir da semana 4 de cada fase, faça provas anteriores inteiras com o tempo real. Provas da Fundep ficam em gestaodeconcursos.com.br; da FAFIPA em fundacaofafipa.org.br; da VUNESP em vunesp.com.br; do IBGP no site da banca. Bancos de questões (como QConcursos ou TEC) permitem filtrar por banca e assunto.</p>
+<p class="prose">A partir da semana 4 de cada fase, faça provas anteriores inteiras com o tempo real. Provas da Fundep ficam em gestaodeconcursos.com.br; da FAFIPA, em fundacaofafipa.org.br. Bancos de questões (como QConcursos ou TEC) permitem filtrar por banca e assunto.</p>
 <h3>Para quem está começando</h3>
 <ul class="prose">
 <li>Constância ganha de maratona: 2h todo dia rendem mais que 8h no domingo.</li>
@@ -1230,6 +1189,11 @@ const pad=n=>String(n).padStart(2,"0");
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 const parseYmd=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
 const todayStr=()=>ymd(new Date());
+const addDays=(k,n)=>{const d=parseYmd(k);d.setDate(d.getDate()+n);return ymd(d)};
+const daysBetween=(a,b)=>Math.round((parseYmd(b)-parseYmd(a))/86400000);
+const mondayOf=k=>{const d=parseYmd(k);d.setDate(d.getDate()-((d.getDay()+6)%7));return ymd(d)};
+const ddmm=k=>k?k.slice(8,10)+"/"+k.slice(5,7):"";
+const brD=k=>k?k.split("-").reverse().join("/"):"";
 const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const fmtHM=sec=>{const m=Math.round((sec||0)/60);const h=Math.floor(m/60),mm=m%60;return h?`${h}h${mm?pad(mm):""}`:`${mm}min`};
 const fmtClock=ms=>{const s=Math.max(0,Math.floor(ms/1000));return `${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)}`};
@@ -1237,8 +1201,9 @@ const MONTHS_PT=["janeiro","fevereiro","março","abril","maio","junho","julho","
 const WD=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
 const WD_FULL=["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
 const fmtDateLong=s=>{const d=parseYmd(s);return `${WD_FULL[d.getDay()]}, ${d.getDate()} de ${MONTHS_PT[d.getMonth()]} de ${d.getFullYear()}`};
-function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.remove("act");t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("show"),2400)}
-/* ---- Desfazer: guarda uma cópia antes da ação e oferece o botão por 8 segundos ---- */
+function toast(msg,ms=2600){const t=$("#toast");t.textContent=msg;t.classList.remove("act");t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("show"),ms)}
+function download(blob,name){const u=URL.createObjectURL(blob);const l=document.createElement("a");l.href=u;l.download=name;l.click();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+/* ---- Desfazer ---- */
 let UNDO=null;
 function snap(ym,keepRunning=true){return {u:JSON.stringify(U),ym:ym||null,m:ym?JSON.stringify(MONTHS[ym]||[]):null,keepRunning}}
 function offerUndo(msg,sn){
@@ -1256,11 +1221,11 @@ async function doUndo(){
 }
 function initials(name){const p=(name||"").trim().split(/\s+/);return ((p[0]||"?")[0]+(p[1]?p[1][0]:"")).toUpperCase()}
 function avatarHTML(p,cls=""){return `<div class="avatar ${cls}">${p&&p.photo?`<img src="${p.photo}" alt="">`:esc(initials(p&&p.name||"?"))}</div>`}
-function daysUntil(dateStr){if(!dateStr)return null;const a=parseYmd(todayStr()),b=parseYmd(dateStr);return Math.round((b-a)/86400000)}
+function daysUntil(dateStr){if(!dateStr)return null;return daysBetween(todayStr(),dateStr)}
 function greetWord(){const h=new Date().getHours();if(h>=5&&h<12)return "Bom dia";if(h>=12&&h<18)return "Boa tarde";return "Boa noite"}
 
 /* ======================================================================
-   Armazenamento (Firebase ou local)
+   Armazenamento (Firebase)
    ====================================================================== */
 let fb=null;
 const Store={
@@ -1311,25 +1276,55 @@ async function saveMonth(ym){
    ====================================================================== */
 let U=null;          // documento do usuário
 let MONTHS={};       // "AAAA-MM" -> [sessões]
-const UI={view:"inicio",calYear:new Date().getFullYear(),calMonth:new Date().getMonth(),subjFilter:"all",guideTab:"mapa",openSubj:null,qf:"all"};
+const UI={view:"inicio",calYear:new Date().getFullYear(),calMonth:new Date().getMonth(),subjFilter:"all",guideTab:"mapa",openSubj:null,qf:"all",ctab:"dia",rex:null,weekOpen:{},ed:null};
 
 function defaultUser(){
-  return {v:1,profile:{name:"",photo:"",phrases:DEFAULT_PHRASES.slice()},
-    settings:{goalMin:180,theme:"auto",avail:{0:120,1:180,2:180,3:180,4:180,5:180,6:240},blockMin:60,autoReorg:true,focus:"auto"},
-    exams:{dmae:"2026-11-01",curitiba:"2026-12-13",contagem:"2027-01-24",tjsp:""},
-    routine:JSON.parse(JSON.stringify(ROUTINES[1])),
+  return {v:2,profile:{name:"",photo:"",phrases:DEFAULT_PHRASES.slice()},
+    settings:{goalMin:180,theme:"auto",avail:{0:120,1:180,2:180,3:180,4:180,5:180,6:240},blockMin:60,autoReorg:true},
+    exams:{dmae:"2026-11-01",curitiba:"2026-12-13"},
+    routines:JSON.parse(JSON.stringify(ROUTINES)),autoPlans:{},
+    plan:{},tasks:{},tmark:{},
     topics:{},guide:{},customSubjects:[],running:null,months:[],
     cur:{calc:null,ans:{},seen:{}}};
 }
-function subjects(){return DEFAULT_SUBJECTS.concat((U.customSubjects||[]).map(c=>({...c,topics:(c.topics||[]).map(t=>[t,c.ex]),custom:true})))}
-function subjById(id){return subjects().find(s=>s.id===id)||{id,name:"Matéria removida",color:"#999",ex:"",topics:[]}}
-function currentPhase(){
-  const t=todayStr();
-  if(U.exams.dmae&&t<=U.exams.dmae)return 1;
-  if(U.exams.curitiba&&t<=U.exams.curitiba)return 4;
-  if(!U.exams.contagem||t<=U.exams.contagem)return 2;
-  return 3;
+/* Converte dados da versão anterior (com TJSP/Contagem e uma rotina só) */
+function normalize(data){
+  const D=defaultUser(), u={...D,...data};
+  u.v=2;
+  u.profile={...D.profile,...(data.profile||{})};
+  u.settings={...D.settings,...(data.settings||{})};
+  u.settings.avail={...D.settings.avail,...(u.settings.avail||{})};
+  delete u.settings.focus;
+  const ex=data.exams||{};
+  u.exams={dmae:ex.dmae||D.exams.dmae,curitiba:ex.curitiba||D.exams.curitiba};
+  u.cur={...D.cur,...(data.cur||{})};
+  u.topics=data.topics||{};u.guide=data.guide||{};u.tmark=data.tmark||{};u.plan=data.plan||{};u.tasks=data.tasks||{};
+  u.months=data.months||[];
+  u.customSubjects=(data.customSubjects||[]).map(c=>({...c,ex:(c.ex||"").replace(/[^dk]/g,"")||"dk"}));
+  u.autoPlans={...(data.autoPlans||{})};
+  if(!data.routines){
+    u.routines=JSON.parse(JSON.stringify(ROUTINES));
+    if(data.routine){
+      const ap=data.autoPlan, which=ap&&(ap.ex==="d"||ap.ex==="k")?ap.ex:(todayStr()<=u.exams.dmae?"d":"k");
+      u.routines[which]=data.routine;
+      if(ap&&ap.ex===which)u.autoPlans[which]=ap;
+    }
+  }else u.routines={d:data.routines.d||JSON.parse(JSON.stringify(ROUTINES.d)),k:data.routines.k||JSON.parse(JSON.stringify(ROUTINES.k))};
+  delete u.routine;delete u.autoPlan;
+  const ok=new Set(DEFAULT_SUBJECTS.map(s=>s.id).concat(u.customSubjects.map(c=>c.id)));
+  const clean=bl=>(bl||[]).filter(b=>b&&ok.has(b.s));
+  for(const x of ["d","k"])for(let d=0;d<7;d++)u.routines[x][d]=clean(u.routines[x][d]);
+  for(const k of Object.keys(u.plan))u.plan[k]=clean(u.plan[k]);
+  return u;
 }
+function subjects(){return DEFAULT_SUBJECTS.concat((U.customSubjects||[]).map(c=>({...c,topics:(c.topics||[]).map(t=>[t,c.ex]),custom:true})))}
+function subjById(id){return subjects().find(s=>s.id===id)||(LEGACY[id]?{id,name:LEGACY[id][0],color:LEGACY[id][1],ex:"",topics:[]}:{id,name:"Matéria removida",color:"#999",ex:"",topics:[]})}
+const examDate=ex=>U.exams[EXAMS[ex].key];
+function examForDate(k){return U.exams.dmae&&k<=U.exams.dmae?"d":"k"}
+function currentExam(){return examForDate(todayStr())}
+function curPhase(){return PHASES.find(p=>p.ex===currentExam())||PHASES[0]}
+const rex=()=>UI.rex||currentExam();
+function curR(){const ex=rex();return U.routines[ex]||(U.routines[ex]={})}
 
 /* ---------- Agregações ---------- */
 function allSessions(){return Object.values(MONTHS).flat()}
@@ -1350,6 +1345,63 @@ function streak(dm){
 }
 function bySubjectTotals(filterFn){
   const t={};for(const s of allSessions()){if(filterFn&&!filterFn(s))continue;t[s.subj]=(t[s.subj]||0)+s.sec}return t;
+}
+
+/* ======================================================================
+   Cronograma: blocos de cada dia, assuntos e datas
+   ====================================================================== */
+function baseBlocks(k){
+  if(k===U.exams.dmae||k===U.exams.curitiba)return [];
+  return ((U.routines[examForDate(k)]||{})[parseYmd(k).getDay()]||[]).map(b=>({s:b.s,m:b.m}));
+}
+function blocksFor(k){return U.plan[k]||baseBlocks(k)}
+function eventsFor(k){
+  const ev=[];
+  if(k===U.exams.dmae)ev.push({t:"Prova do DMAE",x:1});
+  if(k===U.exams.curitiba)ev.push({t:"Prova de Curitiba",x:1});
+  if(U.exams.dmae&&k===addDays(U.exams.dmae,-1))ev.push({t:"Véspera do DMAE: revisão leve, separar documento com foto e caneta preta, dormir cedo"});
+  if(U.exams.curitiba&&k===addDays(U.exams.curitiba,-1))ev.push({t:"Véspera de Curitiba: viagem, revisão leve e dormir cedo"});
+  MILESTONES.forEach(m=>{if(m[0]===k)ev.push({t:m[1]})});
+  return ev;
+}
+function agendaEnd(){return addDays(mondayOf(U.exams.curitiba||U.exams.dmae||todayStr()),6)}
+/* Distribui o próximo assunto pendente de cada matéria pelos blocos, dia a dia.
+   Assunto marcado sai da fila; nos 6 dias antes da prova só entra revisão. */
+function buildAgenda(from,to){
+  const today=todayStr(), used=new Set(), days={}, cover={};
+  const nextTopic=(s,ex,k)=>{
+    for(let i=0;i<s.topics.length;i++){const t=s.topics[i];if(!t||!t[1].includes(ex))continue;
+      const key=s.id+":"+i;if(used.has(key))continue;
+      if(U.topics[key]&&!(k===today&&U.tmark[key]===today))continue;
+      used.add(key);return i}
+    return null;
+  };
+  for(let k=from;k<=to;k=addDays(k,1)){
+    const ex=examForDate(k), ed=examDate(ex), left=ed?daysBetween(k,ed):99, past=k<today;
+    days[k]=blocksFor(k).map(b=>{
+      const o={s:b.s,m:b.m};if(past)return o;
+      if(b.s==="rev"){o.label=left>=0&&left<=6?"Revisão final: caderno de erros e questões":"Caderno de erros e questões misturadas";return o}
+      if(left>=0&&left<=6){o.label="Revisão e questões (sem assunto novo)";return o}
+      const sj=subjById(b.s), i=nextTopic(sj,ex,k);
+      if(i==null)o.label="Questões e revisão da matéria";else{o.ti=i;o.label=sj.topics[i][0]}
+      return o;
+    });
+    if(k===U.exams.dmae)cover.d=new Set(used);
+    if(k===U.exams.curitiba)cover.k=new Set(used);
+  }
+  return {days,cover};
+}
+function coverage(ex,cov){
+  const miss={};let total=0,inPlan=0;
+  for(const s of subjects()){if(s.id==="rev")continue;
+    s.topics.forEach((t,i)=>{if(!t||!t[1].includes(ex))return;const key=s.id+":"+i;if(U.topics[key])return;total++;
+      if(cov&&cov.has(key))inPlan++;else miss[s.id]=(miss[s.id]||0)+1})}
+  return {total,inPlan,miss};
+}
+function upcoming(n){
+  const out=[], today=todayStr();let k=addDays(today,1);const end=addDays(today,120);
+  while(k<=end&&out.length<n){eventsFor(k).forEach(e=>out.push({k,...e}));(U.tasks[k]||[]).forEach(t=>{if(!t.done)out.push({k,t:t.t})});k=addDays(k,1)}
+  return out.slice(0,n);
 }
 
 /* ======================================================================
@@ -1383,8 +1435,11 @@ async function timerStop(){
   const date=r.date||todayStr(), sn=snap(date.slice(0,7),false);
   U.running=null;saveUser(true);
   if(sec<30){toast("Sessão muito curta — não foi registrada.");render();return}
+  let extra="";
+  if(r.topic!==""&&r.topic!=null&&sec>=20*60){const key=r.subj+":"+r.topic;
+    if(!U.topics[key]){U.topics[key]=1;U.tmark[key]=todayStr();saveUser();extra=" · assunto marcado"}}
   await addSession({id:newId(),date,begin:r.begin,sec,subj:r.subj,topic:r.topic||"",note});
-  render();offerUndo(`Registrado: ${fmtHM(sec)} de ${subjById(r.subj).name}`,sn);
+  render();offerUndo(`Registrado: ${fmtHM(sec)} de ${subjById(r.subj).name}${extra}`,sn);
 }
 function timerDiscard(){const sn=snap(null,false);U.running=null;saveUser(true);render();offerUndo("Tempo descartado.",sn)}
 function beep(){
@@ -1403,7 +1458,7 @@ setInterval(()=>{
 },1000);
 
 /* ======================================================================
-   Render: shell
+   Render: shell e tema
    ====================================================================== */
 const mqDark=matchMedia("(prefers-color-scheme: dark)");
 function themePref(){return (U&&U.settings.theme)||localStorage.getItem(LS+"theme")||"auto"}
@@ -1420,7 +1475,7 @@ function toggleTheme(btn){
   const apply=()=>{localStorage.setItem(LS+"theme",next);if(U){U.settings.theme=next;saveUser();const sel=$("#sTheme");if(sel)sel.value=next}applyTheme()};
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(reduce){apply();return}
-  if(!document.startViewTransition){ // navegadores sem View Transitions: troca suave de cores
+  if(!document.startViewTransition){
     const h=document.documentElement;h.classList.add("theming");apply();setTimeout(()=>h.classList.remove("theming"),500);return;
   }
   const r=btn.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2;
@@ -1440,7 +1495,7 @@ function render(){
   applyTheme();renderMe();
   $$("#menu a").forEach(a=>a.classList.toggle("on",a.dataset.v===UI.view));
   const main=$("#main");
-  const V={inicio:viewHome,calendario:viewCal,materias:viewSubj,rotina:viewRoutine,guia:viewGuide,perfil:viewProfile}[UI.view]||viewHome;
+  const V={inicio:viewHome,cronograma:viewCrono,calendario:viewCal,materias:viewSubj,guia:viewGuide,perfil:viewProfile}[UI.view]||viewHome;
   main.innerHTML=V();
   if(!U.running)document.title="Caderno de Estudos";
   afterRender();
@@ -1450,6 +1505,20 @@ function afterRender(){
   const tsel=$("#tSubj");if(tsel)fillTopicSelect();
 }
 
+/* ---------- Pedaços do cronograma usados em várias telas ---------- */
+function agBlock(k,b,v){
+  const sj=subjById(b.s), done=(v&&v.by[b.s])||0, today=todayStr();
+  const key=b.ti!=null?b.s+":"+b.ti:null, ok=key&&U.topics[key];
+  return `<div class="blk" style="--c:${sj.color}">
+    <div class="row" style="gap:6px;flex-wrap:nowrap"><span class="bn">${esc(sj.name)}</span><span class="spacer"></span><span class="tiny muted" style="white-space:nowrap">${fmtHM(b.m*60)}</span></div>
+    ${b.label?(key?`<label class="ag-t ${ok?"ok":""}"><input type="checkbox" data-act="agtopic" data-key="${key}" ${ok?"checked":""} aria-label="Marcar assunto como estudado"><span>${esc(b.label)}</span></label>`:`<p class="ag-t"><span>${esc(b.label)}</span></p>`):""}
+    ${k<=today&&done?`<div class="prog" style="height:5px;margin-top:7px"><span style="width:${Math.min(100,done/(b.m*60)*100)}%;--c:${sj.color}"></span></div><span class="tiny muted">${fmtHM(done)} feitos</span>`:""}
+    ${k===today?`<div><button class="btn sm ghost go" data-act="quickstart" data-s="${b.s}" data-t="${b.ti??""}" ${U.running?"disabled":""}>▶ Estudar</button></div>`:""}
+  </div>`;
+}
+function evHTML(ev){return ev.map(e=>`<div class="ev ${e.x?"exam":""}">${e.x?"🎯 ":"📌 "}${esc(e.t)}</div>`).join("")}
+function taskHTML(k){return (U.tasks[k]||[]).map((t,i)=>`<label class="chk task ${t.done?"done":""}"><input type="checkbox" data-act="taskchk" data-k="${k}" data-i="${i}" ${t.done?"checked":""}><span>${esc(t.t)}</span></label>`).join("")}
+
 /* ---------- Início ---------- */
 function viewHome(){
   const p=U.profile, name=(p.name||"").split(" ")[0]||"";
@@ -1458,24 +1527,22 @@ function viewHome(){
   const phrase=UI.phrase.replaceAll("{nome}",name||"você");
   const dm=dayMap(), today=todayStr(), td=dm[today]||{total:0,by:{}};
   const goal=(U.settings.goalMin||180)*60;
-  const wd=new Date().getDay(), plan=U.routine[wd]||[];
-  const planned={};plan.forEach(b=>planned[b.s]=(planned[b.s]||0)+b.m*60);
-  const ph=currentPhase(), PH=phaseByN(ph);
+  const items=buildAgenda(today,today).days[today]||[];
+  const ev=eventsFor(today), PH=curPhase();
 
-  // semana (seg a dom)
   const now=new Date(), monday=new Date(now);monday.setDate(now.getDate()-((now.getDay()+6)%7));
   let wkMax=1;const wkDays=[];
   for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);const k=ymd(d);const v=dm[k]||{total:0,by:{}};wkDays.push({k,d,v});wkMax=Math.max(wkMax,v.total)}
   const wkTotal=wkDays.reduce((a,x)=>a+x.v.total,0);
-  const monthKey=today.slice(0,7);
-  const mTotal=(MONTHS[monthKey]||[]).reduce((a,s)=>a+s.sec,0);
+  const mTotal=(MONTHS[today.slice(0,7)]||[]).reduce((a,s)=>a+s.sec,0);
 
-  const cds=[["d",U.exams.dmae],["k",U.exams.curitiba],["c",U.exams.contagem],["t",U.exams.tjsp]].map(([k,dt])=>{
-    const n=daysUntil(dt);
+  const cds=["d","k"].map(k=>{
+    const n=daysUntil(examDate(k));
     if(n===null)return `<span class="cd"><span>${EX_SHORT[k]}</span><span class="small muted">data a definir</span></span>`;
     if(n<0)return `<span class="cd"><span>${EX_SHORT[k]}</span><span class="small muted">prova realizada</span></span>`;
     return `<span class="cd ${n<=45?"soon":""}"><b>${n===0?"Hoje!":n}</b><span>${n===0?"":n===1?"dia":"dias"} · ${EX_SHORT[k]}</span></span>`;
   }).join("");
+  const up=upcoming(5);
 
   return `
   <section class="hello">
@@ -1491,7 +1558,7 @@ function viewHome(){
         <div class="stats"><div class="stat"><b>${fmtHM(wkTotal)}</b><span class="small muted">na semana</span></div>
         <div class="stat"><b>${fmtHM(mTotal)}</b><span class="small muted">em ${MONTHS_PT[new Date().getMonth()]}</span></div>
         <div class="stat"><b>${streak(dm)}</b><span class="small muted">dias seguidos</span></div></div>
-        <div class="week">${wkDays.map(x=>`<div class="col" data-day="${x.k}" title="">${Object.entries(x.v.by).map(([s,sec])=>`<span style="height:${sec/wkMax*100}%;background:${subjById(s).color}"></span>`).join("")}</div>`).join("")}</div>
+        <div class="week">${wkDays.map(x=>`<div class="col" data-day="${x.k}">${Object.entries(x.v.by).map(([s,sec])=>`<span style="height:${sec/wkMax*100}%;background:${subjById(s).color}"></span>`).join("")}</div>`).join("")}</div>
         <div class="week lbl" style="height:auto">${wkDays.map(x=>`<div>${WD[x.d.getDay()]}<b>${x.v.total?fmtHM(x.v.total):"–"}</b></div>`).join("")}</div>
       </div>
     </div>
@@ -1503,18 +1570,16 @@ function viewHome(){
         ${td.total>=goal?`<p class="small" style="color:var(--ok);font-weight:700;margin-top:6px">Meta do dia cumprida! 🎉</p>`:""}
       </div>
       <div class="card">
-        <h3>Rotina de ${WD_FULL[wd].toLowerCase()}</h3>
-        ${plan.length?Object.entries(planned).map(([s,sec])=>{const d=td.by[s]||0,sj=subjById(s),pc=Math.min(100,d/sec*100);
-          return `<div class="plan-item ${pc>=100?"done":""}"><span class="dot" style="--c:${sj.color}"></span><span class="nm">${esc(sj.name)}</span>
-          <button class="btn sm ghost" data-act="quickstart" data-s="${s}" ${U.running?"disabled":""}>▶</button>
-          <div class="prog"><span style="width:${pc}%;--c:${sj.color}"></span></div>
-          <span class="tiny muted" style="grid-column:2/4">${fmtHM(d)} de ${fmtHM(sec)}</span></div>`}).join("")
-        :`<p class="muted">Nada planejado para hoje. <a href="#rotina">Monte sua rotina</a>.</p>`}
+        <div class="row" style="margin-bottom:10px"><h3 style="margin:0">Plano de hoje</h3><span class="spacer"></span><a class="small" href="#cronograma" style="color:var(--ink2)">ver cronograma</a></div>
+        ${evHTML(ev)}
+        ${items.length?items.map(b=>agBlock(today,b,td)).join(""):`<p class="muted">${ev.some(e=>e.x)?"Dia de prova. Boa sorte! 🍀":"Nada planejado para hoje."} <a href="#cronograma">Ajustar no cronograma</a>.</p>`}
+        ${taskHTML(today)}
       </div>
       <div class="card">
-        <h3>Onde você está</h3>
-        <p><b>${esc(PH.title)}</b><br><span class="muted small">${esc(PH.range)}</span></p>
-        <div class="row"><a class="btn sm" href="#guia" data-act="gotab" data-t="fases">Abrir o guia desta fase</a>
+        <h3>Próximos compromissos</h3>
+        ${up.length?up.map(x=>{const n=daysBetween(today,x.k);return `<div class="up"><span class="d">${ddmm(x.k)}<small>${n===1?"amanhã":"em "+n+" dias"}</small></span><span>${x.x?"🎯 <b>"+esc(x.t)+"</b>":esc(x.t)}</span></div>`}).join(""):`<p class="muted small">Nada nos próximos meses.</p>`}
+        <p class="small muted" style="margin:12px 0 8px">Você está na <b>${esc(PH.lbl)}</b>: ${esc(PH.title.split("— ")[1]||PH.title)}.</p>
+        <div class="row"><a class="btn sm" href="#guia" data-act="gotab" data-t="fases">Guia desta fase</a>
         <a class="btn sm ghost" href="#guia" data-act="gotab" data-t="curitiba">Edital de Curitiba</a></div>
       </div>
     </div>
@@ -1524,7 +1589,7 @@ function timerCard(){
   const r=U.running;
   const subs=subjects();
   if(!r){
-    const last=UI.lastSubj||(U.routine[new Date().getDay()]||[])[0]?.s||"port";
+    const last=UI.lastSubj||(blocksFor(todayStr())[0]||{}).s||"port";
     return `<div class="card timer">
       <h3>Cronômetro</h3>
       <div class="field"><label for="tSubj">Matéria</label>
@@ -1555,7 +1620,199 @@ function timerCard(){
 }
 function fillTopicSelect(){
   const sj=subjById($("#tSubj").value);
-  $("#tTopic").innerHTML=`<option value="">— Geral —</option>`+sj.topics.map((t,i)=>`<option value="${i}">${esc(t[0])}</option>`).join("");
+  $("#tTopic").innerHTML=`<option value="">— Geral —</option>`+sj.topics.map((t,i)=>t?`<option value="${i}">${esc(t[0])}</option>`:"").join("");
+}
+
+/* ---------- Cronograma ---------- */
+function viewCrono(){
+  const tab=UI.ctab||"dia";
+  return `<div class="view-head"><h1>Cronograma</h1></div>
+    <div class="tabs">${[["dia","Dia a dia"],["semana","Semana-modelo"]].map(([k,l])=>`<button class="chip ${tab===k?"on":""}" data-act="ctab" data-t="${k}">${l}</button>`).join("")}</div>
+    ${tab==="dia"?cronoDays():cronoWeek()}`;
+}
+function guideWeekHTML(w){
+  for(const p of PHASES){const wi=p.weeks.findIndex(x=>x.s===w);if(wi<0)continue;const W=p.weeks[wi];
+    const ids=W.items.map((_,ii)=>`f${p.n}w${wi}i${ii}`), done=ids.filter(id=>U.guide[id]).length;
+    return `<div class="card goals"><div class="row"><b style="font-family:var(--f-ui)">Metas desta semana</b><span class="small muted">${done}/${ids.length} · do Guia, ${esc(p.lbl)}</span></div>
+      <div class="goal-list">${W.items.map((it,ii)=>`<label class="chk ${U.guide[ids[ii]]?"done":""}"><input type="checkbox" data-act="gchk" data-id="${ids[ii]}" ${U.guide[ids[ii]]?"checked":""}><span>${esc(it)}</span></label>`).join("")}</div></div>`}
+  return "";
+}
+function dayCard(k,items,dmap){
+  const today=todayStr(), d=parseYmd(k), past=k<today, v=dmap[k]||{total:0,by:{}};
+  const ev=eventsFor(k), mins=items.reduce((a,b)=>a+b.m,0);
+  return `<div class="rday ${k===today?"today":""} ${past?"past":""}">
+    <h4><span>${WD_FULL[d.getDay()]}<span class="dt">${ddmm(k)}</span></span><span class="small muted">${mins?fmtHM(mins*60):""}</span></h4>
+    ${evHTML(ev)}
+    ${U.plan[k]?`<p style="margin:0 0 6px"><span class="tag adj" style="margin:0">dia ajustado</span></p>`:""}
+    ${items.length?items.map(b=>agBlock(k,b,v)).join(""):`<p class="empty-day">${ev.some(e=>e.x)?"Boa prova! 🍀":"Folga."}</p>`}
+    ${taskHTML(k)}
+    ${past?`<p class="tiny muted" style="margin:4px 0 0">Estudado: <b>${v.total?fmtHM(v.total):"nada registrado"}</b></p>`:""}
+    <button class="btn sm ghost" style="width:100%;justify-content:center;margin-top:8px" data-act="editday" data-k="${k}">Editar dia</button>
+  </div>`;
+}
+function cronoDays(){
+  const today=todayStr(), from=mondayOf(today);
+  let end=agendaEnd();if(end<addDays(from,27))end=addDays(from,27);
+  const {days,cover}=buildAgenda(from,end), dmap=dayMap();
+  const exs=["d","k"].filter(ex=>examDate(ex)&&examDate(ex)>=today);
+  const cov=exs.map((ex,ix)=>{
+    const dt=examDate(ex), c=coverage(ex,cover[ex]), n=daysBetween(today,dt);
+    const start=ex==="d"?today:(addDays(U.exams.dmae,1)>today?addDays(U.exams.dmae,1):today);
+    let mins=0;for(const [k,it] of Object.entries(days))if(k>=start&&k<=dt)mins+=it.reduce((a,b)=>a+b.m,0);
+    const miss=Object.entries(c.miss).sort((a,b)=>b[1]-a[1]);
+    return `<div class="cov ${ix===0?"first":""}">
+      <div class="row"><b style="font-family:var(--f-ui)">${EXAMS[ex].name}</b><span class="small muted">${brD(dt)} · ${n===0?"hoje":n+(n===1?" dia":" dias")} · ${fmtHM(mins*60)} planejadas nesta fase</span></div>
+      <div class="prog" style="margin:8px 0 6px"><span style="width:${c.total?c.inPlan/c.total*100:100}%;--c:${ex==="d"?"#0EA5E9":"#16A34A"}"></span></div>
+      <p class="small" style="margin:0">${c.total?`O cronograma tem lugar para <b>${c.inPlan} dos ${c.total}</b> assuntos que faltam${ex==="k"?" (conta também o que você estudar para o DMAE)":""}.`:"Todos os assuntos já foram marcados como estudados. Agora é revisão e questões."}
+      ${miss.length?` Ficam sem horário: ${miss.map(([s,q])=>`${esc(subjById(s).name)} (${q})`).join(", ")}.`:""}</p>
+    </div>`}).join("");
+  let weeks="";
+  for(let w=from;w<=end;w=addDays(w,7)){
+    const keys=[0,1,2,3,4,5,6].map(i=>addDays(w,i)), last=keys[6];
+    const mins=keys.reduce((a,k)=>a+(days[k]||[]).reduce((x,b)=>x+b.m,0),0);
+    const isCur=w===from, open=UI.weekOpen[w]??(w<=addDays(from,7));
+    let tag;
+    if(U.exams.dmae>=w&&U.exams.dmae<=last)tag="🎯 semana da prova do DMAE";
+    else if(U.exams.curitiba>=w&&U.exams.curitiba<=last)tag="🎯 semana da prova de Curitiba";
+    else tag="Foco: "+EX_SHORT[examForDate(w)];
+    weeks+=`<details class="wk-ag" data-w="${w}" ${open?"open":""}><summary><span class="wk-t">${ddmm(w)} a ${ddmm(last)}</span>${isCur?`<span class="pill-now">esta semana</span>`:""}<span class="small muted">${tag}</span><span class="spacer"></span><span class="small muted">${fmtHM(mins*60)} planejadas</span></summary>
+      ${guideWeekHTML(w)}<div class="rout">${keys.map(k=>dayCard(k,days[k]||[],dmap)).join("")}</div></details>`;
+  }
+  return `<div class="card" style="margin-bottom:16px">
+    <h3>Seu cronograma até as provas</h3>
+    ${cov?cov+`<p class="small muted" style="margin:4px 0 0">Para caber mais assuntos, aumente o tempo na aba Semana-modelo ou ajuste dias específicos com “Editar dia”.</p>`:`<p class="muted">As duas provas já passaram. Se precisar, atualize as datas em Perfil.</p>`}
+    <div class="row" style="margin-top:12px"><button class="btn sm" data-act="newtask">+ Tarefa ou lembrete</button><button class="btn sm ghost" data-act="ics">Baixar para o Google Agenda (.ics)</button></div>
+    <p class="tiny muted" style="margin:10px 0 0">Cada bloco traz o próximo assunto da fila da matéria. Marcou como estudado (aqui, em Matérias ou estudando 20 min ou mais com o assunto no cronômetro), ele sai da fila e os dias seguintes se ajustam sozinhos. Nos 6 dias antes de cada prova não entra assunto novo, só revisão.</p>
+  </div>${weeks}`;
+}
+
+/* ---------- Organizador automático (semana-modelo) ----------
+   Peso de cada matéria = pontos que ela vale na prova.
+   O que falta estudar pesa mais; matéria toda estudada fica com ~25% do peso. */
+const EXAM_WEIGHTS={
+  d:{port:10,rl:3.5,mat:5,matav:1.5,cg:5,legdmae:5,adm:8,arq:5,admpub:7},
+  k:{port:12.5,rl:6,mat:6.5,info:12.5,legctba:8,dconst:12,admpub:20,adm:12,arq:10}
+};
+function remainingInfo(s,ex){
+  const idx=s.topics.map((_,i)=>i).filter(i=>s.topics[i]&&s.topics[i][1].includes(ex));
+  if(!idx.length)return {n:0,nw:0,rv:0,frac:1};
+  let nw=0,rv=0;idx.forEach(i=>{const v=U.topics[s.id+":"+i]||0;if(!v)nw++;else if(v===1)rv++});
+  return {n:idx.length,nw,rv,frac:(nw+0.4*rv)/idx.length};
+}
+function studiedCount(ex){let n=0;for(const s of subjects())s.topics.forEach((t,i)=>{if(t&&t[1].includes(ex)&&U.topics[s.id+":"+i])n++});return n}
+function buildAutoRoutine(ex,avail,B){
+  const W=EXAM_WEIGHTS[ex]||{};
+  const subs=subjects().filter(s=>s.id!=="rev"&&(W[s.id]!=null||(s.custom&&s.ex.includes(ex))));
+  const cap={};let total=0;for(let d=0;d<7;d++){cap[d]=Math.max(0,+avail[d]||0);total+=cap[d]}
+  if(total<30)return null;
+  const revMin=total>=300?Math.round(total*.15/15)*15:0;
+  const studyMin=total-revMin;
+  const rows=subs.map(s=>{const r=remainingInfo(s,ex),w=W[s.id]??3;return {id:s.id,w,r,score:w*(0.25+0.75*r.frac)}});
+  const sum=rows.reduce((a,x)=>a+x.score,0)||1;
+  rows.forEach(x=>{const m=studyMin*x.score/sum;x.min=m<20?0:Math.max(30,Math.round(m/15)*15)});
+  let diff=studyMin-rows.reduce((a,x)=>a+x.min,0), guard=200;
+  while(Math.abs(diff)>=15&&guard--){const cand=rows.filter(x=>x.min>0&&(diff>0||x.min>30)).sort((a,b)=>b.score-a.score);if(!cand.length)break;
+    const k=diff>0?0:cand.length-1;cand[k].min+=diff>0?15:-15;diff+=diff>0?-15:15}
+  const split=(m,max)=>{const out=[];while(m>0){if(m>=max+30){out.push(max);m-=max}else{out.push(m);m=0}}return out};
+  const blocks=[];
+  split(revMin,120).forEach(m=>blocks.push({s:"rev",m,w:0}));
+  rows.forEach(x=>split(x.min,B).forEach(m=>blocks.push({s:x.id,m,w:x.w})));
+  blocks.sort((a,b)=>(a.s==="rev"?-1:0)-(b.s==="rev"?-1:0)||b.m-a.m||b.w-a.w);
+  const plan={0:[],1:[],2:[],3:[],4:[],5:[],6:[]};
+  for(const bl of blocks){
+    let best=-1,bs=-Infinity;
+    for(let d=0;d<7;d++){if(cap[d]<30)continue;
+      let sc=Math.min(cap[d],bl.m)*10+cap[d];
+      if(plan[d].some(x=>x.s===bl.s))sc-=5000;
+      if(plan[(d+6)%7].some(x=>x.s===bl.s)||plan[(d+1)%7].some(x=>x.s===bl.s))sc-=300;
+      if(bl.s==="rev"&&(d===0||d===6))sc+=3000;
+      if(sc>bs){bs=sc;best=d}}
+    if(best<0)continue;
+    const m=Math.min(bl.m,Math.floor(cap[best]/15)*15);if(m<30)continue;
+    const same=plan[best].find(x=>x.s===bl.s);
+    if(same)same.m+=m;else plan[best].push({s:bl.s,m,w:bl.w});
+    cap[best]-=m;
+  }
+  for(let d=0;d<7;d++){
+    if(cap[d]>=15&&plan[d].length){plan[d].sort((a,b)=>b.m-a.m)[0].m+=Math.floor(cap[d]/15)*15}
+    plan[d].sort((a,b)=>(a.s==="rev")-(b.s==="rev")||b.w-a.w);
+    plan[d]=plan[d].map(({s,m})=>({s,m}));
+  }
+  const weekly={};for(let d=0;d<7;d++)plan[d].forEach(b=>weekly[b.s]=(weekly[b.s]||0)+b.m);
+  return {plan,summary:{ex,at:todayStr(),studied:studiedCount(ex),B,
+    rows:rows.map(x=>({id:x.id,w:x.w,n:x.r.n,nw:x.r.nw,rv:x.r.rv,min:weekly[x.id]||0})).sort((a,b)=>b.min-a.min),rev:weekly.rev||0}};
+}
+function runAutoRoutine(ex){
+  const res=buildAutoRoutine(ex,U.settings.avail,U.settings.blockMin||60);
+  if(!res){toast("Coloque pelo menos 30 minutos disponíveis na semana.");return false}
+  U.routines[ex]=res.plan;U.autoPlans[ex]=res.summary;return true;
+}
+function stalePlanReason(ex){
+  const ap=U.autoPlans[ex];if(!ap)return "";
+  const d=studiedCount(ex)-ap.studied;
+  return d>=5?`Você marcou ${d} assuntos como estudados desde a última organização.`:"";
+}
+const rangeOf=x=>x==="d"?`até ${ddmm(U.exams.dmae)}`:`${ddmm(addDays(U.exams.dmae,1))} a ${ddmm(U.exams.curitiba)}`;
+const hoursOpts=Array.from({length:25},(_,i)=>i*30);
+function cronoWeek(){
+  const ex=rex(), R=U.routines[ex]||{}, order=[1,2,3,4,5,6,0], wd=new Date().getDay(), st=U.settings;
+  const total=order.reduce((a,d)=>a+(R[d]||[]).reduce((x,b)=>x+b.m,0),0);
+  const availTotal=order.reduce((a,d)=>a+(+st.avail[d]||0),0);
+  const ap=U.autoPlans[ex], stale=stalePlanReason(ex), nome=ex==="d"?"do DMAE":"de Curitiba";
+  return `
+  <div class="row" style="margin-bottom:10px"><div class="chips">${["d","k"].map(x=>`<button class="chip ${ex===x?"on":""}" data-act="rex" data-x="${x}">${EX_SHORT[x]} · ${rangeOf(x)}</button>`).join("")}</div><span class="spacer"></span><span class="muted small">${fmtHM(total*60)} por semana</span></div>
+  <p class="small muted" style="margin:0 0 14px">Esta semana se repete em todos os dias ${ex==="d"?"até a prova do DMAE":"entre o DMAE e a prova de Curitiba"}. Para mudar só um dia, use “Editar dia” na aba Dia a dia.</p>
+  <div class="card" style="margin-bottom:16px">
+    <h3>Organizar automaticamente</h3>
+    <p class="small muted" style="margin:0">Distribui as matérias pelo peso de cada uma na prova ${nome}, pelo que você já marcou em Matérias e pelo tempo que você tem em cada dia. É uma sugestão: depois dá para mudar qualquer bloco.</p>
+    <p class="small" style="margin:12px 0 0;font-family:var(--f-ui);font-weight:600">Quanto tempo você tem em cada dia</p>
+    <div class="avail">${order.map(d=>`<label>${WD[d]}<select data-avail="${d}">${hoursOpts.map(m=>`<option value="${m}" ${(+st.avail[d]||0)===m?"selected":""}>${m?fmtHM(m*60):"folga"}</option>`).join("")}</select></label>`).join("")}</div>
+    <div class="row" style="gap:14px 18px; margin-bottom:12px">
+      <span class="row small" style="gap:6px"><span class="muted">Blocos de</span>
+        <span class="segmented">${[45,60,90].map(v=>`<button data-act="blocklen" data-v="${v}" class="${(st.blockMin||60)===v?"on":""}">${v} min</button>`).join("")}</span></span>
+      <label class="chk small" style="padding:0"><input type="checkbox" id="rAuto" ${st.autoReorg?"checked":""}><span>Reorganizar sozinho quando eu mudar o tempo disponível</span></label>
+    </div>
+    <div class="row"><button class="btn primary" data-act="autoroutine">Organizar a semana ${nome}</button><span class="small muted">${fmtHM(availTotal*60)} disponíveis · substitui a semana atual (dá para desfazer)</span></div>
+    ${stale?`<div class="notice"><span>${esc(stale)} Quer reorganizar?</span><button class="btn sm primary" data-act="autoroutine">Reorganizar</button></div>`:""}
+    ${ap?`<details style="margin-top:12px"><summary class="small" style="cursor:pointer">Como o tempo foi dividido (em ${brD(ap.at)})</summary>
+      <table class="plan-tbl"><thead><tr><th>Matéria</th><th>Peso na prova</th><th>Falta estudar</th><th class="n">Por semana</th></tr></thead><tbody>
+      ${ap.rows.map(r=>{const sj=subjById(r.id);return `<tr><td><span class="row" style="gap:.4em;flex-wrap:nowrap"><span class="dot" style="--c:${sj.color}"></span>${esc(sj.name)}</span></td><td>${r.w} pts</td><td>${r.n?`${r.nw} de ${r.n} assuntos`:"—"}</td><td class="n">${r.min?fmtHM(r.min*60):"fica de fora"}</td></tr>`}).join("")}
+      ${ap.rev?`<tr><td>Revisão, questões e simulados</td><td>—</td><td>—</td><td class="n">${fmtHM(ap.rev*60)}</td></tr>`:""}
+      </tbody></table></details>`:""}
+  </div>
+  <div class="rout">${order.map(d=>{const bl=R[d]||[];const m=bl.reduce((a,b)=>a+b.m,0);
+    return `<div class="rday ${d===wd&&examForDate(todayStr())===ex?"today":""}"><h4><span>${WD_FULL[d]}</span><span class="small muted">${m?fmtHM(m*60):""}</span></h4>
+    ${bl.length?"":`<p class="empty-day">Dia de folga.</p>`}
+    ${bl.map((b,i)=>{const sj=subjById(b.s);return `<div class="blk" style="--c:${sj.color}">
+      <button class="nm" data-act="editblk" data-d="${d}" data-i="${i}" title="Editar bloco">${esc(sj.name)}</button>
+      <div class="ctl"><button class="step" data-act="stepblk" data-d="${d}" data-i="${i}" data-v="-15" aria-label="Menos 15 minutos">−</button>
+      <span class="m">${fmtHM(b.m*60)}</span>
+      <button class="step" data-act="stepblk" data-d="${d}" data-i="${i}" data-v="15" aria-label="Mais 15 minutos">+</button>
+      <button class="x" data-act="delblk" data-d="${d}" data-i="${i}" aria-label="Remover bloco">×</button></div></div>`}).join("")}
+    <button class="btn sm ghost" style="width:100%;justify-content:center" data-act="addblk" data-d="${d}">+ bloco</button></div>`}).join("")}</div>
+  <div class="card" style="margin-top:16px">
+    <div class="row"><button class="btn sm" data-act="loadroutine" data-x="${ex}">Carregar a rotina sugerida pelo Guia</button>
+    <span class="small muted">Dica: clique no nome de um bloco para trocar a matéria, o tempo ou o dia.</span></div>
+  </div>`;
+}
+
+/* ---------- Exportar para Google Agenda ---------- */
+function exportICS(){
+  const today=todayStr(), end=agendaEnd();
+  if(end<today){toast("Não há dias futuros no cronograma.");return}
+  const {days}=buildAgenda(today,end);
+  const e=s=>String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\r?\n/g,"\\n");
+  const stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+Z$/,"Z");
+  const L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Caderno de Estudos//PT-BR","CALSCALE:GREGORIAN","X-WR-CALNAME:Cronograma de estudos"];
+  const add=(k,sum,desc,uid)=>{L.push("BEGIN:VEVENT","UID:"+uid+"@caderno-estudos","DTSTAMP:"+stamp,"DTSTART;VALUE=DATE:"+k.replace(/-/g,""),"DTEND;VALUE=DATE:"+addDays(k,1).replace(/-/g,""),"SUMMARY:"+e(sum));if(desc)L.push("DESCRIPTION:"+e(desc));L.push("TRANSP:TRANSPARENT","END:VEVENT")};
+  for(const [k,items] of Object.entries(days)){
+    eventsFor(k).forEach((x,i)=>add(k,(x.x?"🎯 ":"📌 ")+x.t,"","ev"+k+i));
+    if(items.length)add(k,"📚 Estudo: "+fmtHM(items.reduce((a,b)=>a+b.m,0)*60),items.map(b=>`${subjById(b.s).name} (${fmtHM(b.m*60)})${b.label?" — "+b.label:""}`).join("\n"),"st"+k);
+    (U.tasks[k]||[]).forEach((t,i)=>{if(!t.done)add(k,"✔ "+t.t,"","tk"+k+i)});
+  }
+  L.push("END:VCALENDAR");
+  download(new Blob([L.join("\r\n")],{type:"text/calendar;charset=utf-8"}),`cronograma-${today}.ics`);
+  toast("Arquivo baixado. No Google Agenda: Configurações › Importar e exportar › Importar.",5000);
 }
 
 /* ---------- Calendário ---------- */
@@ -1564,8 +1821,6 @@ function viewCal(){
   const years=new Set([new Date().getFullYear()]);Object.keys(dm).forEach(k=>years.add(+k.slice(0,4)));
   const yTotal=Object.entries(dm).filter(([k])=>k.startsWith(y+"-")).reduce((a,[,v])=>a+v.total,0);
   const yDays=Object.entries(dm).filter(([k,v])=>k.startsWith(y+"-")&&v.total>0).length;
-
-  // mês
   const first=new Date(y,m,1), last=new Date(y,m+1,0);
   const lead=(first.getDay()+6)%7; const today=todayStr();
   let cells="";for(let i=0;i<lead;i++)cells+=`<div class="day empty"></div>`;
@@ -1650,172 +1905,52 @@ function openDay(k){
 function viewSubj(){
   const f=UI.subjFilter, tot=bySubjectTotals();
   const list=subjects().filter(s=>f==="all"||s.ex.includes(f));
-  const cnt=(s)=>{const ts=s.topics.map((t,i)=>({t,i})).filter(x=>f==="all"||x.t[1].includes(f));const st=ts.map(x=>U.topics[s.id+":"+x.i]||0);return {n:ts.length,a:st.filter(v=>v>=1).length,b:st.filter(v=>v>=2).length,ts}};
+  const cnt=(s)=>{const ts=s.topics.map((t,i)=>({t,i})).filter(x=>x.t&&(f==="all"||x.t[1].includes(f)));const st=ts.map(x=>U.topics[s.id+":"+x.i]||0);return {n:ts.length,a:st.filter(v=>v>=1).length,b:st.filter(v=>v>=2).length,ts}};
   const all=list.map(cnt).reduce((a,c)=>({n:a.n+c.n,a:a.a+c.a,b:a.b+c.b}),{n:0,a:0,b:0});
   return `
   <div class="view-head"><h1>Matérias</h1><span class="spacer"></span><button class="btn sm" data-act="newsubj">+ Nova matéria</button></div>
   <div class="row" style="margin-bottom:14px">
-    <div class="chips">${[["all","Todas"],["d","DMAE"],["k","Curitiba"],["c","Contagem"],["t","TJSP"]].map(([k,l])=>`<button class="chip ${f===k?"on":""}" data-act="sfilter" data-f="${k}">${l}</button>`).join("")}</div>
+    <div class="chips">${[["all","Todas"],["d","DMAE"],["k","Curitiba"]].map(([k,l])=>`<button class="chip ${f===k?"on":""}" data-act="sfilter" data-f="${k}">${l}</button>`).join("")}</div>
   </div>
   <div class="card" style="margin-bottom:16px">
     <div class="row"><b style="font-family:var(--f-ui)">${all.a} de ${all.n} assuntos estudados</b><span class="muted small">· ${all.b} revisados</span></div>
     <div class="prog" style="margin-top:8px"><span style="width:${all.n?all.a/all.n*100:0}%"></span></div>
-    <p class="tiny muted" style="margin:8px 0 0">Clique no quadradinho de cada assunto: 1 clique = estudado (colorido), 2 cliques = revisado (✓✓), 3 cliques = limpa.</p>
+    <p class="tiny muted" style="margin:8px 0 0">Clique no quadradinho de cada assunto: 1 clique = estudado (colorido), 2 cliques = revisado (✓✓), 3 cliques = limpa. O Cronograma usa essas marcações para escolher os próximos assuntos.</p>
   </div>
   <div class="grid">
   ${list.map(s=>{const c=cnt(s);return `<details class="card subj" style="--c:${s.color}" ${UI.openSubj===s.id?"open":""} data-sid="${s.id}">
-    <summary><div><h3>${esc(s.name)} ${s.ex.split("").map(k=>`<span class="tag ${k}">${EX_SHORT[k]}</span>`).join("")}</h3>
+    <summary><div><h3>${esc(s.name)} ${s.ex.split("").map(k=>`<span class="tag ${k}">${EX_SHORT[k]||""}</span>`).join("")}</h3>
       <div class="meta">${c.a}/${c.n} assuntos · ${fmtHM(tot[s.id]||0)} estudados</div></div>
       <div style="width:110px"><div class="prog"><span style="width:${c.n?c.a/c.n*100:0}%;--c:${s.color}"></span></div></div></summary>
     <div class="body">
       ${s.tip?`<div class="tipbox">💡 ${esc(s.tip)}</div>`:""}
       ${c.ts.map(({t,i})=>{const st=U.topics[s.id+":"+i]||0;return `<div class="topic"><button class="st s${st}" data-act="topic" data-k="${s.id}:${i}" aria-label="Marcar assunto">${st===1?"✓":st===2?"✓✓":""}</button>
-        <span class="tt">${esc(t[0])} ${t[1].split("").map(k=>`<span class="tag ${k}">${EX_SHORT[k]}</span>`).join("")}</span></div>`}).join("")}
+        <span class="tt">${esc(t[0])} ${t[1].split("").map(k=>`<span class="tag ${k}">${EX_SHORT[k]||""}</span>`).join("")}</span></div>`}).join("")}
       <div class="row" style="margin-top:10px"><button class="btn sm" data-act="quickstart" data-s="${s.id}" ${U.running?"disabled":""}>▶ Estudar agora</button>
       ${s.custom?`<span class="spacer"></span><button class="btn sm danger" data-act="delsubj" data-s="${s.id}">Remover matéria</button>`:""}</div>
     </div></details>`}).join("")}
   </div>`;
 }
 
-/* ---------- Rotina ---------- */
-/* ---------- Organizador automático ----------
-   Peso de cada matéria = pontos que ela vale na prova do foco.
-   Ajuste pelo progresso: o que falta estudar pesa mais; o que já foi estudado
-   (mas não revisado) ainda recebe um pouco; matéria toda revisada fica com ~25% do peso. */
-const EXAM_WEIGHTS={
-  d:{port:10,rl:3.5,mat:5,matav:1.5,cg:5,legdmae:5,adm:8,arq:5,admpub:7},
-  k:{port:12.5,rl:6,mat:6.5,info:12.5,legctba:8,dconst:12,admpub:20,adm:12,arq:10},
-  c:{port:20,rl:7,mat:3,info:5,ctg:5,adm:24,arq:14,admpub:22},
-  t:{port:16,dconst:6,dadm:4,dpenal:4,dpp:5,dpc:7,normas:4,info:9,rl:7,mat:4,cg:4,red:6}
-};
-const PHASE_EXAM={1:"d",4:"k",2:"c",3:"t"};
-function focusExam(){const f=U.settings.focus;return f&&f!=="auto"?f:PHASE_EXAM[currentPhase()]}
-function remainingInfo(s,ex){
-  const idx=s.topics.map((_,i)=>i).filter(i=>s.topics[i][1].includes(ex));
-  if(!idx.length)return {n:0,nw:0,rv:0,frac:1};
-  let nw=0,rv=0;idx.forEach(i=>{const v=U.topics[s.id+":"+i]||0;if(!v)nw++;else if(v===1)rv++});
-  return {n:idx.length,nw,rv,frac:(nw+0.4*rv)/idx.length};
-}
-function studiedCount(ex){let n=0;for(const s of subjects())s.topics.forEach((t,i)=>{if(t[1].includes(ex)&&U.topics[s.id+":"+i])n++});return n}
-function buildAutoRoutine(ex,avail,B){
-  const W=EXAM_WEIGHTS[ex]||{};
-  const subs=subjects().filter(s=>s.id!=="rev"&&(W[s.id]!=null||(s.custom&&s.ex.includes(ex))));
-  const cap={};let total=0;for(let d=0;d<7;d++){cap[d]=Math.max(0,+avail[d]||0);total+=cap[d]}
-  if(total<30)return null;
-  const revMin=total>=300?Math.round(total*.15/15)*15:0;
-  const studyMin=total-revMin;
-  const rows=subs.map(s=>{const r=remainingInfo(s,ex),w=W[s.id]??3;return {id:s.id,w,r,score:w*(0.25+0.75*r.frac)}});
-  const sum=rows.reduce((a,x)=>a+x.score,0)||1;
-  rows.forEach(x=>{const m=studyMin*x.score/sum;x.min=m<20?0:Math.max(30,Math.round(m/15)*15)});
-  // acerta a soma para bater com o tempo disponível
-  let diff=studyMin-rows.reduce((a,x)=>a+x.min,0), guard=200;
-  while(Math.abs(diff)>=15&&guard--){const cand=rows.filter(x=>x.min>0&&(diff>0||x.min>30)).sort((a,b)=>b.score-a.score);if(!cand.length)break;
-    const k=diff>0?0:cand.length-1;cand[k].min+=diff>0?15:-15;diff+=diff>0?-15:15}
-  const split=(m,max)=>{const out=[];while(m>0){if(m>=max+30){out.push(max);m-=max}else{out.push(m);m=0}}return out};
-  const blocks=[];
-  split(revMin,120).forEach(m=>blocks.push({s:"rev",m,w:0}));
-  rows.forEach(x=>split(x.min,B).forEach(m=>blocks.push({s:x.id,m,w:x.w})));
-  blocks.sort((a,b)=>(a.s==="rev"?-1:0)-(b.s==="rev"?-1:0)||b.m-a.m||b.w-a.w);
-  const plan={0:[],1:[],2:[],3:[],4:[],5:[],6:[]};
-  for(const bl of blocks){
-    let best=-1,bs=-Infinity;
-    for(let d=0;d<7;d++){if(cap[d]<30)continue;
-      let sc=Math.min(cap[d],bl.m)*10+cap[d];
-      if(plan[d].some(x=>x.s===bl.s))sc-=5000;
-      if(plan[(d+6)%7].some(x=>x.s===bl.s)||plan[(d+1)%7].some(x=>x.s===bl.s))sc-=300;
-      if(bl.s==="rev"&&(d===0||d===6))sc+=3000;
-      if(sc>bs){bs=sc;best=d}}
-    if(best<0)continue;
-    const m=Math.min(bl.m,Math.floor(cap[best]/15)*15);if(m<30)continue;
-    const same=plan[best].find(x=>x.s===bl.s);
-    if(same)same.m+=m;else plan[best].push({s:bl.s,m,w:bl.w});
-    cap[best]-=m;
-  }
-  for(let d=0;d<7;d++){ // sobra do dia vai para o maior bloco
-    if(cap[d]>=15&&plan[d].length){plan[d].sort((a,b)=>b.m-a.m)[0].m+=Math.floor(cap[d]/15)*15}
-    plan[d].sort((a,b)=>(a.s==="rev")-(b.s==="rev")||b.w-a.w);
-    plan[d]=plan[d].map(({s,m})=>({s,m}));
-  }
-  const weekly={};for(let d=0;d<7;d++)plan[d].forEach(b=>weekly[b.s]=(weekly[b.s]||0)+b.m);
-  return {plan,summary:{ex,at:todayStr(),studied:studiedCount(ex),B,
-    rows:rows.map(x=>({id:x.id,w:x.w,n:x.r.n,nw:x.r.nw,rv:x.r.rv,min:weekly[x.id]||0})).sort((a,b)=>b.min-a.min),rev:weekly.rev||0}};
-}
-function runAutoRoutine(msg){
-  const ex=focusExam(), res=buildAutoRoutine(ex,U.settings.avail,U.settings.blockMin||60);
-  if(!res){toast("Coloque pelo menos 30 minutos disponíveis na semana.");return}
-  const sn=snap();U.routine=res.plan;U.autoPlan=res.summary;saveUser();render();
-  offerUndo(msg||"Rotina organizada.",sn);
-}
-function stalePlanReason(){
-  const ap=U.autoPlan;if(!ap)return "";
-  const ex=focusExam();
-  if(ap.ex!==ex)return `O foco agora é ${EX_SHORT[ex]}, mas a rotina foi organizada para ${EX_SHORT[ap.ex]}.`;
-  const d=studiedCount(ex)-ap.studied;
-  if(d>=5)return `Você marcou ${d} assuntos como estudados desde a última organização.`;
-  return "";
-}
-const hoursOpts=Array.from({length:25},(_,i)=>i*30);
-function viewRoutine(){
-  const order=[1,2,3,4,5,6,0], wd=new Date().getDay(), st=U.settings;
-  const total=order.reduce((a,d)=>a+(U.routine[d]||[]).reduce((x,b)=>x+b.m,0),0);
-  const availTotal=order.reduce((a,d)=>a+(+st.avail[d]||0),0);
-  const ap=U.autoPlan, stale=stalePlanReason(), ex=focusExam();
-  return `
-  <div class="view-head"><h1>Rotina semanal</h1><span class="spacer"></span><span class="muted">${fmtHM(total*60)} planejadas por semana</span></div>
-  <div class="card" style="margin-bottom:16px">
-    <h3>Organizar automaticamente</h3>
-    <p class="small muted" style="margin:0">Distribui as matérias pelo peso de cada uma na prova, pelo que você já marcou em Matérias e pelo tempo que você tem. É uma sugestão: depois dá para mudar qualquer bloco.</p>
-    <div class="avail">${order.map(d=>`<label>${WD[d]}<select data-avail="${d}">${hoursOpts.map(m=>`<option value="${m}" ${(+st.avail[d]||0)===m?"selected":""}>${m?fmtHM(m*60):"folga"}</option>`).join("")}</select></label>`).join("")}</div>
-    <div class="row" style="gap:14px 18px; margin-bottom:12px">
-      <label class="row small" style="gap:6px"><span class="muted">Foco</span>
-        <select id="rFocus" style="width:auto">${[["auto",`Automático (${EX_SHORT[PHASE_EXAM[currentPhase()]]})`],["d","DMAE"],["k","Curitiba"],["c","Contagem"],["t","TJSP"]].map(([v,l])=>`<option value="${v}" ${st.focus===v?"selected":""}>${l}</option>`).join("")}</select></label>
-      <span class="row small" style="gap:6px"><span class="muted">Blocos de</span>
-        <span class="segmented">${[45,60,90].map(v=>`<button data-act="blocklen" data-v="${v}" class="${(st.blockMin||60)===v?"on":""}">${v} min</button>`).join("")}</span></span>
-      <label class="chk small" style="padding:0"><input type="checkbox" id="rAuto" ${st.autoReorg?"checked":""}><span>Reorganizar sozinho quando eu mudar o tempo disponível</span></label>
-    </div>
-    <div class="row"><button class="btn primary" data-act="autoroutine">Organizar minha rotina</button><span class="small muted">${fmtHM(availTotal*60)} disponíveis por semana · substitui a rotina atual (dá para desfazer)</span></div>
-    ${stale?`<div class="notice"><span>${esc(stale)} Quer reorganizar?</span><button class="btn sm primary" data-act="autoroutine">Reorganizar</button></div>`:""}
-    ${ap?`<details style="margin-top:12px"><summary class="small" style="cursor:pointer">Como o tempo foi dividido (${EX_SHORT[ap.ex]}, em ${ap.at.split("-").reverse().join("/")})</summary>
-      <table class="plan-tbl"><thead><tr><th>Matéria</th><th>Peso na prova</th><th>Falta estudar</th><th class="n">Por semana</th></tr></thead><tbody>
-      ${ap.rows.map(r=>{const sj=subjById(r.id);return `<tr><td><span class="row" style="gap:.4em;flex-wrap:nowrap"><span class="dot" style="--c:${sj.color}"></span>${esc(sj.name)}</span></td><td>${r.w} pts</td><td>${r.n?`${r.nw} de ${r.n} assuntos`:"—"}</td><td class="n">${r.min?fmtHM(r.min*60):"fica de fora"}</td></tr>`}).join("")}
-      ${ap.rev?`<tr><td>Revisão, questões e simulados</td><td>—</td><td>—</td><td class="n">${fmtHM(ap.rev*60)}</td></tr>`:""}
-      </tbody></table></details>`:""}
-  </div>
-  <div class="rout">${order.map(d=>{const bl=U.routine[d]||[];const m=bl.reduce((a,b)=>a+b.m,0);
-    return `<div class="rday ${d===wd?"today":""}"><h4><span>${WD_FULL[d]}</span><span class="small muted">${m?fmtHM(m*60):""}</span></h4>
-    ${bl.length?"":`<p class="empty-day">Dia de folga.</p>`}
-    ${bl.map((b,i)=>{const sj=subjById(b.s);return `<div class="blk" style="--c:${sj.color}">
-      <button class="nm" data-act="editblk" data-d="${d}" data-i="${i}" title="Editar bloco">${esc(sj.name)}</button>
-      <div class="ctl"><button class="step" data-act="stepblk" data-d="${d}" data-i="${i}" data-v="-15" aria-label="Menos 15 minutos">−</button>
-      <span class="m">${fmtHM(b.m*60)}</span>
-      <button class="step" data-act="stepblk" data-d="${d}" data-i="${i}" data-v="15" aria-label="Mais 15 minutos">+</button>
-      <button class="x" data-act="delblk" data-d="${d}" data-i="${i}" aria-label="Remover bloco">×</button></div></div>`}).join("")}
-    <button class="btn sm ghost" style="width:100%;justify-content:center" data-act="addblk" data-d="${d}">+ bloco</button></div>`}).join("")}</div>
-  <div class="card" style="margin-top:16px">
-    <div class="row"><span class="small muted">Ou carregue uma rotina pronta:</span>
-    ${PHASES.map(p=>`<button class="btn sm" data-act="loadroutine" data-p="${p.n}" title="${esc(p.title)}">${p.lbl}</button>`).join("")}
-    <span class="small muted">Dica: clique no nome de um bloco para trocar a matéria, o tempo ou o dia.</span></div>
-  </div>`;
-}
-
 /* ---------- Guia ---------- */
 function viewGuide(){
-  const tab=UI.guideTab, ph=currentPhase();
-  const tabs=[["mapa","Mapa dos concursos"],["fases","Plano por fases"],["curitiba","Edital de Curitiba"],["questoes","Questões FAFIPA"],["metodo","Como estudar"],["concursos","Detalhes das provas"]];
+  const tab=UI.guideTab, ph=curPhase().n;
+  const tabs=[["mapa","Mapa das provas"],["fases","Plano por fases"],["curitiba","Edital de Curitiba"],["questoes","Questões FAFIPA"],["metodo","Como estudar"],["concursos","Detalhes das provas"]];
   let body="";
   if(tab==="mapa"){
-    body=`<div class="card"><h2>O que se repete entre os concursos</h2>
-    <p class="prose muted">Estudar pelo que se repete é o atalho: Português, Raciocínio Lógico, Administração/Arquivo e Adm. Pública servem a mais de um concurso. A ordem de prioridade é DMAE → Curitiba → Contagem → TJSP.</p>
-    <div class="tbl-wrap"><table class="map"><thead><tr><th>Matéria</th><th>DMAE · 01/11/2026</th><th>Curitiba · 13/12/2026</th><th>Contagem · 24/01/2027</th><th>TJSP · a definir</th></tr></thead>
+    body=`<div class="card"><h2>O que se repete entre as duas provas</h2>
+    <p class="prose muted">Estudar pelo que se repete é o atalho: Português, Administração, Arquivo, Redação Oficial e a Lei 14.133 servem ao DMAE e a Curitiba. A ordem é DMAE (01/11) → Curitiba (13/12).</p>
+    <div class="tbl-wrap"><table class="map"><thead><tr><th>Matéria</th><th>DMAE · ${brD(U.exams.dmae)}</th><th>Curitiba · ${brD(U.exams.curitiba)}</th></tr></thead>
     <tbody>${OVERLAP.map(r=>`<tr>${r.map((c,i)=>i?`<td>${esc(c)}</td>`:`<th scope="row" style="background:transparent">${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div></div>
     <div class="card" style="margin-top:16px"><h2>Prioridade de estudo agora</h2>
     <ol class="prose">
-      <li><b>Conhecimentos Específicos do DMAE</b> (Administração, Arquivo, Redação Oficial, 14.133): 20 dos 50 pontos e reaproveita em Curitiba e Contagem.</li>
-      <li><b>Português</b>: cai em todos.</li>
+      <li><b>Inscrição de Curitiba</b>: de 07/10 a 05/11, com taxa paga até 06/11. Quem tem direito à isenção pede só até 13/10.</li>
+      <li><b>Conhecimentos Específicos do DMAE</b> (Administração, Arquivo, Redação Oficial, 14.133): 20 dos 50 pontos e quase tudo reaproveita em Curitiba.</li>
+      <li><b>Português</b>: cai nos dois.</li>
       <li><b>Legislação Uberlândia/DMAE</b>: 5 questões, não pode zerar, conteúdo fechado.</li>
-      <li><b>Matemática e Raciocínio Lógico</b>: foque no básico (porcentagem, regra de três, juros, lógica); a matemática avançada fica por último.</li>
+      <li><b>Matemática e Raciocínio Lógico</b>: o básico primeiro (porcentagem, regra de três, juros, lógica); a matemática do ensino médio fica por último.</li>
       <li><b>Conhecimentos gerais</b>: 15–20 min por dia de notícias + Uberlândia/MG.</li>
-      <li><b>Curitiba</b>: não esqueça da inscrição (07/10 a 05/11). Depois do DMAE, o foco vira Direito Administrativo, Constitucional e Informática.</li>
+      <li><b>Depois de 01/11</b>: Curitiba. O foco vira Direito Administrativo, Constitucional, Informática e as leis de Curitiba.</li>
     </ol></div>`;
   }else if(tab==="fases"){
     body=PHASES.map(p=>`<section class="phase ${p.n===ph?"now":""}"><h2>${esc(p.title)}${p.n===ph?`<span class="pill-now">você está aqui</span>`:""}<small>${esc(p.range)}</small></h2>
@@ -1824,7 +1959,7 @@ function viewGuide(){
         return `<div class="card wk"><div class="row"><h3 style="margin:0">${esc(w.t)}</h3><span class="spacer"></span><span class="small muted">${done}/${ids.length}</span></div>
         <div class="prog" style="margin:8px 0 6px;height:6px"><span style="width:${done/ids.length*100}%"></span></div>
         ${w.items.map((it,ii)=>{const id=ids[ii];return `<label class="chk ${U.guide[id]?"done":""}"><input type="checkbox" data-act="gchk" data-id="${id}" ${U.guide[id]?"checked":""}><span>${esc(it)}</span></label>`}).join("")}</div>`}).join("")}
-      <button class="btn sm" data-act="loadroutine" data-p="${p.n}">Usar a rotina sugerida da ${p.lbl}</button></section>`).join("");
+      <button class="btn sm" data-act="loadroutine" data-x="${p.ex}">Usar a semana sugerida da ${p.lbl}</button></section>`).join("");
   }else if(tab==="curitiba"){
     body=CurMod.edital(U.cur,{prova:U.exams.curitiba||"2026-12-13",app:true});
   }else if(tab==="questoes"){
@@ -1848,19 +1983,8 @@ function viewGuide(){
       <li>Inscrições de 07/10 a 05/11 (taxa R$ 100, pagar até 06/11); isenção de 07 a 13/10.</li>
       <li>Site: fundacaofafipa.org.br</li></ul>
       <button class="btn sm" data-act="gotab" data-t="curitiba">Ver o resumo completo</button></div>
-    <div class="card"><h2>Prefeitura de Contagem</h2><p class="muted">Assistente Administrativo · banca IBGP</p>
-      <ul class="prose"><li>Prova em <b>24/01/2027</b>.</li>
-      <li>45 questões, 100 pontos: Português 10 (peso 2), Raciocínio Lógico 5 (peso 2), Informática 5 (peso 1), Conhecimentos Gerais do Município 5 (peso 1) e <b>Conhecimentos Específicos 20 (peso 3 = 60 pontos)</b>.</li>
-      <li>Específicos: Adm. Pública, Lei 14.133, rotinas administrativas, documentos e arquivo, almoxarifado, atendimento, ética, redação oficial, LAI e LGPD.</li>
-      <li>Critério mínimo de aprovação: confira no edital completo.</li></ul></div>
-    <div class="card"><h2>TJSP — Escrevente</h2><p class="muted">Banca VUNESP</p>
-      <ul class="prose"><li>70 questões + redação, em 5 horas.</li>
-      <li>Bloco I Português (16) e Bloco II Direito (30): mínimo de 50% de acertos em cada.</li>
-      <li>Bloco III (24): Atualidades 4, Matemática 4, Informática 9, RL 7 — só classifica.</li>
-      <li>Nota final mínima 5/10; redação eliminatória com mínimo 20/40.</li>
-      <li>O edital enviado é da Capital/1ª RAJ (2025). Confira o do interior quando sair.</li></ul></div>
     <div class="card"><h2>Datas no seu contador</h2>
-      <p class="prose">DMAE: ${U.exams.dmae?fmtDateLong(U.exams.dmae):"a definir"}<br>Curitiba: ${U.exams.curitiba?fmtDateLong(U.exams.curitiba):"a definir"}<br>Contagem: ${U.exams.contagem?fmtDateLong(U.exams.contagem):"a definir"}<br>TJSP: ${U.exams.tjsp?fmtDateLong(U.exams.tjsp):"a definir"}</p>
+      <p class="prose">DMAE: ${U.exams.dmae?fmtDateLong(U.exams.dmae):"a definir"}<br>Curitiba: ${U.exams.curitiba?fmtDateLong(U.exams.curitiba):"a definir"}</p>
       <a class="btn sm" href="#perfil">Editar datas</a></div></div>`;
   }
   return `<div class="view-head"><h1>Guia de estudos</h1></div>
@@ -1888,7 +2012,8 @@ function viewProfile(){
         <div class="field"><label for="sTheme">Tema</label><select id="sTheme">${[["auto","Automático (segue o aparelho)"],["light","Claro"],["dark","Escuro"]].map(([v,l])=>`<option value="${v}" ${U.settings.theme===v?"selected":""}>${l}</option>`).join("")}</select></div>
       </div>
       <div class="card"><h3>Datas das provas</h3>
-        ${[["dmae","DMAE"],["curitiba","Curitiba"],["contagem","Contagem"],["tjsp","TJSP"]].map(([k,l])=>`<div class="field"><label for="e_${k}">${l}</label><input type="date" id="e_${k}" value="${U.exams[k]||""}"></div>`).join("")}
+        ${[["dmae","DMAE"],["curitiba","Curitiba"]].map(([k,l])=>`<div class="field"><label for="e_${k}">${l}</label><input type="date" id="e_${k}" value="${U.exams[k]||""}"></div>`).join("")}
+        <p class="tiny muted">O cronograma usa estas datas para trocar de fase e para a revisão final.</p>
         <button class="btn" data-act="saveexams">Salvar datas</button>
       </div>
       <div class="card"><h3>Dados</h3>
@@ -1933,7 +2058,7 @@ function blockModal(d){
   <button class="btn primary" data-act="saveblk" data-d="${d}">Adicionar bloco</button>`);
 }
 function editBlockModal(d,i){
-  const b=(U.routine[d]||[])[i];if(!b)return;const subs=subjects();
+  const b=(curR()[d]||[])[i];if(!b)return;const subs=subjects();
   openModal(`<div class="top"><h2>Editar bloco</h2><button class="close" data-close aria-label="Fechar">×</button></div>
   <div class="field"><label for="eSubj">Matéria</label><select id="eSubj">${subs.map(s=>`<option value="${s.id}" ${s.id===b.s?"selected":""}>${esc(s.name)}</option>`).join("")}</select></div>
   <div class="row"><div class="field" style="flex:1"><label for="eMin">Duração (minutos)</label><input type="number" id="eMin" min="5" max="600" step="5" value="${b.m}"></div>
@@ -1949,6 +2074,38 @@ function subjModal(){
   <div class="field"><label for="nsTopics">Assuntos (um por linha)</label><textarea id="nsTopics"></textarea></div>
   <button class="btn primary" data-act="savesubj">Criar matéria</button>`);
 }
+/* Editar um dia específico do cronograma */
+function editDayModal(k){
+  if(!UI.ed||UI.ed.k!==k)UI.ed={k,blocks:blocksFor(k).map(b=>({s:b.s,m:b.m})),tasks:(U.tasks[k]||[]).map(t=>({...t}))};
+  const E=UI.ed, subs=subjects();
+  openModal(`<div class="top"><h2 style="font-size:1.2rem">${fmtDateLong(k)}</h2><button class="close" data-close aria-label="Fechar">×</button></div>
+  <h3>Blocos de estudo</h3>
+  ${E.blocks.length?"":`<p class="muted small">Nenhum bloco: este dia fica como folga.</p>`}
+  ${E.blocks.map((b,i)=>`<div class="ed-row"><select data-ed="s" data-i="${i}" aria-label="Matéria">${subs.map(s=>`<option value="${s.id}" ${s.id===b.s?"selected":""}>${esc(s.name)}</option>`).join("")}</select>
+    <input type="number" data-ed="m" data-i="${i}" min="5" max="600" step="5" value="${b.m}" aria-label="Minutos"><span class="small muted">min</span>
+    <button class="xbtn" data-act="edDelB" data-i="${i}" aria-label="Remover bloco">×</button></div>`).join("")}
+  <button class="btn sm ghost" data-act="edAddB">+ bloco</button>
+  <h3 style="margin-top:18px">Tarefas e lembretes</h3>
+  ${E.tasks.map((t,i)=>`<div class="ed-row"><input type="text" data-ed="t" data-i="${i}" value="${esc(t.t)}" placeholder="Ex.: pagar a taxa de Curitiba"><button class="xbtn" data-act="edDelT" data-i="${i}" aria-label="Remover tarefa">×</button></div>`).join("")}
+  <button class="btn sm ghost" data-act="edAddT">+ tarefa</button>
+  <div class="row" style="margin-top:20px"><button class="btn primary" data-act="edSave">Salvar dia</button>
+  ${E.blocks.length?`<button class="btn ghost" data-act="edOff">Marcar folga</button>`:""}
+  ${U.plan[k]?`<span class="spacer"></span><button class="btn ghost" data-act="edReset">Voltar à semana-modelo</button>`:""}</div>
+  <p class="tiny muted" style="margin:12px 0 0">Mudanças aqui valem só para este dia. Para mudar todas as semanas, use a aba Semana-modelo.</p>`);
+}
+function readEd(){
+  const E=UI.ed;if(!E)return;
+  $$("#modalBg [data-ed]").forEach(el=>{const i=+el.dataset.i,f=el.dataset.ed;
+    if(f==="s"&&E.blocks[i])E.blocks[i].s=el.value;
+    else if(f==="m"&&E.blocks[i])E.blocks[i].m=Math.max(5,Math.min(600,Math.round(+el.value||60)));
+    else if(f==="t"&&E.tasks[i])E.tasks[i].t=el.value});
+}
+function taskModal(){
+  openModal(`<div class="top"><h2>Nova tarefa ou lembrete</h2><button class="close" data-close aria-label="Fechar">×</button></div>
+  <div class="field"><label for="tkText">O que fazer</label><input type="text" id="tkText" placeholder="Ex.: pedir isenção da taxa de Curitiba"></div>
+  <div class="field"><label for="tkDate">Dia</label><input type="date" id="tkDate" value="${todayStr()}"></div>
+  <button class="btn primary" data-act="savetask">Adicionar</button>`);
+}
 
 /* ======================================================================
    Eventos
@@ -1958,10 +2115,10 @@ document.addEventListener("click",async e=>{
   if(dayEl&&!e.target.closest("[data-act]")&&U){openDay(dayEl.dataset.day);return}
   const b=e.target.closest("[data-act]");if(!b||!U)return;
   const a=b.dataset.act;
-  if(a==="gchk")return; // tratado no change
+  if(a==="gchk"||a==="agtopic"||a==="taskchk")return; // tratados no "change"
   if(a==="start"){const s=$("#tSubj").value,t=$("#tTopic").value;UI.lastSubj=s;UI.note="";timerStart(s,t,UI.mode||0);
     if(UI.mode&&"Notification" in window&&Notification.permission==="default")Notification.requestPermission();}
-  else if(a==="quickstart"){if(U.running)return;UI.lastSubj=b.dataset.s;UI.note="";timerStart(b.dataset.s,"",0);closeModal();location.hash="#inicio"}
+  else if(a==="quickstart"){if(U.running)return;UI.lastSubj=b.dataset.s;UI.note="";closeModal();timerStart(b.dataset.s,b.dataset.t||"",0);if(UI.view!=="inicio")location.hash="#inicio";scrollTo(0,0)}
   else if(a==="pause")timerPause();
   else if(a==="resume"){U.running.alerted=U.running.mode?elapsedMs(U.running)>=U.running.mode*60000:false;timerResume()}
   else if(a==="stop")await timerStop();
@@ -1977,36 +2134,61 @@ document.addEventListener("click",async e=>{
   else if(a==="delsess"){const dt=b.dataset.date, sn=snap(dt.slice(0,7));await deleteSession(dt,b.dataset.id);render();openDay(dt);offerUndo("Sessão apagada.",sn)}
   else if(a==="mprev"||a==="mnext"){UI.calMonth+=a==="mnext"?1:-1;if(UI.calMonth<0){UI.calMonth=11;UI.calYear--}if(UI.calMonth>11){UI.calMonth=0;UI.calYear++}await ensureYear(UI.calYear);render()}
   else if(a==="sfilter"){UI.subjFilter=b.dataset.f;render()}
-  else if(a==="topic"){const k=b.dataset.k, sn=snap();const v=((U.topics[k]||0)+1)%3;if(v)U.topics[k]=v;else delete U.topics[k];UI.openSubj=k.split(":")[0];saveUser();render();offerUndo(["Marcação removida.","Marcado como estudado.","Marcado como revisado."][v],sn)}
+  else if(a==="topic"){const k=b.dataset.k, sn=snap();const v=((U.topics[k]||0)+1)%3;if(v)U.topics[k]=v;else delete U.topics[k];
+    if(v===1)U.tmark[k]=todayStr();if(!v)delete U.tmark[k];
+    UI.openSubj=k.split(":")[0];saveUser();render();offerUndo(["Marcação removida.","Marcado como estudado.","Marcado como revisado."][v],sn)}
   else if(a==="newsubj")subjModal();
   else if(a==="savesubj"){
     const name=$("#nsName").value.trim();if(!name){toast("Dê um nome para a matéria.");return}
-    const ex=$$(".nsEx").filter(x=>x.checked).map(x=>x.value).join("")||"dkct";
+    const ex=$$(".nsEx").filter(x=>x.checked).map(x=>x.value).join("")||"dk";
     U.customSubjects.push({id:"c_"+newId(),name,color:$("#nsColor").value,ex,topics:$("#nsTopics").value.split("\n").map(s=>s.trim()).filter(Boolean),tip:""});
     saveUser();closeModal();render();toast("Matéria criada.");
   }
   else if(a==="delsubj"){if(!confirm("Remover esta matéria? As horas já registradas continuam no histórico."))return;const sn=snap();U.customSubjects=U.customSubjects.filter(s=>s.id!==b.dataset.s);saveUser();render();offerUndo("Matéria removida.",sn)}
-  else if(a==="loadroutine"){const P=phaseByN(b.dataset.p);if(!confirm(`Substituir sua rotina atual pela sugerida da ${P.lbl} (${P.title.split("— ")[1]||P.title})?`))return;const sn=snap();U.routine=JSON.parse(JSON.stringify(ROUTINES[P.n]));saveUser();if(UI.view!=="rotina")location.hash="#rotina";else render();setTimeout(()=>offerUndo("Rotina carregada.",sn),50)}
+  /* ---- Cronograma ---- */
+  else if(a==="ctab"){UI.ctab=b.dataset.t;render()}
+  else if(a==="rex"){UI.rex=b.dataset.x;render()}
+  else if(a==="newtask")taskModal();
+  else if(a==="savetask"){const t=$("#tkText").value.trim(), k=$("#tkDate").value;if(!t||!k){toast("Escreva a tarefa e escolha o dia.");return}
+    const sn=snap();(U.tasks[k]=U.tasks[k]||[]).push({t,done:false});saveUser();closeModal();render();offerUndo(`Tarefa adicionada em ${ddmm(k)}.`,sn)}
+  else if(a==="ics")exportICS();
+  else if(a==="editday"){UI.ed=null;editDayModal(b.dataset.k)}
+  else if(a==="edAddB"){readEd();const last=UI.ed.blocks[UI.ed.blocks.length-1];UI.ed.blocks.push({s:last?last.s:"port",m:60});editDayModal(UI.ed.k)}
+  else if(a==="edDelB"){readEd();UI.ed.blocks.splice(+b.dataset.i,1);editDayModal(UI.ed.k)}
+  else if(a==="edAddT"){readEd();UI.ed.tasks.push({t:"",done:false});editDayModal(UI.ed.k);const ins=$$("#modalBg [data-ed=t]");if(ins.length)ins[ins.length-1].focus()}
+  else if(a==="edDelT"){readEd();UI.ed.tasks.splice(+b.dataset.i,1);editDayModal(UI.ed.k)}
+  else if(a==="edOff"){readEd();UI.ed.blocks=[];editDayModal(UI.ed.k)}
+  else if(a==="edSave"){readEd();const E=UI.ed,k=E.k,sn=snap();
+    if(JSON.stringify(E.blocks)===JSON.stringify(baseBlocks(k)))delete U.plan[k];else U.plan[k]=E.blocks;
+    const tasks=E.tasks.map(t=>({...t,t:(t.t||"").trim()})).filter(t=>t.t);
+    if(tasks.length)U.tasks[k]=tasks;else delete U.tasks[k];
+    UI.ed=null;saveUser();closeModal();render();offerUndo(`Dia ${ddmm(k)} atualizado.`,sn)}
+  else if(a==="edReset"){const k=UI.ed.k,sn=snap();delete U.plan[k];UI.ed=null;saveUser();closeModal();render();offerUndo(`${ddmm(k)} voltou à semana-modelo.`,sn)}
+  /* ---- Semana-modelo ---- */
+  else if(a==="loadroutine"){const ex=b.dataset.x;if(!confirm(`Substituir a semana-modelo ${ex==="d"?"do DMAE":"de Curitiba"} pela rotina sugerida no Guia?`))return;
+    const sn=snap();U.routines[ex]=JSON.parse(JSON.stringify(ROUTINES[ex]));delete U.autoPlans[ex];UI.rex=ex;UI.ctab="semana";saveUser();
+    if(UI.view!=="cronograma")location.hash="#cronograma";else render();setTimeout(()=>offerUndo("Rotina carregada.",sn),50)}
   else if(a==="addblk")blockModal(+b.dataset.d);
-  else if(a==="saveblk"){const d=+b.dataset.d;const m=Math.max(5,+$("#bMin").value||60);const sn=snap();(U.routine[d]=U.routine[d]||[]).push({s:$("#bSubj").value,m});saveUser();closeModal();render();offerUndo("Bloco adicionado.",sn)}
-  else if(a==="delblk"){const sn=snap();U.routine[b.dataset.d].splice(+b.dataset.i,1);saveUser();closeModal();render();offerUndo("Bloco removido.",sn)}
+  else if(a==="saveblk"){const d=+b.dataset.d;const m=Math.max(5,+$("#bMin").value||60);const sn=snap();const R=curR();(R[d]=R[d]||[]).push({s:$("#bSubj").value,m});saveUser();closeModal();render();offerUndo("Bloco adicionado.",sn)}
+  else if(a==="delblk"){const sn=snap();curR()[b.dataset.d].splice(+b.dataset.i,1);saveUser();closeModal();render();offerUndo("Bloco removido.",sn)}
   else if(a==="editblk")editBlockModal(+b.dataset.d,+b.dataset.i);
-  else if(a==="saveedit"){const d=+b.dataset.d,i=+b.dataset.i,sn=snap();const blk=U.routine[d][i];
+  else if(a==="saveedit"){const d=+b.dataset.d,i=+b.dataset.i,sn=snap(),R=curR();const blk=R[d][i];
     const m=Math.max(5,Math.min(600,Math.round(+$("#eMin").value||blk.m)));const nd=+$("#eDay").value;
     const nb={s:$("#eSubj").value,m};
-    if(nd===d)U.routine[d][i]=nb;else{U.routine[d].splice(i,1);(U.routine[nd]=U.routine[nd]||[]).push(nb)}
+    if(nd===d)R[d][i]=nb;else{R[d].splice(i,1);(R[nd]=R[nd]||[]).push(nb)}
     saveUser();closeModal();render();offerUndo("Bloco atualizado.",sn)}
-  else if(a==="stepblk"){const d=+b.dataset.d,i=+b.dataset.i,blk=U.routine[d][i];const nm=Math.max(15,Math.min(600,blk.m+(+b.dataset.v)));
+  else if(a==="stepblk"){const d=+b.dataset.d,i=+b.dataset.i,blk=curR()[d][i];const nm=Math.max(15,Math.min(600,blk.m+(+b.dataset.v)));
     if(nm===blk.m)return;const sn=snap();blk.m=nm;saveUser();render();offerUndo(`${subjById(blk.s).name}: ${fmtHM(nm*60)}`,sn)}
-  else if(a==="autoroutine")runAutoRoutine();
+  else if(a==="autoroutine"){const ex=rex(),sn=snap();if(runAutoRoutine(ex)){saveUser();render();offerUndo(`Semana ${ex==="d"?"do DMAE":"de Curitiba"} organizada.`,sn)}}
   else if(a==="blocklen"){U.settings.blockMin=+b.dataset.v;saveUser();render()}
+   /* ---- Guia e perfil ---- */
   else if(a==="gtab"){UI.guideTab=b.dataset.t;render()}
-  else if(a==="gotab"){UI.guideTab=b.dataset.t;if(UI.view==="guia"){render();scrollTo(0,0)}} // links com href="#guia" trocam a tela sozinhos
+  else if(a==="gotab"){UI.guideTab=b.dataset.t;if(UI.view==="guia"){render();scrollTo(0,0)}}
   else if(a==="gomat"){UI.subjFilter="k";location.hash="#materias"}
   else if(a==="saveprof"){U.profile.name=$("#pName").value.trim();U.profile.phrases=$("#pPhr").value.split("\n").map(s=>s.trim()).filter(Boolean);UI.phrase=null;cacheLockProfile();await saveUser(true);toast("Perfil salvo.");render()}
   else if(a==="rmphoto"){const sn=snap();U.profile.photo="";cacheLockProfile();saveUser();render();offerUndo("Foto removida.",sn)}
-  else if(a==="saveexams"){["dmae","curitiba","contagem","tjsp"].forEach(k=>U.exams[k]=$("#e_"+k).value);saveUser();toast("Datas salvas.");render()}
-  else if(a==="export"){await loadAllMonths();const blob=new Blob([JSON.stringify({user:U,months:MONTHS},null,1)],{type:"application/json"});const u=URL.createObjectURL(blob);const l=document.createElement("a");l.href=u;l.download=`caderno-backup-${todayStr()}.json`;l.click();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+  else if(a==="saveexams"){["dmae","curitiba"].forEach(k=>U.exams[k]=$("#e_"+k).value||U.exams[k]);saveUser();toast("Datas salvas.");render()}
+  else if(a==="export"){await loadAllMonths();download(new Blob([JSON.stringify({user:U,months:MONTHS},null,1)],{type:"application/json"}),`caderno-backup-${todayStr()}.json`)}
   else if(a==="logout"){if(U.running&&!confirm("Há um cronômetro ativo. Ele continua salvo. Sair mesmo assim?"))return;await Store.logout();location.reload()}
 });
 /* ---- Curitiba: questões, simulador de nota ---- */
@@ -2019,11 +2201,15 @@ document.addEventListener("click",e=>{
 document.addEventListener("change",async e=>{
   if(!U)return;const t=e.target;
   if(t.id==="tSubj"){UI.lastSubj=t.value;fillTopicSelect()}
-  else if(t.dataset&&t.dataset.act==="gchk"){const sn=snap();if(t.checked)U.guide[t.dataset.id]=1;else delete U.guide[t.dataset.id];saveUser();render();offerUndo(t.checked?"Tarefa marcada.":"Tarefa desmarcada.",sn)}
+  else if(t.dataset&&t.dataset.act==="gchk"){const sn=snap();if(t.checked)U.guide[t.dataset.id]=1;else delete U.guide[t.dataset.id];saveUser();render();offerUndo(t.checked?"Meta marcada.":"Meta desmarcada.",sn)}
+  else if(t.dataset&&t.dataset.act==="agtopic"){const k=t.dataset.key,sn=snap();
+    if(t.checked){if(!U.topics[k])U.topics[k]=1;U.tmark[k]=todayStr()}else{delete U.topics[k];delete U.tmark[k]}
+    saveUser();render();offerUndo(t.checked?"Assunto marcado como estudado.":"Marcação removida.",sn)}
+  else if(t.dataset&&t.dataset.act==="taskchk"){const L=U.tasks[t.dataset.k],i=+t.dataset.i;if(L&&L[i]){L[i].done=t.checked;saveUser();render()}}
   else if(t.id==="calYear"){UI.calYear=+t.value;await ensureYear(UI.calYear);render()}
-  else if(t.dataset&&t.dataset.avail!=null){U.settings.avail[t.dataset.avail]=+t.value;saveUser();
-    if(U.settings.autoReorg&&U.autoPlan)runAutoRoutine("Tempo alterado — rotina reorganizada.");else render()}
-  else if(t.id==="rFocus"){U.settings.focus=t.value;saveUser();render()}
+  else if(t.dataset&&t.dataset.avail!=null){const sn=snap();U.settings.avail[t.dataset.avail]=+t.value;let re=false;
+    if(U.settings.autoReorg)for(const ex of Object.keys(U.autoPlans||{}))if(runAutoRoutine(ex))re=true;
+    saveUser();render();if(re)offerUndo("Tempo alterado — semanas reorganizadas.",sn)}
   else if(t.id==="rAuto"){U.settings.autoReorg=t.checked;saveUser()}
   else if(t.id==="sGoal"){U.settings.goalMin=Math.max(10,+t.value||180);saveUser()}
   else if(t.id==="sTheme"){U.settings.theme=t.value;localStorage.setItem(LS+"theme",t.value);applyTheme();saveUser()}
@@ -2031,25 +2217,27 @@ document.addEventListener("change",async e=>{
   else if(t.id==="impIn"&&t.files[0]){
     try{const data=JSON.parse(await t.files[0].text());if(!data.user||!data.months)throw 0;
       if(!confirm("Restaurar este backup? Isso substitui os dados atuais."))return;
-      U={...defaultUser(),...data.user};MONTHS=data.months;U.months=Object.keys(MONTHS).sort();
-      U.exams={...defaultUser().exams,...(data.user.exams||{})};U.cur={...defaultUser().cur,...(data.user.cur||{})};
+      U=normalize(data.user);MONTHS=data.months;U.months=Object.keys(MONTHS).sort();
       await saveUser(true);for(const ym of U.months)await Store.saveMonth(ym,MONTHS[ym]);toast("Backup restaurado.");render();
     }catch(err){toast("Arquivo de backup inválido.")}
   }
 });
-document.addEventListener("toggle",e=>{const d=e.target;if(d.matches&&d.matches("details.subj")){if(d.open)UI.openSubj=d.dataset.sid;else if(UI.openSubj===d.dataset.sid)UI.openSubj=null}},true);
+document.addEventListener("toggle",e=>{const d=e.target;if(!d.matches)return;
+  if(d.matches("details.subj")){if(d.open)UI.openSubj=d.dataset.sid;else if(UI.openSubj===d.dataset.sid)UI.openSubj=null}
+  else if(d.matches("details.wk-ag"))UI.weekOpen[d.dataset.w]=d.open;
+},true);
 document.addEventListener("input",e=>{if(e.target.id==="tNote")UI.note=e.target.value;else if(U&&CurMod.onInput(e.target,U.cur))saveUser()});
 document.addEventListener("click",e=>{const m=e.target.closest("#tMode button");if(!m)return;UI.mode=+m.dataset.mode;$$("#tMode button").forEach(x=>x.classList.toggle("on",x===m))});
-addEventListener("hashchange",()=>{UI.view=(location.hash||"#inicio").slice(1);if(UI.view==="inicio")UI.phrase=null;closeModal();render();scrollTo(0,0)});
+addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.id==="tkText"){e.preventDefault();const b=$('[data-act="savetask"]');if(b)b.click()}});
+addEventListener("hashchange",()=>{let v=(location.hash||"#inicio").slice(1);if(v==="rotina")v="cronograma";UI.view=v;if(v==="inicio")UI.phrase=null;closeModal();render();scrollTo(0,0)});
 
-function resizeImage(file){return new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const s=240,c=document.createElement("canvas");c.width=c.height=s;const k=Math.max(s/img.width,s/img.height),w=img.width*k,h=img.height*k;c.getContext("2d").drawImage(img,(s-w)/2,(s-h)/2,w,h);URL.revokeObjectURL(img.src);res(c.toDataURL("image/jpeg",.82))};img.onerror=rej;img.src=URL.createObjectURL(file)})}
 /* ---------- Recorte da foto de perfil ---------- */
 function cropModal(file){
   const url=URL.createObjectURL(file), img=new Image();
   img.onerror=()=>{URL.revokeObjectURL(url);toast("Não consegui abrir essa imagem. Tente JPG, PNG ou WEBP.")};
   img.onload=()=>{
     const S=280, dpr=Math.min(3,window.devicePixelRatio||1);
-    const base=Math.max(S/img.width,S/img.height); // escala mínima que cobre o quadro
+    const base=Math.max(S/img.width,S/img.height);
     const st={z:1,ox:0,oy:0};
     openModal(`<div class="top"><h2>Ajustar foto</h2><button class="close" data-close aria-label="Fechar">×</button></div>
       <p class="small muted" style="margin-bottom:6px">Arraste para posicionar e use o controle para aproximar. O que ficar dentro do círculo vira sua foto.</p>
@@ -2066,7 +2254,6 @@ function cropModal(file){
         c.strokeStyle="rgba(255,255,255,.9)";c.lineWidth=2*f;c.beginPath();c.arc(size/2,size/2,size/2-6*f,0,Math.PI*2);c.stroke();c.restore()}};
     const draw=()=>{clamp();paint(ctx,S*dpr,true)};
     draw();
-    // arrastar (mouse, toque e caneta) + pinça com dois dedos
     const pts=new Map();let pinch=null;
     const scaleOf=()=>cv.getBoundingClientRect().width/S;
     cv.addEventListener("pointerdown",e=>{cv.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
@@ -2102,21 +2289,13 @@ async function loadAllMonths(){await Promise.all(U.months.filter(ym=>!MONTHS[ym]
    Inicialização
    ====================================================================== */
 async function openApp(){
-  let data=await Store.loadUser();
-  if(!data){data=defaultUser();U=data;await saveUser(true)}
-  U={...defaultUser(),...data};
-  U.profile={...defaultUser().profile,...(data.profile||{})};
-  U.settings={...defaultUser().settings,...(data.settings||{})};
-  U.settings.avail={...defaultUser().settings.avail,...(U.settings.avail||{})};
-  U.exams={...defaultUser().exams,...(data.exams||{})};
-  if(!U.exams.contagem)U.exams.contagem="2027-01-24";
-  if(!U.exams.curitiba)U.exams.curitiba="2026-12-13";
-  U.cur={...defaultUser().cur,...(data.cur||{})};
-  // carrega todos os meses registrados (1 leitura por mês)
+  const data=await Store.loadUser();
+  if(!data){U=defaultUser();await saveUser(true)}
+  else{const old=data.v!==2;U=normalize(data);if(old)saveUser(true)} // converte a versão antiga uma vez
   await loadAllMonths();
   cacheLockProfile();
   $("#lock").classList.add("hide");$("#app").classList.remove("hide");document.body.classList.add("inapp");
-  UI.view=(location.hash||"#inicio").slice(1);
+  let v=(location.hash||"#inicio").slice(1);if(v==="rotina")v="cronograma";UI.view=v;
   render();setSync("ok");
   if(!U.profile.name)setTimeout(()=>{location.hash="#perfil";toast("Bem-vindo(a)! Coloque seu nome e uma foto.")},300);
 }
